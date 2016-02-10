@@ -21,7 +21,7 @@ class Catalog extends CI_Controller {
         $config['total_rows'] = $this->Catalog_model->get_count();
         $config['base_url'] = "";
         $config['cur_page'] = $page;
-        $config['page_size'] = 12;
+        $config['page_size'] = 4;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
         $dat['catalog'] = $this->Catalog_model->get_Catalog(array("current" => $page, "count" => $config['page_size']));
