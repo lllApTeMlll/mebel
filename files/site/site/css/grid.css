@@ -1,0 +1,67 @@
+.container{
+    width: 940px;
+    margin: 0 auto;
+}
+
+.row{
+    margin: 0 -10px;
+}
+
+.row:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.col_1, 
+.col_2, 
+.col_3, 
+.col_4, 
+.col_5, 
+.col_6, 
+.col_7, 
+.col_8, 
+.col_9, 
+.col_10, 
+.col_11, 
+.col_12{
+    float: left;
+    padding: 0 0px;
+}
+
+.col_1{width: 8.33%;}
+.col_2{width: 16.66%;}
+.col_3{width: 25%;}
+.col_4{width: 33.33%;}
+.col_5{width: 41.66%;}
+.col_6{width: 50%;}
+.col_7{width: 58.33%;}
+.col_8{width: 66.66%;}
+.col_9{width: 75%;}
+.col_10{width: 83.33%;}
+.col_11{width: 91.66%;}
+.col_12{width: 100%;}
+
+.prefix_1{margin-left: 8.33%;}
+.prefix_2{margin-left: 16.66%;}
+.prefix_3{margin-left: 25%;}
+.prefix_4{margin-left: 33.33%;}
+.prefix_5{margin-left: 41.66%;}
+.prefix_6{margin-left: 50%;}
+.prefix_7{margin-left: 58.33%;}
+.prefix_8{margin-left: 66.66%;}
+.prefix_9{margin-left: 75%;}
+.prefix_10{margin-left: 83.33%;}
+.prefix_11{margin-left: 91.66%;}
+
+.suffix_1{margin-right: 8.33%;}
+.suffix_2{margin-right: 16.66%;}
+.suffix_3{margin-right: 25%;}
+.suffix_4{margin-right: 33.33%;}
+.suffix_5{margin-right: 41.66%;}
+.suffix_6{margin-right: 50%;}
+.suffix_7{margin-right: 58.33%;}
+.suffix_8{margin-right: 66.66%;}
+.suffix_9{margin-right: 75%;}
+.suffix_10{margin-right: 83.33%;}
+.suffix_11{margin-right: 91.66%;}
