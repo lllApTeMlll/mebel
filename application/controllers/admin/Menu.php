@@ -22,7 +22,7 @@ class Menu extends CI_Controller {
     
     public function addCat() {
         $mas = ($this->input->post(null, true));
-        echo "<pre>";
+        //echo "<pre>";
         //var_dump($mas);//die();
         $this->list_model->saveCat($mas, array('Title','Link','id','Parent_id'));
         header("Location: /fasadm/Menu/");

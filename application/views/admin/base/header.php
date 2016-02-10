@@ -58,10 +58,10 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="" class="img-circle" alt="User Image">
+                            <img src="/files/site/admin/dist/img/avatar.png" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                            <p><?=($this->session->userdata('username'))?></p>
                         </div>
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->

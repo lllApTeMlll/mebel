@@ -40,54 +40,7 @@
             <div class="nav-wrap">	
                 <div class="wrapper">
                     <div class="nav">
-                        <div class="nav-item-wrap">
-                            <div class="nav__item active">
-                                <a href="" class="nav__item-link nav__item-link-dropdown">Каталог кухонь</a>
-                                <div class="nav__item-dropdown">
-                                    <ul>
-                                        <li><a href="">Светлое дерево</a></li>
-                                        <li><a href="">Темное дерево</a></li>
-                                        <li><a href="">Белый/Ваниль/Кофе</a></li>
-                                        <li><a href="">Высокий Глянец</a></li>
-                                        <li><a href="">Цветные</a></li>
-                                        <li><a href="">Кантри</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nav-item-wrap">
-                            <div class="nav__item">
-                                <a href="" class="nav__item-link nav__item-link-dropdown">Материалы</a>
-                                <div class="nav__item-dropdown">
-                                    <ul>
-                                        <li><a href="">Светлое дерево</a></li>
-                                        <li><a href="">Темное дерево</a></li>
-                                        <li><a href="">Белый/Ваниль/Кофе</a></li>
-                                        <li><a href="">Высокий Глянец</a></li>
-                                        <li><a href="">Цветные</a></li>
-                                        <li><a href="">Кантри</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nav-item-wrap">
-                            <div class="nav__item">
-                                <a href="" class="nav__item-link nav__item-link-dropdown">проекты</a>
-                                <div class="nav__item-dropdown">
-                                    <ul>
-                                        <li><a href="">Светлое дерево</a></li>
-                                        <li><a href="">Темное дерево</a></li>
-                                        <li><a href="">Белый/Ваниль/Кофе</a></li>
-                                        <li><a href="">Высокий Глянец</a></li>
-                                        <li><a href="">Цветные</a></li>
-                                        <li><a href="">Кантри</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nav-item-wrap"><div class="nav__item"><a href="" class="nav__item-link">о компании</a></div></div>
-                        <div class="nav-item-wrap"><div class="nav__item"><a href="" class="nav__item-link">акции</a></div></div>
-                        <div class="nav-item-wrap"><div class="nav__item"><a href="" class="nav__item-link">контакты</a></div></div>
+                        <?=$menu?>
                     </div>
                     <div class="logo-field">
                         <div class="logo">

@@ -23,13 +23,13 @@ class User_model extends CI_Model {
         }
         return false;
     }
-    
+
     public function isAvtoris() {
         if (!$this->session->has_userdata('user_id')) {
-			//echo $_SERVER['REQUEST_URI'];die();
-			if ($_SERVER['REQUEST_URI'] !== "/fasadm/"){
-				header("/fasadm/");
-			}
+            //echo $_SERVER['REQUEST_URI'];die();
+            if ($_SERVER['REQUEST_URI'] !== "/fasadm/") {
+                header("/fasadm/");
+            }
         }
         //echo $this->router->fetch_class();
     }
@@ -43,48 +43,17 @@ class User_model extends CI_Model {
             //echo "<pre>";
             //var_dump($v['Name'] == $this->router->fetch_class());
             //var_dump($v['Name'] ,$this->router->fetch_class());
-            if ($v['Name'] == $this->router->fetch_class()){
+            if ($v['Name'] == $this->router->fetch_class()) {
                 $v['Act'] = "active";
-                $componetnArray['Crumbs'] .= '<li><a href="'.$v['Puth'].'"><i class="fa '.$v['Icon'].'"></i>'.$v['Title'].'</a></li>';
+                $componetnArray['Crumbs'] .= '<li><a href="' . $v['Puth'] . '"><i class="fa ' . $v['Icon'] . '"></i>' . $v['Title'] . '</a></li>';
                 $componetnArray['Name'] = $v['Title'];
-            }else{
+            } else {
                 $v['Act'] = "";
             }
         }
         //die();
         $componetnArray['Items'] = $component;
         return $componetnArray;
-    }
-
-    public function getSeoList() {
-        $query = $this->db->get('seo', 100, 0);
-        return $query->result_array();
-    }
-
-    public function getSeoItem($id) {
-        $query = $this->db->where('`id`', $id)->get('seo', 1, 0);
-        return $query->row_array();
-    }
-
-    public function insertSeo($mas) {
-        $this->db->insert('seo', $mas);
-    }
-
-    public function updateSeo($mas, $id) {
-        $this->db->update('seo', $mas, array('id' => $id));
-    }
-
-    private function addView($id) {
-        $query = $this->db->where('`id`', $id)->get('film1');
-        $res = $query->row_array();
-        //var_dump($res);die();
-        $show = $res['view'];
-        $show++;
-        $data = array(
-            'view' => $show
-        );
-        //var_dump($show);die();
-        $this->db->update('film1', $data, array('id' => $id));
     }
 
 }

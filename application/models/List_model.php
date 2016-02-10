@@ -8,7 +8,7 @@ class list_model extends CI_Model {
     private $selectCat;
     private $table = "Cat";
 
-    function __construct($id=0, $deep=1) {
+    function __construct($id = 0, $deep = 1) {
         $this->maxDeep = $deep;
         $this->typeId = $id;
         $this->load->database();
@@ -44,6 +44,9 @@ class list_model extends CI_Model {
         if ($config['Parent_id'] !== FALSE) {
             $this->db->where('`Parent_id`', $config['Parent_id']);
         }
+        
+        $this->db->order_by('Order', 'ASC');
+        
         $query = $this->db->get($this->table, $config['count'], $config['current']);
         if ($config['count'] == 1) {
             return $query->row_array();
@@ -66,7 +69,7 @@ class list_model extends CI_Model {
     public function delete($id) {
         $this->db->delete($this->table, array('id' => $id));
     }
-    
+
     private function clearWhite($mas) {
         $clearArray = array("Title", "Link", "Parent_id", "id", "Order");
         foreach ($mas as $k => $v) {
@@ -90,7 +93,7 @@ class list_model extends CI_Model {
                 <input type='hidden' name='root' value='{$this->typeId}'>";
         $css = "<style>" . file_get_contents(BASE . "/files/site/all/nestable/style.css") . "</style>";
         $js = "<script>" . file_get_contents(BASE . "/files/site/all/nestable/script.js") . "</script>";
-        $script = '<script>$(function (){$("#' . $idd . '").nestable({group: 0, maxDepth: ' . $this->maxDeep . ', });});'.jsPast().'</script>';
+        $script = '<script>$(function (){$("#' . $idd . '").nestable({group: 0, maxDepth: ' . $this->maxDeep . ', });});' . jsPast() . '</script>';
         $st.=$css . $js . $script;
         return $st;
     }
@@ -142,8 +145,6 @@ class list_model extends CI_Model {
             if ($v != '') {
                 unset($edit);
                 $edit['Order'] = $k;
-                //var_dump($mas);
-                //var_dump($el);
                 foreach ($el as $v1) {
                     if (isset($mas[$v1][$k]) && !empty($mas[$v1][$k])) {
                         $edit[$v1] = $mas[$v1][$k];
@@ -155,7 +156,6 @@ class list_model extends CI_Model {
     }
 
     public function delRoot($id) {
-        //$Zupr = new IC_Zapr_Class();
         $ma = $this->get_ItemsEl(array("Parent_id" => $id, "count" => 100));
         if ($ma) {
             foreach ($ma as $k => $v) {
@@ -163,6 +163,54 @@ class list_model extends CI_Model {
                 $this->delete($v['id']);
             }
         }
+    }
+
+    public function menuCat($list, $mas, $str, $drop) {
+        //$str.="<ul {$drop}>";
+        foreach ($list as $k => $v) {
+            $class = "";
+            $classA = "";
+            $List11 = $this->get_ItemsEl(array("Parent_id" => $v['id'], "count" => 100));
+            $podMas = $this->isMas($mas, $v['id']);
+            if ($podMas || $List11) {
+                $class = "class='dropdown'";
+                $classA = "class='nav__item-link-dropdown'";
+            }
+            $str.="<div class='nav-item-wrap'><div class='nav__item {$class}'>";
+            $str.="<a href='' class='nav__item-link {$classA}'>{$v['Title']}</a>";
+            if ($podMas) {
+                $str.="<div class='nav__item-dropdown'><ul>";
+                foreach ($podMas['list'] as $k1 => $v1) {
+                    $str.="<li>";
+                    $str.="<a href='{$podMas['link']}{$v1['Link']}/'>{$v1['Title']}</a>";
+                    $str.="</li>";
+                }
+                $str.="</ul></div>";
+            }
+            if ($List11) {
+                $str.="<div class='nav__item-dropdown'><ul>";
+                foreach ($List11 as $k1 => $v1) {
+                    $str.="<li>";
+                    $str.="<a href='{$v1['Link']}'>{$v1['Title']}</a>";
+                    $str.="</li>";
+                }
+                $str.="</ul></div>";
+            }
+            $str.="</div></div>";
+        }
+        //$str.="</ul>";
+        return $str;
+    }
+
+    private function isMas($mas, $id) {
+        //echo "<pre>";
+        foreach ($mas as $k => $v) {
+            //var_dump($v);die();
+            if ($v['id'] == $id) {
+                return $v;
+            }
+        }
+        return false;
     }
 
     private function getSel($mas) {
