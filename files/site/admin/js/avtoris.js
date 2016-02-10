@@ -3,6 +3,8 @@ $(function () {
         var form = $(this).closest('form');
         if (valid(form)) {
             var data = form.serializeArray();
+            console.log(data);
+
             $.ajax({
                 type: 'POST', data: data, url: '/fasadm/avtoris/', dataType: 'text',
                 success: function (data) {
