@@ -129,7 +129,7 @@
                     <p>Теперь выбрать кухню стало проще и доступнее перейдите в каталог и выберите понравившеюся кухню, определитесь с цветом, по размерам и срокам доставки Вы можете уточнить у нашего менеджера. </p>
                 </div>
             </div>
-            <div class="catalog-row js-catalog-row">
+            <div class="catalog-row catalog-row-reverse js-catalog-row">
                 <div class="catalog-row__item item-image js-item-image">
                     <div class="item-image-arrow"></div>
                     <a href=""><img src="/files/site/site/images/temp/catalog/img2.jpg" alt=""></a>

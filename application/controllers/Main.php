@@ -18,9 +18,9 @@ class Main extends CI_Controller {
     public function index() {
         //echo "ok";die();
         $dat['menu'] = $this->menu;
-        $this->load->view('site/base/header', $dat);
+        $this->load->view('site/base/headerMain', $dat);
         $this->load->view('site/main', $dat);
-        $this->load->view('site/base/footer');
+        $this->load->view('site/base/footerMain');
     }
 
 }

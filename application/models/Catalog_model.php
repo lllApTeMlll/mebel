@@ -6,7 +6,7 @@ class Catalog_model extends CI_Model {
         $this->load->database();
         $this->load->model('list_model');
     }
-    
+
     private $table = "Catalog";
 
     public function get_Catalog($mas = "") {
@@ -82,7 +82,7 @@ class Catalog_model extends CI_Model {
 
     public function update($mas, $id) {
         $mas = $this->clearForCatalog($mas);
-        $mas['Cat'] = $this->getAllCat($mas['Cat']);
+        $mas['Cat'] = $this->getAllCat($mas['Cat'], "");
         $this->db->update($this->table, $mas, array('id' => $id));
     }
 
@@ -99,11 +99,18 @@ class Catalog_model extends CI_Model {
         }
         return $mas;
     }
-    
-    private function getAllCat($id,$str){
-        $str .= $id.",";
+
+    private function getIdCid($name) {
+        $query = $this->db->where('`Link`', $name)->get('Cat');
+        return $query->result_array();
+    }
+
+    private function getAllCat($id, $str) {
+        $str .= $id . ",";
         $parrent = $this->list_model->get_ItemsEl(array("id" => $id, "count" => 1));
-        if ($parrent) $str = $this->getAllCat($parrent['id'],$str);
+        if ($parrent["Parent_id"] !== "0"){
+            $str = $this->getAllCat($parrent['Parent_id'], $str);
+        }
         return $str;
     }
 

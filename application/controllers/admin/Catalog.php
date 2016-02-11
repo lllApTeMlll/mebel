@@ -28,7 +28,7 @@ class Catalog extends CI_Controller {
         $dat['catalog'] = $this->Catalog_model->get_Catalog(array("current" => $page, "count" => $config['page_size']));
         $this->list_model->setId(1);
         $this->list_model->setmaxDee(3);
-        $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1,3);
+        $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1, 3);
         $this->load->view('admin/base/header', $dat);
         $this->load->view('admin/Catalog/List', $dat);
         $this->load->view('admin/base/footer');
@@ -47,18 +47,18 @@ class Catalog extends CI_Controller {
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
             //$cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
-            $dat['current']['cat'] = $this->Base_model->getOtion(1,"",-1,"");
+            $dat['current']['cat'] = $this->Base_model->getOtion(1, "", -1, "");
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/Catalog/Edit', $dat);
             $this->load->view('admin/base/footer');
         }
     }
-    
+
     public function addCat() {
         $mas = ($this->input->post(null, true));
-        echo "<pre>";
+        //echo "<pre>";
         //var_dump($mas);//die();
-        $this->list_model->saveCat($mas, array('Title','Link','id','Parent_id'));
+        $this->list_model->saveCat($mas, array('Title', 'Link', 'id', 'Parent_id'));
         header("Location: /fasadm/Catalog/");
     }
 
@@ -75,7 +75,7 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "item", "Item_id" => $id, "count" => 100));
-            $dat['current']['cat'] = $this->Base_model->getOtion(1,"",-1,"");
+            $dat['current']['cat'] = $this->Base_model->getOtion(1, "", $this->getFirstCat($dat['current']['mas']['Cat']), "");
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/Catalog/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -87,9 +87,14 @@ class Catalog extends CI_Controller {
         header("Location: /fasadm/Catalog/");
     }
 
+    private function getFirstCat($cat) {
+        $catArray = explode(",", trim($cat, ","));
+        return $catArray[0];
+    }
+
     public function updateAndInsert() {
         $mas = ($this->input->post(null, true));
-       // echo "<pre>";
+        // echo "<pre>";
         //var_dump($mas);die();
         $id = $this->input->post('id', true);
         $type = $this->input->post('type', true);
@@ -104,13 +109,15 @@ class Catalog extends CI_Controller {
             }
         }
         $edit["Type"] = "item";
-        foreach ($mas["id_photo"] as $k => $v) {
-            $edit["Item_id"] = $id;
-            $edit["Order"] = $k;
-            $this->Load_model->update($edit, $v);
+        if (isset($mas["id_photo"])) {
+            foreach ($mas["id_photo"] as $k => $v) {
+                $edit["Item_id"] = $id;
+                $edit["Order"] = $k;
+                $this->Load_model->update($edit, $v);
+            }
         }
-        $mas["Url"] = "/Catalog/item/" . $id ."/";
-        $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"]."/";
+        $mas["Url"] = "/Catalog/item/" . $id . "/";
+        $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
         //var_dump($id);die();
     }

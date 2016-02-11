@@ -11,14 +11,12 @@
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/jquery.bxslider.css"/>
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/animations.css"/>  
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/flexslider.css"/>  
-        <link rel="stylesheet" type="text/css" href="/files/site/site/css/jquery.fancybox.css"/> 
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/grid.css"/> 
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/style.css"/> 
         <script src="/files/site/site/js/jquery.js" type="text/javascript" charset="utf-8"></script>  
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;language=ru"></script>
         <script src="/files/site/site/js/jquery.bxslider.js" type="text/javascript" charset="utf-8"></script>  
-        <script src="/files/site/site/js/jquery.flexslider.js" type="text/javascript" charset="utf-8"></script>   
-        <script src="/files/site/site/js/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/files/site/site/js/jquery.flexslider.js" type="text/javascript" charset="utf-8"></script>           
         <script src="/files/site/site/js/script.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,22 +32,21 @@
     </head>
 
     <body>  							
-        <div id="anchor2"></div>
-        <section class="header header-in">
-            <div class="nav-wrap">	
-                <div class="wrapper">
-                    <div class="nav">
-                        <?= $menu ?>
-                    </div>
-                    <div class="logo-field">
-                        <div class="logo">
-                            <a href="index.html"><img src="/files/site/site/images/logo.png" alt=""></a>
-                        </div>
-                        <div class="phone">
-                            <i class="icon icon-phone"></i><a href="tel:+73952500225">8 (3952) 500-225</a>
-                        </div>
-                    </div>
+    <div id="anchor2"></div>
+    <section class="header header-main">
+    <div class="nav-wrap">	
+        <div class="wrapper">
+            <div class="nav">
+                <?=$menu?>
+            </div>
+            <div class="logo-field">
+                <div class="logo">
+                            <a href="/"><img src="/files/site/site/images/logo.png" alt=""></a>
+                </div>
+                <div class="phone">
+                    <i class="icon icon-phone"></i><a href="tel:+73952500225">8 (3952) 500-225</a>
                 </div>
             </div>
-        </section>
-        <div class="clear"></div>	
+        </div>
+    </div>
+    <div class="clear"></div>	
