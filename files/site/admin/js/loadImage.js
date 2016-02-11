@@ -12,7 +12,7 @@ $(function () {
         maxSize: '1000000',
         maxHeigth: 1300,
         maxWidth: 500,
-        minWidth: 300
+        minWidth: 350
     };
     //var fr = new FileReader();
     //var img = new Image();

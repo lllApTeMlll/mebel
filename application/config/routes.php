@@ -56,6 +56,7 @@ $route['files/site/all/AjexFileManager/ajax/php/ajax.php'] = 'ckeditor/Ajax/inde
 
 
 $route['catalog/item/(:any)']='site/Catalog/item/$1';
+$route['catalog/getInfo/(:any)']='site/Catalog/getInfo/$1';
 $route['catalog']='site/Catalog/index';
 $route['catalog/(:any)']='site/Catalog/index/$1';
 $route['catalog/(:any)/(:any)']='site/Catalog/index/$1/$2';

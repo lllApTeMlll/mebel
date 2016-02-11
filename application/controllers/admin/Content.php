@@ -2,6 +2,8 @@
 
 class Content extends CI_Controller {
 
+    private $Component = "Content";
+    
     public function __construct() {
         parent::__construct();
         $this->load->model('user_model');
@@ -22,7 +24,7 @@ class Content extends CI_Controller {
         $dat['pagin'] = $this->pagin->getLinksAdmin();
         $dat['content'] = $this->Content_model->get_list(array("current" => $page, "count" => $config['page_size']));
         $this->load->view('admin/base/header', $dat);
-        $this->load->view('admin/Content/List', $dat);
+        $this->load->view('admin/'.$this->Component.'/List', $dat);
         $this->load->view('admin/base/footer');
     }
 
@@ -30,24 +32,16 @@ class Content extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/Catalog/");
+            header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
-            $dat['current']['mas'] = array("Title" => "", "Articl" => "", "Price" => "", "Description" => "", "Sostav" => "", "EnglishTitle" => "");
+            $dat['current']['mas'] = array("Title" => "", "Puth" => "", "Description" => "");
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $this->load->view('admin/base/header', $dat);
-            $this->load->view('admin/Content/Edit', $dat);
+            $this->load->view('admin/'.$this->Component.'/Edit', $dat);
             $this->load->view('admin/base/footer');
         }
-    }
-    
-    public function addCat() {
-        $mas = ($this->input->post(null, true));
-        echo "<pre>";
-        //var_dump($mas);//die();
-        $this->list_model->saveCat($mas, array('Title','Link','id','Parent_id'));
-        header("Location: /fasadm/Content/");
     }
 
     public function editItem($id) {
@@ -55,26 +49,26 @@ class Content extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/Content/");
+            header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
-            $dat['current']['mas'] = $this->Content_model->get_Catalog(array("count" => 1, "id" => $id));
+            $dat['current']['mas'] = $this->Content_model->get_list(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
             $this->load->view('admin/base/header', $dat);
-            $this->load->view('admin/Content/Edit', $dat);
+            $this->load->view('admin/'.$this->Component.'/Edit', $dat);
             $this->load->view('admin/base/footer');
         }
     }
 
     public function delitItem($id) {
         $this->Content_model->delete($id);
-        header("Location: /fasadm/Content/");
+        header("Location: /fasadm/{$this->Component}/");
     }
 
     public function updateAndInsert() {
         $mas = ($this->input->post(null, true));
-        echo "<pre>";
+        //echo "<pre>";
         //var_dump($mas);die();
         $id = $this->input->post('id', true);
         $type = $this->input->post('type', true);

@@ -8,12 +8,12 @@
             <div class="tab-pane active" id="tab_1">
                 <div class="box-body">
                     <div class="form-group col-lg-6">
-                        <label for="Title">Название</label>
+                        <label for="Title">Заголовок</label>
                         <input class="form-control" id="Title" data_type="required" name="Title" value="<?= $current['mas']["Title"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="EnglishTitle">Seo название</label>
-                        <input class="form-control" id="EnglishTitle" data_type="required" name="EnglishTitle" value="<?= $current['mas']["EnglishTitle"] ?>"  type="text">
+                        <label for="Puth">Путь</label>
+                        <input class="form-control" id="Puth" data_type="required" name="Puth" value="<?= $current['mas']["Puth"] ?>"  type="text">
                     </div>
 
                     <div class="form-group col-lg-12">

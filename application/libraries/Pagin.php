@@ -1,52 +1,5 @@
 <?php
 
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	http://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Pagination Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Pagination
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/pagination.html
- */
 class CI_Pagin {
 
     /**
@@ -173,7 +126,10 @@ class CI_Pagin {
         $needChunk = 0;       // индекс нужного в данный момент чанка
         $queryVars = array(); // ассоц. массив полученный из строки запроса
         $pagesArr = array(); // пременная для промежуточного хранения массива навигации
-        $htmlOut = '';      // HTML - код постраничной навигации
+        $htmlOut = '<div class="pager-title">
+                            страницы:
+                    </div>
+                    <div class="pager-list">';      // HTML - код постраничной навигации
         //  $this->base_url      = "/catalog/3/3/";    // формируемая ссылка
         // В этом блоке мы просто строим ссылку - такую же, как та, по которой
         // пришли на данную страницу, но извлекаем из неё нашу GET-переменную: 
@@ -211,33 +167,30 @@ class CI_Pagin {
         if ((http_build_query($queryVars)) != "")
             $amp = "&";
         if ($this->cur_page > 1) {
-            $htmlOut .= '<a rel="canonical" class="button small nobg primary" href="' . $this->base_url . $amp . $this->param . '=1">' . $this->startChar . '</a>' .
-                    '<a rel="prev" class="button small nobg primary" href="' . $this->base_url . $amp . $this->param . '=' . ($this->cur_page - 1) . '">' . $this->prevChar . '</a>';
+            $htmlOut .= '<a class="pager_link pager_link-prev" href="' . $this->base_url . $amp . $this->param . '='.($this->cur_page - 1).'"></a>';
         } else {
-            $htmlOut .= '<span class="button small nobg primary">' . $this->startChar . '</span>' .
-                    '<span class="button small nobg primary">' . $this->prevChar . '</span>';
+            $htmlOut .= '<a class="pager_link pager_link-prev"></a>';
         }
+        $htmlOut .= '<ul>';
         // Собсно выводим ссылки из нужного чанка
         foreach ($allPage[$needChunk] AS $pageNum => $ofset) {
             // Делаем текущую страницу не активной:
             if ($ofset == $this->cur_page) {
-                $htmlOut .= '
-			<span class="button small nobg primary current">' . $pageNum . '</span>';
+                $htmlOut .= '<li class="pager_link active"><a>' . $pageNum . '</a></li>';
                 continue;
             }
-            $htmlOut .= '<a rel="canonical" class="button small nobg primary" href="' . $this->base_url . $amp . $this->param . '=' . $pageNum . '">' . $pageNum . '</a>';
+            $htmlOut .= '<li class="pager_link"><a href="' . $this->base_url . $amp . $this->param . '=' . $pageNum . '">' . $pageNum . '</a></li>';
         }
-
+        $htmlOut .= '</ul>';
         // Формируем ссылки "следующая", "в конец" ------------------------------------------------
         //var_dump(@array_pop(array_pop($allPage)));die();
         $lasst = @array_pop(array_pop($allPage));
         if ($lasst * $this->page_size > $this->cur_page * $this->page_size) {
-            $htmlOut .= '<a rel="next" class="button small nobg primary" href="' . $this->base_url . $amp . $this->param . '=' . ( $this->cur_page + 1) . '">' . $this->nextChar . '</a>' .
-                    '<a rel="canonical" class="button small nobg primary" href="' . $this->base_url . $amp . $this->param . '=' . $lasst . '">' . $this->endChar . '</a>';
+            $htmlOut .= '<a href="' . $this->base_url . $amp . $this->param . '='.($this->cur_page + 1).'" class="pager_link pager_link-next"></a>';
         } else {
-            $htmlOut .= '<span class="button small nobg primary">' . $this->nextChar . '</span>' .
-                    '<span class="button small nobg primary">' . $this->endChar . '</span>';
+            $htmlOut .= '<a class="pager_link pager_link-next"></a>';
         }
+        $htmlOut .= '</div>';
         return $htmlOut;
     }
 

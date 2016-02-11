@@ -25,7 +25,7 @@ class Content_model extends CI_Model {
         }
 
         if ($config['Url'] !== FALSE) {
-            $this->db->where('`Url`', $config['Url']);
+            $this->db->where('`Puth`', $config['Url']);
         }
 
         $query = $this->db->get($this->table, $config['count'], $config['current']);
@@ -52,7 +52,7 @@ class Content_model extends CI_Model {
         }
 
         if ($config['Url'] !== FALSE) {
-            $this->db->where('`Url`', $config['Url']);
+            $this->db->where('`Puth`', $config['Url']);
         }
         return $this->db->count_all_results($this->table);
     }
@@ -77,7 +77,7 @@ class Content_model extends CI_Model {
     }
 
     private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle");
+        $clearArray = array("Title", "Puth", "Description");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);

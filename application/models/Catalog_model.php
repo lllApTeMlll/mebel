@@ -20,17 +20,17 @@ class Catalog_model extends CI_Model {
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
             unset($mas['current']);
         }
+        
         $config = array_merge($config, (array) $mas);
-
+        if ($config['current'] != 0){
+            $config['current']--;
+            $config['current'] *= $config['count'];
+        }
         if ($config['cid'] != FALSE) {
             $idn = $this->getIdCid($config['cid']);
             //var_dump($idn);die();
-            if (!empty($idn)) {
-                $this->db->group_start();
-                foreach ($idn as $k => $v) {
-                    $this->db->or_like('`cid`', "," . $v['id'] . ",");
-                }
-                $this->db->group_end();
+            if (($idn)) {
+                $this->db->or_like('`Cat`', "," . $idn["id"] . ",");
             }
         }
         if ($config['id'] != FALSE) {
@@ -58,12 +58,8 @@ class Catalog_model extends CI_Model {
         if ($config['cid'] != FALSE) {
             $idn = $this->getIdCid($config['cid']);
             //var_dump($idn);die();
-            if (!empty($idn)) {
-                $this->db->group_start();
-                foreach ($idn as $k => $v) {
-                    $this->db->or_like('`cid`', "," . $v['id'] . ",");
-                }
-                $this->db->group_end();
+            if (($idn)) {
+                $this->db->or_like('`Cat`', "," . $idn["id"] . ",");
             }
         }
         return $this->db->count_all_results($this->table);
@@ -72,7 +68,7 @@ class Catalog_model extends CI_Model {
     public function insert($mas) {
         $this->db->trans_start();
         $mas = $this->clearForCatalog($mas);
-        $mas['Cat'] = $this->getAllCat($mas['Cat']);
+        $mas['Cat'] = $this->getAllCat($mas['Cat'], ",");
         //var_dump($mas);die();
         $this->db->insert($this->table, $mas);
         $insert_id = $this->db->insert_id();
@@ -82,7 +78,7 @@ class Catalog_model extends CI_Model {
 
     public function update($mas, $id) {
         $mas = $this->clearForCatalog($mas);
-        $mas['Cat'] = $this->getAllCat($mas['Cat'], "");
+        $mas['Cat'] = $this->getAllCat($mas['Cat'], ",");
         $this->db->update($this->table, $mas, array('id' => $id));
     }
 
@@ -100,15 +96,23 @@ class Catalog_model extends CI_Model {
         return $mas;
     }
 
-    private function getIdCid($name) {
-        $query = $this->db->where('`Link`', $name)->get('Cat');
-        return $query->result_array();
+    private function getIdCid($param) {
+        $name = false;
+        if ($param[1] != false){
+            $name = $param[1];
+        }elseif ($param[0] != false) {
+            $name = $param[0];
+        }else{
+            return false;
+        }
+        $query = $this->db->select('id')->where('`Link`', $name)->get('Cat');
+        return $query->row_array();
     }
 
     private function getAllCat($id, $str) {
         $str .= $id . ",";
         $parrent = $this->list_model->get_ItemsEl(array("id" => $id, "count" => 1));
-        if ($parrent["Parent_id"] !== "0"){
+        if ($parrent["Parent_id"] !== "0") {
             $str = $this->getAllCat($parrent['Parent_id'], $str);
         }
         return $str;
