@@ -54,8 +54,11 @@ $route['files/site/all/AjexFileManager/ajax/php/ajax.php'] = 'ckeditor/Ajax/inde
  * Роуты для клиентской части
  */
 
-$route['catalog']='site/Catalog/index';
+
 $route['catalog/item/(:any)']='site/Catalog/item/$1';
+$route['catalog']='site/Catalog/index';
+$route['catalog/(:any)']='site/Catalog/index/$1';
+$route['catalog/(:any)/(:any)']='site/Catalog/index/$1/$2';
 
 $route['news']='site/News/index';
 $route['news/item/(:any)']='site/News/item/$1';

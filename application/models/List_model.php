@@ -177,7 +177,7 @@ class list_model extends CI_Model {
                 $classA = "class='nav__item-link-dropdown'";
             }
             $str.="<div class='nav-item-wrap'><div class='nav__item {$class}'>";
-            $str.="<a href='' class='nav__item-link {$classA}'>{$v['Title']}</a>";
+            $str.="<a href='{$v['Link']}' class='nav__item-link {$classA}'>{$v['Title']}</a>";
             if ($podMas) {
                 $str.="<div class='nav__item-dropdown'><ul>";
                 foreach ($podMas['list'] as $k1 => $v1) {

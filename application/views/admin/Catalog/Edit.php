@@ -24,7 +24,12 @@
                         <label for="Price">Цена</label>
                         <input class="form-control" id="Price" data_type="required" name="Price" value="<?= $current['mas']["Price"] ?>"  type="text">
                     </div>
-
+                    <div class="form-group col-lg-12">
+                        <label for="Cat">Категория</label>
+                        <select name='Cat'>
+                            <?=$current['cat'] ?>
+                        </select>
+                    </div>
                     <div class="form-group col-lg-12">
                         <label for="Description">Описание</label>
                         <textarea class="form-control ckedit" id="Description" name="Description" ><?= $current['mas']["Description"] ?></textarea>

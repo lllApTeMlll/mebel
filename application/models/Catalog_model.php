@@ -4,6 +4,7 @@ class Catalog_model extends CI_Model {
 
     public function __construct() {
         $this->load->database();
+        $this->load->model('list_model');
     }
     
     private $table = "Catalog";
@@ -71,6 +72,7 @@ class Catalog_model extends CI_Model {
     public function insert($mas) {
         $this->db->trans_start();
         $mas = $this->clearForCatalog($mas);
+        $mas['Cat'] = $this->getAllCat($mas['Cat']);
         //var_dump($mas);die();
         $this->db->insert($this->table, $mas);
         $insert_id = $this->db->insert_id();
@@ -80,6 +82,7 @@ class Catalog_model extends CI_Model {
 
     public function update($mas, $id) {
         $mas = $this->clearForCatalog($mas);
+        $mas['Cat'] = $this->getAllCat($mas['Cat']);
         $this->db->update($this->table, $mas, array('id' => $id));
     }
 
@@ -88,13 +91,20 @@ class Catalog_model extends CI_Model {
     }
 
     private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle");
+        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle", "Cat");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);
             }
         }
         return $mas;
+    }
+    
+    private function getAllCat($id,$str){
+        $str .= $id.",";
+        $parrent = $this->list_model->get_ItemsEl(array("id" => $id, "count" => 1));
+        if ($parrent) $str = $this->getAllCat($parrent['id'],$str);
+        return $str;
     }
 
 }

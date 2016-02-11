@@ -6,6 +6,7 @@ class Catalog extends CI_Controller {
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('Catalog_model');
+        $this->load->model('Base_model');
         $this->load->model('Load_model');
         $this->load->model('Seo_model');
         $this->load->model('list_model');
@@ -45,6 +46,8 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
+            //$cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
+            $dat['current']['cat'] = $this->Base_model->getOtion(1,"",-1,"");
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/Catalog/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -72,6 +75,7 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "item", "Item_id" => $id, "count" => 100));
+            $dat['current']['cat'] = $this->Base_model->getOtion(1,"",-1,"");
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/Catalog/Edit', $dat);
             $this->load->view('admin/base/footer');
