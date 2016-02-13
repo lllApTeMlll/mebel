@@ -9,7 +9,7 @@ class Catalog_model extends CI_Model {
 
     private $table = "Catalog";
 
-    public function get_Catalog($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'type' => FALSE, //тип
             'cid' => FALSE, //категория
@@ -111,7 +111,7 @@ class Catalog_model extends CI_Model {
 
     private function getAllCat($id, $str) {
         $str .= $id . ",";
-        $parrent = $this->list_model->get_ItemsEl(array("id" => $id, "count" => 1));
+        $parrent = $this->list_model->get_List(array("id" => $id, "count" => 1));
         if ($parrent["Parent_id"] !== "0") {
             $str = $this->getAllCat($parrent['Parent_id'], $str);
         }

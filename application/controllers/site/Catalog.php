@@ -12,8 +12,8 @@ class Catalog extends CI_Controller {
         $this->load->model('Load_model');
         $this->load->model('Seo_model');
         $this->load->library('pagin');
-        $List11 = $this->list_model->get_ItemsEl(array("Parent_id" => 13, "count" => 100));
-        $cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
+        $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
+        $cat = $this->list_model->get_List(array("Parent_id" => 1, "count" => 100));
         $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/", "list" => $cat, "id" => 14)), "", "");
         $this->cat = $cat;
     }
@@ -29,7 +29,7 @@ class Catalog extends CI_Controller {
         $config['page_size'] = 3;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinks();
-        $catalogList = $this->Catalog_model->get_Catalog(array("current" => $page, "count" => $config['page_size'], 'cid' => array($cat1, $cat2)));
+        $catalogList = $this->Catalog_model->get_List(array("current" => $page, "count" => $config['page_size'], 'cid' => array($cat1, $cat2)));
         $dat["catList"] = $this->madeTrueArray($catalogList);
         //var_dump($dat["catList"]);
         $this->load->view('site/base/header', $dat);
@@ -47,7 +47,7 @@ class Catalog extends CI_Controller {
     }
     
     public function getInfo($id){
-        $catalogList = $this->Catalog_model->get_Catalog(array("count" => 1, 'id' => $id));
+        $catalogList = $this->Catalog_model->get_List(array("count" => 1, 'id' => $id));
         $catList = $this->madeTrueArray(array($catalogList),true);
         $dat['cat'] = $catList[0];
         //var_dump($dat['cat']); die();
@@ -56,7 +56,7 @@ class Catalog extends CI_Controller {
 
     private function madeTrueArray($mas, $array = false) {
         foreach ($mas as $k => $v) {
-            $pthoto = $this->Load_model->get_Photo(array('count' => ($array ? 100 : 1), "Type" => "item", "Item_id" => $v['id']));
+            $pthoto = $this->Load_model->get_List(array('count' => ($array ? 100 : 1), "Type" => "item", "Item_id" => $v['id']));
             if ($pthoto) {
                 $mas[$k]['photo'] = ($array ? $pthoto : $pthoto['Puth'] . "small/" . $pthoto['Name']);
             } else {
@@ -77,7 +77,7 @@ class Catalog extends CI_Controller {
             }
             $str .= '<li class="sidemenu__item ' . $active . '">
                         <a href="/catalog/' . $v['Link'] . '/" class="sidemenu__item-link"><span>' . $v['Title'] . '</span></a>';
-            $List11 = $this->list_model->get_ItemsEl(array("Parent_id" => $v['id'], "count" => 100));
+            $List11 = $this->list_model->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($List11) {
                 $str .=
                         '<div class="sidemenu__item-count">' . count($List11) . '</div>

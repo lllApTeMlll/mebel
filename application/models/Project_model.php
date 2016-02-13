@@ -8,7 +8,7 @@ class Project_model extends CI_Model {
 
     private $table = "Project";
 
-    public function get_list($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'count' => 8, //count enement in one page
             'current' => 0, //current element

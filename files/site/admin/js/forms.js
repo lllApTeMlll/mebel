@@ -1,6 +1,7 @@
 $(function () {
     $("form").submit(function () {
         if (valid($(this))) {
+            console.log($(this).serializeArray());
             return true;
         } else {
             return false;
@@ -8,16 +9,21 @@ $(function () {
     });
     //var editor;
     $(".ckedit").each(function () {
-        loadFile(loadEditor($(this).attr("id")));
+        //loadFile(loadEditor($(this).attr("id")));
+        $(this).froalaEditor({heightMax: 500, height: 300, language: 'ru', imageManagerLoadURL: '/imageManager/',
+            fontFamily: {
+                'Arial,Helvetica,sans-serif': 'Font 1',
+                'Impact,Charcoal,sans-serif': 'Font 2',
+                'Tahoma,Geneva,sans-serif': 'Font 3'}});
     });
-    
-    
+
+
     if ($("#mainForm #Title").length && $("#mainForm #EnglishTitle").length) {
         tttrran($("#mainForm #Title"), $("#mainForm #EnglishTitle"));
     }
 });
 
-function loadFile(obj){
+function loadFile(obj) {
     return false;
 //    AjexFileManager.init({
 //        returnTo : "ckeditor",
@@ -45,12 +51,13 @@ function loadEditor(id) {
 }
 
 function ajaxLoad(data, url, type) {
-    type = type||"data";
-    var param = {type: "POST", url: url, data: data };
-    if (type == 'file'){
+    type = type || "data";
+    var param = {type: "POST", url: url, data: data};
+    if (type == 'file') {
         param.contentType = false;
         param.processData = false;
-    };
+    }
+    ;
     //console.log(param);
     return $.ajax(param);
 }

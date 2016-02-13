@@ -8,7 +8,7 @@ class Load_model extends CI_Model {
 
     private $table = "Photo";
 
-    public function get_Photo($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'type' => FALSE, //тип
             'Item_id' => FALSE, //
@@ -61,7 +61,7 @@ class Load_model extends CI_Model {
     }
 
     public function delWithout() {
-        $delPhoto = $this->get_Photo(array("type" => "", "count" => 30));
+        $delPhoto = $this->get_List(array("type" => "", "count" => 30));
         //var_dump($this->db->last_query());
         foreach ($delPhoto as $v) {
             $this->delete($v['id']);
@@ -80,7 +80,7 @@ class Load_model extends CI_Model {
     }
 
     public function delete($id) {
-        $delPhoto = $this->get_Photo(array("id" => $id, "count" => 1));
+        $delPhoto = $this->get_List(array("id" => $id, "count" => 1));
         if (file_exists(BASE . $delPhoto['Puth'] . "/small/" . $delPhoto['Name'])) {
             unlink(BASE . $delPhoto['Puth'] . "/small/" . $delPhoto['Name']);
         }
@@ -102,7 +102,7 @@ class Load_model extends CI_Model {
     }
 
     public function getPhotos($mas) {
-        (array) $allPhoto = $this->Load_model->get_Photo($mas);
+        (array) $allPhoto = $this->Load_model->get_List($mas);
         //var_dump($allPhoto);
         //die();
         if (isset($mas['count']) && $mas['count'] == 1) {

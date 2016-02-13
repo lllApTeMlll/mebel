@@ -26,7 +26,7 @@ class list_model extends CI_Model {
         $this->selectCat = $selectCat;
     }
 
-    public function get_ItemsEl($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'Parent_id' => FALSE, //тип
             'count' => 8, //count enement in one page
@@ -82,7 +82,7 @@ class list_model extends CI_Model {
 
     public function get_Items($templ = "catList", $idd = 'nestable3', $type = 0, $lemit = 10) {
 
-        $mas = $this->get_ItemsEl(array("id" => $this->typeId));
+        $mas = $this->get_List(array("id" => $this->typeId));
         require ENGINE . 'admin/List/Templates/' . $templ . '.php';
         //var_dump($masT);
         $st = "<div class='mainForm'>
@@ -108,7 +108,7 @@ class list_model extends CI_Model {
         }
         foreach ($mas as $k => $v) {
             //$ma = $Zupr->selectElAll("`cat`", " WHERE parent_id={$v['id']}  ORDER BY  `order` ASC  ", 0, 100);
-            $ma = $this->get_ItemsEl(array("Parent_id" => $v['id'], "count" => 100));
+            $ma = $this->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($ma && $deep <= $lemit) {
                 $deep1 = $deep;
                 $deep1++;
@@ -156,7 +156,7 @@ class list_model extends CI_Model {
     }
 
     public function delRoot($id) {
-        $ma = $this->get_ItemsEl(array("Parent_id" => $id, "count" => 100));
+        $ma = $this->get_List(array("Parent_id" => $id, "count" => 100));
         if ($ma) {
             foreach ($ma as $k => $v) {
                 $this->delRoot($v['id']);
@@ -170,7 +170,7 @@ class list_model extends CI_Model {
         foreach ($list as $k => $v) {
             $class = "";
             $classA = "";
-            $List11 = $this->get_ItemsEl(array("Parent_id" => $v['id'], "count" => 100));
+            $List11 = $this->get_List(array("Parent_id" => $v['id'], "count" => 100));
             $podMas = $this->isMas($mas, $v['id']);
             if ($podMas || $List11) {
                 $class = "class='dropdown'";

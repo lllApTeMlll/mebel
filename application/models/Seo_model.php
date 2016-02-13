@@ -8,7 +8,7 @@ class Seo_model extends CI_Model {
 
     private $table = "Seo";
 
-    public function get_list($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'Url' => FALSE, //тип
             'count' => 8, //count enement in one page
@@ -62,7 +62,7 @@ class Seo_model extends CI_Model {
 
     public function insert($mas) {
         $mas = $this->clearForCatalog($mas);
-        $alrwdy = $this->get_list(array("Url" => $mas["Url"],"count" => 1));
+        $alrwdy = $this->get_List(array("Url" => $mas["Url"],"count" => 1));
         //var_dump(count($alrwdy)==0);die();
         if (count($alrwdy)==0){
             $this->db->insert($this->table, $mas);

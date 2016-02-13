@@ -13,7 +13,7 @@ class Base_model extends CI_Model {
         $this->table = $table;
     }
 
-    public function get_list($mas = "") {
+    public function get_List($mas = "") {
         $config = array(
             'Parent_id' => FALSE, //тип
             'count' => 8, //count enement in one page
@@ -58,7 +58,7 @@ class Base_model extends CI_Model {
     }
 
     public function getOtion($id, $str, $act, $poast) {
-        $allCid = $this->get_list(array("Parent_id" => $id, "count" => 100));
+        $allCid = $this->get_List(array("Parent_id" => $id, "count" => 100));
         if ($allCid) {
             foreach ($allCid as $k => $v) {
                 $sele = "";

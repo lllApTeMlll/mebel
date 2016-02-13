@@ -48,7 +48,8 @@ $route['fasadm/seo'] = 'Admin/seo';
 $route['fasadm/seo/add'] = 'Admin/seo_add';
 $route['fasadm/seo/edit/(:any)'] = 'Admin/seo_edit/$1';
 
-$route['files/site/all/AjexFileManager/ajax/php/ajax.php'] = 'ckeditor/Ajax/index';
+$route['uploadimage'] = 'floara/Floara/uploadImage';
+$route['imageManager'] = 'floara/Floara/imageManager';
 
 /*
  * Роуты для клиентской части

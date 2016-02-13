@@ -41,8 +41,8 @@ $(function () {
                 } else {
                     alert("no image");
                 }
-                console.log(pr);
-                console.log(filesToUpload);
+                //console.log(pr);
+                //console.log(filesToUpload);
             });
             this.start(params);
         },
@@ -133,7 +133,7 @@ $(function () {
                         success: function (data) {
                             provTime = false;
                             removeLoader();
-                            $('form').get(0).reset();
+                            $('#loadImage').val(''); 
                            // console.log(data);
                             try {
                                 var mas = JSON.parse(data);
@@ -157,7 +157,7 @@ $(function () {
                 u8arr[n] = bstr.charCodeAt(n);
             }
             return new Blob([u8arr], {type: mime});
-        }
+        }//,resetFile
     };
     $.fn.loadImage = function (params)
     {

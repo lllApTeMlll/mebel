@@ -10,19 +10,20 @@ class News extends CI_Controller {
         $this->load->model('News_model');
         $this->load->model('Seo_model');
         $this->load->library('pagin');
+        $this->CurrentModel = $this->News_model;
         $this->user_model->isAvtoris();
     }
 
     public function index() {
         $dat['com'] = $this->user_model->getComp();
         $page = $this->input->get('page', true);
-        $config['total_rows'] = $this->News_model->get_count();
+        $config['total_rows'] = $this->CurrentModel->get_count();
         $config['base_url'] = "";
         $config['cur_page'] = $page;
         $config['page_size'] = 12;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
-        $dat['content'] = $this->News_model->get_list(array("current" => $page, "count" => $config['page_size']));
+        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
         $this->load->view('admin/base/header', $dat);
         $this->load->view('admin/'.$this->Component.'/List', $dat);
         $this->load->view('admin/base/footer');
@@ -60,7 +61,7 @@ class News extends CI_Controller {
             header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
-            $dat['current']['mas'] = $this->News_model->get_Catalog(array("count" => 1, "id" => $id));
+            $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
             $this->load->view('admin/base/header', $dat);
@@ -70,7 +71,7 @@ class News extends CI_Controller {
     }
 
     public function delitItem($id) {
-        $this->News_model->delete($id);
+        $this->CurrentModel->delete($id);
         header("Location: /fasadm/{$this->Component}/");
     }
 
@@ -81,11 +82,11 @@ class News extends CI_Controller {
         $id = $this->input->post('id', true);
         $type = $this->input->post('type', true);
         if ($type == 'add') {
-            $id = $this->News_model->insert($mas);
+            $id = $this->CurrentModel->insert($mas);
         } else {
-            $this->News_model->update($mas, $id);
+            $this->CurrentModel->update($mas, $id);
         }
-        $mas["Url"] = "/{$this->Component}/" . $id ."/";
+        $mas["Url"] = "/{$this->Component}/item/" . $id ."/";
         $mas["Psevdonime"] = $mas["Puth"];
         $this->Seo_model->insert($mas);
         //var_dump($id);die();
