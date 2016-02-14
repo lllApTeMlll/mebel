@@ -17,38 +17,20 @@ $(function () {
                 'Tahoma,Geneva,sans-serif': 'Font 3'}});
     });
 
-
     if ($("#mainForm #Title").length && $("#mainForm #EnglishTitle").length) {
         tttrran($("#mainForm #Title"), $("#mainForm #EnglishTitle"));
     }
+    if ($("#loadImage").length){
+        $("#loadImage").loadImage({maxWidth: 900});
+    }
+    if ($("#itemFasad").length){
+        $("#itemFasad").loadImage({maxWidth: 500, vid: "itemFasad"});
+    }
+    if ($("#itemColor").length){
+        $("#itemColor").loadImage({maxWidth: 500, vid: "itemColor"});
+    }
 });
 
-function loadFile(obj) {
-    return false;
-//    AjexFileManager.init({
-//        returnTo : "ckeditor",
-//        editor: obj
-//    });
-}
-
-
-function replaceText(form) {
-    $.each(CKEDITOR.instances, function (k, v) {
-        if (form.find("#" + k).length) {
-            //console.log(v.getData());
-            form.find("#" + k).val(v.getData());
-        }
-    });
-}
-
-function loadEditor(id) {
-    var instance = CKEDITOR.instances[id];
-    if (instance) {
-        CKEDITOR.remove(instance);
-    }
-    return CKEDITOR.replace(id, {
-    });
-}
 
 function ajaxLoad(data, url, type) {
     type = type || "data";
@@ -81,3 +63,21 @@ function removeLoader() {
     $('.spinner').remove();
     $('progress').remove();
 }
+
+//function replaceText(form) {
+//    $.each(CKEDITOR.instances, function (k, v) {
+//        if (form.find("#" + k).length) {
+//            //console.log(v.getData());
+//            form.find("#" + k).val(v.getData());
+//        }
+//    });
+//}
+//
+//function loadEditor(id) {
+//    var instance = CKEDITOR.instances[id];
+//    if (instance) {
+//        CKEDITOR.remove(instance);
+//    }
+//    return CKEDITOR.replace(id, {
+//    });
+//}

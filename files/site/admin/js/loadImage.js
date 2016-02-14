@@ -1,29 +1,33 @@
 
-$(function () {
-    $("#loadImage").loadImage();
-});
-
-
 (function ($, window, document, undefined)
 {
 
-    var options = {
+    var defaults = {
         type: /image.*/,
         maxSize: '1000000',
         maxHeigth: 1300,
         maxWidth: 500,
-        minWidth: 350
+        minWidth: 350,
+        vid: "id_photo"
     };
     //var fr = new FileReader();
     //var img = new Image();
     var canvas;
     var URL = window.webkitURL || window.URL;
+    
+    function Plugin(element, options)
+    {
+        this.w = $(document);
+        this.el = $(element);
+        this.options = $.extend({}, defaults, options);
+        this.init(element);
+    }
 
-    var methods = {
+    Plugin.prototype = {
         // инициализация плагина
         init: function (params) {
-            var list = params;
-            var thiss = this;
+            var list = $(params),
+                    thiss = this;
             if (!$("#ImageCanvas").length) {
                 list.before('<canvas id="ImageCanvas" width="300" height="300" style="display:none;"></canvas>');
             }
@@ -41,14 +45,12 @@ $(function () {
                 } else {
                     alert("no image");
                 }
-                //console.log(pr);
-                //console.log(filesToUpload);
             });
             this.start(params);
         },
         start: function (params)
         {
-            var list = params;
+            var list = $(params);
             var thiss = this;
             $('.delPhoto').unbind('mousedown');
             $('.delPhoto').mousedown(function () {
@@ -94,7 +96,6 @@ $(function () {
                     //}
                 }
             });
-
         },
         handleFiles: function (filesToUpload, list) {
             var thiss = this;
@@ -106,14 +107,14 @@ $(function () {
                     var width = this.width;
                     var height = this.height;
                     if (width > height) {
-                        if (width > options.maxWidth) {
-                            height *= options.maxWidth / width;
-                            width = options.maxWidth;
+                        if (width > thiss.options.maxWidth) {
+                            height *= thiss.options.maxWidth / width;
+                            width = thiss.options.maxWidth;
                         }
                     } else {
-                        if (height > options.maxHeigth) {
-                            width *= options.maxHeigth / height;
-                            height = options.maxHeigth;
+                        if (height > thiss.options.maxHeigth) {
+                            width *= thiss.options.maxHeigth / height;
+                            height = thiss.options.maxHeigth;
                         }
                     }
                     canvas.width = width;
@@ -124,8 +125,9 @@ $(function () {
                     var blob = thiss.dataURLtoBlob(dataUrl);
                     var formData = new FormData();
                     formData.append("action", "load");
-                    formData.append("max", options.maxWidth);
-                    formData.append("min", options.minWidth);
+                    formData.append("max", thiss.options.maxWidth);
+                    formData.append("min", thiss.options.minWidth);
+                    formData.append("vid", thiss.options.vid);
                     formData.append("files", blob, "thumb.jpg");
                     var provTime = true;
                     getLoader();
@@ -133,8 +135,8 @@ $(function () {
                         success: function (data) {
                             provTime = false;
                             removeLoader();
-                            $('#loadImage').val(''); 
-                           // console.log(data);
+                            $('#loadImage').val('');
+                            // console.log(data);
                             try {
                                 var mas = JSON.parse(data);
                                 //console.log(mas);
@@ -161,8 +163,21 @@ $(function () {
     };
     $.fn.loadImage = function (params)
     {
-        options = $.extend({}, options, params);
-        methods.init(this);
+        var lists = this,
+                retval = this;
+        lists.each(function ()
+        {
+            var plugin = $(this).data("loadImage");
+            if (!plugin) {
+                $(this).data("loadImage", new Plugin(this, params));
+                $(this).data("loadImage-id", new Date().getTime());
+            } else {
+                if (typeof params === 'string' && typeof plugin[params] === 'function') {
+                    retval = plugin[params]();
+                }
+            }
+        });
+        return retval || lists;
     }
     ;
 })(window.jQuery || window.Zepto, window, document);

@@ -68,7 +68,7 @@ class Content extends CI_Controller {
     }
 
     public function updateAndInsert() {
-        $mas = ($this->input->post(null, true));
+        $mas = ($this->input->post(null, false));
         //echo "<pre>";
         //var_dump($mas);die();
         $id = $this->input->post('id', true);

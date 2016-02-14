@@ -31,6 +31,7 @@ class list_model extends CI_Model {
             'Parent_id' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
+            'idLink' => FALSE,
             'id' => FALSE
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
@@ -41,6 +42,13 @@ class list_model extends CI_Model {
         if ($config['id'] !== FALSE) {
             $this->db->where('`id`', $config['id']);
         }
+
+        if ($config['idLink'] !== FALSE) {
+                $this->db->group_start();
+                    $this->db->or_where('`id`', $config['idLink']);
+                    $this->db->or_where('`Link`', $config['idLink']);
+                $this->db->group_end();
+        }
         if ($config['Parent_id'] !== FALSE) {
             $this->db->where('`Parent_id`', $config['Parent_id']);
         }
@@ -48,6 +56,7 @@ class list_model extends CI_Model {
         $this->db->order_by('Order', 'ASC');
         
         $query = $this->db->get($this->table, $config['count'], $config['current']);
+        //var_dump($this->db->last_query());
         if ($config['count'] == 1) {
             return $query->row_array();
         } else

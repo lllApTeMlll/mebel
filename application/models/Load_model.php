@@ -10,7 +10,7 @@ class Load_model extends CI_Model {
 
     public function get_List($mas = "") {
         $config = array(
-            'type' => FALSE, //тип
+            'Type' => FALSE, //тип
             'Item_id' => FALSE, //
             'name' => FALSE, //name
             'count' => 8, //count enement in one page
@@ -22,10 +22,10 @@ class Load_model extends CI_Model {
         }
         $config = array_merge($config, (array) $mas);
 
-        if ($config['type'] !== FALSE) {
-            $this->db->where('`Type`', $config['type']);
+        if ($config['Type'] !== FALSE) {
+            $this->db->where('`Type`', $config['Type']);
         }
-        
+
         if ($config['Item_id'] !== FALSE) {
             $this->db->where('`Item_id`', $config['Item_id']);
         }
@@ -61,7 +61,7 @@ class Load_model extends CI_Model {
     }
 
     public function delWithout() {
-        $delPhoto = $this->get_List(array("type" => "", "count" => 30));
+        $delPhoto = $this->get_List(array("Type" => "", "count" => 30));
         //var_dump($this->db->last_query());
         foreach ($delPhoto as $v) {
             $this->delete($v['id']);
@@ -87,12 +87,12 @@ class Load_model extends CI_Model {
         if (file_exists(BASE . $delPhoto['Puth'] . "/big/" . $delPhoto['Name'])) {
             unlink(BASE . $delPhoto['Puth'] . "/big/" . $delPhoto['Name']);
         }
-       // var_dump($delPhoto);die();
+        // var_dump($delPhoto);die();
         $this->db->delete($this->table, array('id' => $id));
     }
 
     private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Type", "Price", "Description", "Puth", "Name", "Item_id" ,"Order");
+        $clearArray = array("Title", "Type", "Price", "Description", "Puth", "Name", "Item_id", "Order");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);
@@ -101,21 +101,21 @@ class Load_model extends CI_Model {
         return $mas;
     }
 
-    public function getPhotos($mas) {
+    public function getPhotos($mas, $vid = "id_photo") {
         (array) $allPhoto = $this->Load_model->get_List($mas);
         //var_dump($allPhoto);
         //die();
         if (isset($mas['count']) && $mas['count'] == 1) {
-            return $this->getVerstka($allPhoto);
+            return $this->getVerstka($allPhoto, $vid);
         }
         $stringPhotos = "";
         foreach ($allPhoto as $v) {
-            $stringPhotos .= $this->getVerstka($v);
+            $stringPhotos .= $this->getVerstka($v, $vid);
         }
         return $stringPhotos;
     }
 
-    private function getVerstka($mas) {
+    private function getVerstka($mas, $vid) {
         return '
             <li>
                 <div class="delPhotoCont">
@@ -125,7 +125,7 @@ class Load_model extends CI_Model {
                 </div>
                 <div class="img" style="background-image: url(' . $mas['Puth'] . '/small/' . $mas['Name'] . ');"></div>
                 <div class="data">
-                    <input type="hidden" name="id_photo[]" value="' . $mas['id'] . '">
+                    <input type="hidden" name="' . $vid . '[]" value="' . $mas['id'] . '">
                 </div>
             </li>
          ';

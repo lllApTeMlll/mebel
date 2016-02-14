@@ -58,7 +58,29 @@
                             <?= $current['image'] ?>
                         </ul>
                     </div>
-                </div><!-- /.box-body -->
+                </div>
+                <div class="box-body">
+                    <div class="form-group col-lg-12">
+                        <label for="itemFasad">Загрузка фото фасадов</label>
+                        <input id="itemFasad" class="loadImage" type="file" multiple name="files[]">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <ul class="photoActiv">
+                            <?= $current['itemFasad'] ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-group col-lg-12">
+                        <label for="itemColor">Загрузка фото цветов</label>
+                        <input id="itemColor" class="loadImage" type="file" multiple name="files[]">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <ul class="photoActiv">
+                            <?= $current['itemColor'] ?>
+                        </ul>
+                    </div>
+                </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>

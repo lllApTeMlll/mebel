@@ -17,7 +17,7 @@ class Content extends CI_Controller {
     }
 
     public function index() {
-        echo "ok";die();
+        //echo "ok";die();
         $dat['menu'] = $this->menu;
         $dat['content'] = $this->Content_model->get_List(array("count"=>1,"Url"=>$_SERVER['REQUEST_URI']));
         if (!$dat['content']){

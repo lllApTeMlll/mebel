@@ -72,7 +72,11 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "item", "Item_id" => $id, "count" => 100));
+            $dat['current']['itemFasad'] = $this->Load_model->getPhotos(array("Type" => "itemFasad", "Item_id" => $id, "count" => 100),"itemFasad");
+            $dat['current']['itemColor'] = $this->Load_model->getPhotos(array("Type" => "itemColor", "Item_id" => $id, "count" => 100),"itemColor");
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", $this->getFirstCat($dat['current']['mas']['Cat']), "");
+            //echo "<pre>";
+            //var_dump($dat);die();
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/' . $this->Component . '/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -116,6 +120,22 @@ class Catalog extends CI_Controller {
         $edit["Type"] = "item";
         if (isset($mas["id_photo"])) {
             foreach ($mas["id_photo"] as $k => $v) {
+                $edit["Item_id"] = $id;
+                $edit["Order"] = $k;
+                $this->Load_model->update($edit, $v);
+            }
+        }
+        $edit["Type"] = "itemFasad";
+        if (isset($mas["itemFasad"])) {
+            foreach ($mas["itemFasad"] as $k => $v) {
+                $edit["Item_id"] = $id;
+                $edit["Order"] = $k;
+                $this->Load_model->update($edit, $v);
+            }
+        }
+        $edit["Type"] = "itemColor";
+        if (isset($mas["itemColor"])) {
+            foreach ($mas["itemColor"] as $k => $v) {
                 $edit["Item_id"] = $id;
                 $edit["Order"] = $k;
                 $this->Load_model->update($edit, $v);

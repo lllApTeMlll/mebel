@@ -18,15 +18,10 @@ class LoadImage extends CI_Controller {
         if (isset($_FILES["files"]["tmp_name"])) {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "blob");
 
-            // Get filename.
             $temp = explode(".", $_FILES["files"]["name"]);
 
-            // Get extension.
             $extension = end($temp);
 
-            // An image check is being done in the editor but it is best to
-            // check that again on the server side.
-            // Do not use $_FILES["file"]["type"] as it can be easily forged.
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mime = finfo_file($finfo, $_FILES["files"]["tmp_name"]);
 
@@ -57,7 +52,7 @@ class LoadImage extends CI_Controller {
                 $this->image_lib->clear();
                 $mas1 = array("Puth" => '/files/images2/', "Name" => $filename . ".jpg");
                 $this->Load_model->insert($mas1);
-                $mas['elem'] = $this->Load_model->getPhotos(array("name" => $filename . ".jpg", "count" => 1));
+                $mas['elem'] = $this->Load_model->getPhotos(array("name" => $filename . ".jpg", "count" => 1),$this->input->post('vid', true));
                 echo json_encode($mas);
             }
         }

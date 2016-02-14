@@ -1,12 +1,8 @@
 <div class="grayline-wrap breadcrumbs">
-    <ul class="grayline-list">
-        <li><a href="/">Главная</a></li>
-        <li class="sep">/</li>
-        <li>Каталог</li>
-    </ul>
+    <?=$Crumbs['Crumbs']?>
 </div>
 <div class="clear"></div>
-<h2>Каталог немецких кухонь</h2>
+<h2><?=$Crumbs['Title']?></h2>
 <div class="catalog-content__catalog justifyfix">
     <?php foreach ($catList as $v) { ?>
     <div class="catalog-content__catalog-item" style="background: url(<?=$v['photo']?>) left top no-repeat;">

@@ -123,7 +123,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".popup-show").on('click', function () {
+    $(document).on("click", ".popup-show", function (e) {
         $(".popup").height($(document).height());
         $(".catalog-popup").hide();
         $(".popup").show();
@@ -132,12 +132,13 @@ $(document).ready(function () {
     });
 
 
-    $(".catalog-popup-show").on('click', function () {
+    //$(".catalog-popup-show").on('click', function () {
+    $(document).on("click", ".catalog-popup-show", function () {
         var id = $(this).data(id);
-        console.log("/catalog/getInfo/"+id.id+"/");
-        $.ajax({type: "POST", url: "/catalog/getInfo/"+id.id+"/", data: "",
+        console.log("/catalog/getInfo/" + id.id + "/");
+        $.ajax({type: "POST", url: "/catalog/getInfo/" + id.id + "/", data: "",
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 try {
                     //var mas = JSON.parse(data);
                     $(".catalog-popup").html(data);
@@ -190,16 +191,15 @@ $(document).ready(function () {
         });
     });
 
-    $(".close-popup").on('click', function () {
+    $(document).on("click", ".close-popup", function () {
         $(".popup").hide();
     });
 
-    $(".close-catalog-popup").on('click', function () {
+    $(document).on("click", ".close-catalog-popup", function () {
         $(".catalog-popup").hide();
     });
 
-    $(".overlay").on('click', function (e) {
-
+    $(document).on("click", ".overlay", function (e) {
         var el = $(e.target);
         if ((el.hasClass('popup-form')) || (el.closest('.popup-form').length == 1)) {
             e.stopPropagation();
@@ -209,30 +209,11 @@ $(document).ready(function () {
         }
     });
 
-    $("form").each(function () {
-        $(this).validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                phone: {
-                    required: true
-                },
-                email: {
-                    required: true
-                }
-
-            }
-        });
-        $(this).removeAttr('novalidate');
-    });
-
     $(".fancyimage").fancybox({
         padding: 10
     });
 
-    $(".sidemenu__item-link").on('click', function (e) {
-
+    $(document).on("click", ".sidemenu__item-link", function (e) {
         e.preventDefault();
 
         var parent = $(this).parent();
@@ -319,22 +300,22 @@ function getMap() {
     });
 }
 
-jQuery.extend(jQuery.validator.messages, {
-    required: "Это поле необходимо заполнить",
-    remote: "Исправьте это поле чтобы продолжить",
-    email: "Введите правильный email адрес.",
-    url: "Введите верный URL.",
-    date: "Введите правильную дату.",
-    dateISO: "Введите правильную дату (ISO).",
-    number: "Введите число.",
-    digits: "Введите только цифры.",
-    creditcard: "Введите правильный номер вашей кредитной карты.",
-    equalTo: "Повторите ввод значения еще раз.",
-    accept: "Пожалуйста, введите значение с правильным расширением.",
-    maxlength: jQuery.validator.format("Нельзя вводить более {0} символов."),
-    minlength: jQuery.validator.format("Должно быть не менее {0} символов."),
-    rangelength: jQuery.validator.format("Введите от {0} до {1} символов."),
-    range: jQuery.validator.format("Введите число от {0} до {1}."),
-    max: jQuery.validator.format("Введите число меньше или равное {0}."),
-    min: jQuery.validator.format("Введите число больше или равное {0}.")
-});
+//jQuery.extend(jQuery.validator.messages, {
+//    required: "Это поле необходимо заполнить",
+//    remote: "Исправьте это поле чтобы продолжить",
+//    email: "Введите правильный email адрес.",
+//    url: "Введите верный URL.",
+//    date: "Введите правильную дату.",
+//    dateISO: "Введите правильную дату (ISO).",
+//    number: "Введите число.",
+//    digits: "Введите только цифры.",
+//    creditcard: "Введите правильный номер вашей кредитной карты.",
+//    equalTo: "Повторите ввод значения еще раз.",
+//    accept: "Пожалуйста, введите значение с правильным расширением.",
+//    maxlength: jQuery.validator.format("Нельзя вводить более {0} символов."),
+//    minlength: jQuery.validator.format("Должно быть не менее {0} символов."),
+//    rangelength: jQuery.validator.format("Введите от {0} до {1} символов."),
+//    range: jQuery.validator.format("Введите число от {0} до {1}."),
+//    max: jQuery.validator.format("Введите число меньше или равное {0}."),
+//    min: jQuery.validator.format("Введите число больше или равное {0}.")
+//});
