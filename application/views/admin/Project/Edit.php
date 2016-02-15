@@ -1,6 +1,7 @@
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab_1" data-toggle="tab">Характеристики</a></li>
+        <li><a href="#tab_2" data-toggle="tab">Добавление фото</a></li>
         <li><a href="#tab_3" data-toggle="tab">Seo</a></li>
     </ul>
     <form role="form" id="mainForm" method="POST">
@@ -20,6 +21,10 @@
                         <label for="Description">Описание</label>
                         <textarea class="form-control ckedit" id="Description" name="Description" ><?= $current['mas']["Description"] ?></textarea>
                     </div>
+                    <div class="form-group col-lg-12">
+                        <label for="Review">Отзыв</label>
+                        <textarea class="form-control ckedit" id="Review" name="Review" ><?= $current['mas']["Review"] ?></textarea>
+                    </div>
                 </div><!-- /.box-body -->
                 <input type="hidden" name="type" value="<?= $current['type'] ?>">
                 <input type="hidden" name="id" value="<?= $current['id'] ?>">
@@ -29,19 +34,36 @@
                 </div>
 
             </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_2">
+                <div class="box-body">
+                    <div class="form-group col-lg-12">
+                        <label for="loadImage">Загрузка фото</label>
+                        <input id="loadImage" class="loadImage" type="file" multiple name="files[]">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <ul class="photoActiv">
+                            <?= $current['image'] ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
+                </div>
+            </div><!-- /.tab-pane -->
             <div class="tab-pane" id="tab_3">
                 <div class="box-body">
                     <div class="form-group col-lg-12">
                         <label for="SeoTitle">Seo title</label>
-                        <input class="form-control" id="SeoTitle" name="SeoTitle"  type="text">
+                        <input class="form-control" id="SeoTitle" name="SeoTitle" value="<?= $Seo['SeoTitle'] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="SeoDescription">Seo Description</label>
-                        <textarea class="form-control" id="SeoDescription" name="SeoDescription"></textarea>
+                        <textarea class="form-control" id="SeoDescription" name="SeoDescription"><?= $Seo['SeoDescription'] ?></textarea>
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="SeoKeyword">Seo Keyword</label>
-                        <textarea class="form-control" id="SeoKeyword" name="SeoKeyword"></textarea>
+                        <textarea class="form-control" id="SeoKeyword" name="SeoKeyword"><?= $Seo['SeoKeyword'] ?></textarea>
                     </div>
                 </div><!-- /.box-body -->
 

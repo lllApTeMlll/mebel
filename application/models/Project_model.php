@@ -59,7 +59,7 @@ class Project_model extends CI_Model {
 
     public function insert($mas) {
         $this->db->trans_start();
-        $mas = $this->clearForCatalog($mas);
+        $mas = $this->clearWhiteList($mas);
         //var_dump($mas);die();
         $this->db->insert($this->table, $mas);
         $insert_id = $this->db->insert_id();
@@ -68,7 +68,7 @@ class Project_model extends CI_Model {
     }
 
     public function update($mas, $id) {
-        $mas = $this->clearForCatalog($mas);
+        $mas = $this->clearWhiteList($mas);
         $this->db->update($this->table, $mas, array('id' => $id));
     }
 
@@ -76,8 +76,8 @@ class Project_model extends CI_Model {
         $this->db->delete($this->table, array('id' => $id));
     }
 
-    private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle");
+    private function clearWhiteList($mas) {
+        $clearArray = array("Title", "Articl", "Review", "Description", "EnglishTitle");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);

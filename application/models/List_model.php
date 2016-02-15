@@ -29,6 +29,7 @@ class list_model extends CI_Model {
     public function get_List($mas = "") {
         $config = array(
             'Parent_id' => FALSE, //тип
+            'Parent_id_NOT' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
             'idLink' => FALSE,
@@ -51,6 +52,9 @@ class list_model extends CI_Model {
         }
         if ($config['Parent_id'] !== FALSE) {
             $this->db->where('`Parent_id`', $config['Parent_id']);
+        }
+        if ($config['Parent_id_NOT'] !== FALSE) {
+            $this->db->where('`Parent_id`<>', $config['Parent_id_NOT']);
         }
         
         $this->db->order_by('Order', 'ASC');

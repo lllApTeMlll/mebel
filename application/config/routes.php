@@ -38,7 +38,8 @@ $route['fasadm/Project/edit/(:any)'] = 'admin/Project/editItem/$1';
 $route['fasadm/Project/delite/(:any)'] = 'admin/Project/delitItem/$1'; 
 
 $route['fasadm/News'] = 'admin/News/index';    
-$route['fasadm/News/add'] = 'admin/News/addItem';   
+$route['fasadm/News/add'] = 'admin/News/addItem';  
+$route['fasadm/News/addCat'] = 'admin/News/addCat'; 
 $route['fasadm/News/edit/(:any)'] = 'admin/News/editItem/$1';  
 $route['fasadm/News/delite/(:any)'] = 'admin/News/delitItem/$1'; 
 

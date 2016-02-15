@@ -43,12 +43,12 @@ class Catalog extends CI_Controller {
     public function item($id) {
         $dat['menu'] = $this->menu;
         $catalogItem = $this->Catalog_model->get_List(array("count" => 1, 'EnglishTitle' => $id));
-        if (!$catalogItem){
+        if (!$catalogItem) {
             header("Location: /catalog/");
         }
         $dat['item'] = $this->madeTrueArrayForItem($catalogItem);
-        
-        $dat["Crumbs"] = $this->getCrumbs(explode(",", trim($dat['item']['Cat'], ",")));
+
+        $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))),true);
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/catalog/item', $dat);
         $this->load->view('site/base/footer');
@@ -95,27 +95,32 @@ class Catalog extends CI_Controller {
         }
         return $mas;
     }
-    
-    private function getCrumbs($mas1){
+
+    private function getCrumbs($mas1,$pr = false) {
         //echo "<pre>";
         $mas["Title"] = "Каталог";
         $mas['Crumbs'] = "<ul class='grayline-list'>
             <li><a href='/'>Главная</a></li>
-            <li class='sep'>/</li>
-            <li><a href='/catalog/'>Каталог</a></li>";
+            <li class='sep'>/</li>";
+        $a = "<li><a href='/catalog/'>Каталог</a></li>";
+        $last = "<li>Каталог</li>";
         $beforeLisnk = "/catalog/";
-        foreach (array_reverse($mas1) as $v) {
-            if ($v && $v != 1){
-                $currentList = $this->list_model->get_List(array("idLink" => $v, "count" => 1));
+        foreach (($mas1) as $v) {
+            //var_dump($v);
+            if ($v && $v !== 1) {
+                $currentList = $this->list_model->get_List(array("idLink" => $v, "count" => 1, "Parent_id_NOT" => 0));
                 //var_dump($currentList);
-                if ($currentList){
-                    $mas['Crumbs'] .= "<li class='sep'>/</li>
-                        <li><a href='{$beforeLisnk}{$currentList['Link']}/'>{$currentList['Title']}</a></li>";
+                if ($currentList) {
+                    $mas['Crumbs'] .= $a . "<li class='sep'>/</li>";
+                    $a = "<li><a href='{$beforeLisnk}{$currentList['Link']}/'>{$currentList['Title']}</a></li>";
+                    $last = "<li>{$currentList['Title']}</li>";
                     $mas["Title"] = $currentList['Title'];
                     $beforeLisnk = "{$beforeLisnk}{$currentList['Link']}/";
                 }
-            }           
+            }
         }
+        $mas['Crumbs'] .= ($pr ? $a : $last);
+        // echo "</pre>";
         //var_dump($mas1);
         //var_dump($mas['Crumbs']);
         //die();

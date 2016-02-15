@@ -29,6 +29,12 @@ $(function () {
     if ($("#itemColor").length){
         $("#itemColor").loadImage({maxWidth: 500, vid: "itemColor"});
     }
+     $('.datepicker').datetimepicker({
+        lang: 'ru',
+        timepicker: false,
+        format: 'Y-m-d',
+        //formatDate:'Y-m-d',
+    });
 });
 
 

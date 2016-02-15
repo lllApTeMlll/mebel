@@ -33,15 +33,15 @@
                 <div class="box-body">
                     <div class="form-group col-lg-12">
                         <label for="SeoTitle">Seo title</label>
-                        <input class="form-control" id="SeoTitle" name="SeoTitle"  type="text">
+                        <input class="form-control" id="SeoTitle" name="SeoTitle" value="<?= $Seo['SeoTitle'] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="SeoDescription">Seo Description</label>
-                        <textarea class="form-control" id="SeoDescription" name="SeoDescription"></textarea>
+                        <textarea class="form-control" id="SeoDescription" name="SeoDescription"><?= $Seo['SeoDescription'] ?></textarea>
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="SeoKeyword">Seo Keyword</label>
-                        <textarea class="form-control" id="SeoKeyword" name="SeoKeyword"></textarea>
+                        <textarea class="form-control" id="SeoKeyword" name="SeoKeyword"><?= $Seo['SeoKeyword'] ?></textarea>
                     </div>
                 </div><!-- /.box-body -->
 

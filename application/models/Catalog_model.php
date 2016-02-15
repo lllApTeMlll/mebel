@@ -15,6 +15,7 @@ class Catalog_model extends CI_Model {
             'cid' => FALSE, //категория
             'count' => 8, //count enement in one page
             'current' => 0, //current element
+            'EnglishTitle' => FALSE,
             'id' => FALSE
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
@@ -28,7 +29,6 @@ class Catalog_model extends CI_Model {
         }
         if ($config['cid'] != FALSE) {
             $idn = $this->getIdCid($config['cid']);
-            //var_dump($idn);die();
             if (($idn)) {
                 $this->db->or_like('`Cat`', "," . $idn["id"] . ",");
             }
@@ -36,7 +36,11 @@ class Catalog_model extends CI_Model {
         if ($config['id'] != FALSE) {
             $this->db->where('`id`', $config['id']);
         }
+        if ($config['EnglishTitle'] != FALSE) {
+            $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
+        }
         $query = $this->db->get($this->table, $config['count'], $config['current']);
+        //var_dump($this->db->last_query());
         if ($config['count'] == 1) {
             return $query->row_array();
         } else

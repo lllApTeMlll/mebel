@@ -27,6 +27,9 @@
         <!--<script src='/files/site/all/ckeditor/ckeditor.js'></script>
         <script src='/files/site/all/AjexFileManager/ajex.js'></script>-->
 
+        <script src='/files/site/all/datapiker/js/jquery.datetimepicker.js'></script>
+        <link rel="stylesheet" href="/files/site/all/datapiker/css/jquery.datetimepicker.css">
+        
         <link rel="stylesheet" href="/files/site/all/codemirror/codemirror.min.css">
         <link rel="stylesheet" href="/files/site/all/floara/css/froala_editor.css">
         <link rel="stylesheet" href="/files/site/all/floara/css/froala_style.css">

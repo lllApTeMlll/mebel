@@ -36,6 +36,7 @@ class Content extends CI_Controller {
             header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
+            $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
             $dat['current']['mas'] = array("Title" => "", "Puth" => "", "Description" => "");
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
@@ -53,6 +54,7 @@ class Content extends CI_Controller {
             header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
+            $dat['Seo'] = $this->Seo_model->get_List(array("count" => 1, "Url" => "/{$this->Component}/item/" . $id . "/"));
             $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;

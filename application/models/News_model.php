@@ -10,10 +10,11 @@ class News_model extends CI_Model {
 
     public function get_List($mas = "") {
         $config = array(
+            'Type' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
-            'id' => FALSE,
-            'Url' => FALSE,
+            'EnglishTitle' => FALSE,
+            'id' => FALSE
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
             unset($mas['current']);
@@ -23,9 +24,11 @@ class News_model extends CI_Model {
         if ($config['id'] !== FALSE) {
             $this->db->where('`id`', $config['id']);
         }
-
-        if ($config['Url'] !== FALSE) {
-            $this->db->where('`Url`', $config['Url']);
+        if ($config['EnglishTitle'] != FALSE) {
+            $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
+        }
+        if ($config['Type'] !== FALSE) {
+            $this->db->where('`Type`', $config['Type']);
         }
 
         $query = $this->db->get($this->table, $config['count'], $config['current']);
@@ -37,10 +40,11 @@ class News_model extends CI_Model {
 
     public function get_count($mas = "") {
         $config = array(
+            'Type' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
-            'id' => FALSE,
-            'Url' => FALSE,
+            'EnglishTitle' => FALSE,
+            'id' => FALSE
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
             unset($mas['current']);
@@ -50,16 +54,18 @@ class News_model extends CI_Model {
         if ($config['id'] !== FALSE) {
             $this->db->where('`id`', $config['id']);
         }
-
-        if ($config['Url'] !== FALSE) {
-            $this->db->where('`Url`', $config['Url']);
+        if ($config['EnglishTitle'] != FALSE) {
+            $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
+        }
+        if ($config['Type'] !== FALSE) {
+            $this->db->where('`Type`', $config['Type']);
         }
         return $this->db->count_all_results($this->table);
     }
 
     public function insert($mas) {
         $this->db->trans_start();
-        $mas = $this->clearForCatalog($mas);
+        $mas = $this->clearWhiteList($mas);
         //var_dump($mas);die();
         $this->db->insert($this->table, $mas);
         $insert_id = $this->db->insert_id();
@@ -68,7 +74,7 @@ class News_model extends CI_Model {
     }
 
     public function update($mas, $id) {
-        $mas = $this->clearForCatalog($mas);
+        $mas = $this->clearWhiteList($mas);
         $this->db->update($this->table, $mas, array('id' => $id));
     }
 
@@ -76,8 +82,8 @@ class News_model extends CI_Model {
         $this->db->delete($this->table, array('id' => $id));
     }
 
-    private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle");
+    private function clearWhiteList($mas) {
+        $clearArray = array("Title","Type", "Date", "Description", "EnglishTitle");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);
