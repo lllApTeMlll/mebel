@@ -38,10 +38,14 @@ class LoadImage extends CI_Controller {
                     'quality' => 90,
                     'width' => $this->input->post('max', true),
                 );
-                $this->image_lib->initialize($config);
-                $this->image_lib->resize();
-                $mas['error'] = $this->image_lib->display_errors();
-                $this->image_lib->clear();
+                $mas['error'] = "";
+                if ($this->input->post('onlismall', true) === "small") {
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+                    $mas['error'] = $this->image_lib->display_errors();
+                    $this->image_lib->clear();
+                }
+
 
                 $config['new_image'] = BASE . '/files/images2/small/' . $filename . ".jpg";
                 $config['width'] = $this->input->post('min', true);
@@ -52,7 +56,7 @@ class LoadImage extends CI_Controller {
                 $this->image_lib->clear();
                 $mas1 = array("Puth" => '/files/images2/', "Name" => $filename . ".jpg");
                 $this->Load_model->insert($mas1);
-                $mas['elem'] = $this->Load_model->getPhotos(array("name" => $filename . ".jpg", "count" => 1),$this->input->post('vid', true));
+                $mas['elem'] = $this->Load_model->getPhotos(array("name" => $filename . ".jpg", "count" => 1), $this->input->post('vid', true));
                 echo json_encode($mas);
             }
         }

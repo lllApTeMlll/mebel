@@ -123,7 +123,7 @@ class Load_model extends CI_Model {
                         <input type="checkbox" name="del[]" value="' . $mas['id'] . '">
                     </label>
                 </div>
-                <div class="img" style="background-image: url(' . $mas['Puth'] . '/small/' . $mas['Name'] . ');"></div>
+                <div class="img" style="background-image: url(' . $mas['Puth'] . 'small/' . $mas['Name'] . ');"></div>
                 <div class="data">
                     <input type="hidden" name="' . $vid . '[]" value="' . $mas['id'] . '">
                 </div>

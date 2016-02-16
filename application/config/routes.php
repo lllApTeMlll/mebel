@@ -58,7 +58,7 @@ $route['imageManager'] = 'floara/Floara/imageManager';
  */
 
 $route['([a-zA-Z]+)/item/(:any)'] = 'site/$1/item/$2';    
-$route['([a-zA-Z]+)/getInfo/(:any)'] = 'site/$1/getInfo';  
+$route['([a-zA-Z]+)/getInfo/(:any)'] = 'site/$1/getInfo/$2';  
 $route['([a-zA-Z]+)'] = 'site/$1/index';  
 $route['([a-zA-Z]+)/([a-zA-Z\-0-9]*)'] = 'site/$1/index/$2';  
 $route['([a-zA-Z]+)/([a-zA-Z\-0-9]*)/([a-zA-Z\-0-9]*)'] = 'site/$1/index/$2/$3'; 
