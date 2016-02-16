@@ -14,7 +14,7 @@ $.FroalaEditor.LANGUAGE['ru'] = {
     "Type something": "\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u0447\u0442\u043e\u002d\u043d\u0438\u0431\u0443\u0434\u044c",
 
     // Basic formatting
-    "Bold": "\u0416\u0438\u0440\u043d\u044b\u0439",
+    "Bold": "жирный",
     "Italic": "\u041a\u0443\u0440\u0441\u0438\u0432",
     "Underline": "\u041f\u043e\u0434\u0447\u0435\u0440\u043a\u043d\u0443\u0442\u044b\u0439",
     "Strikethrough": "\u0417\u0430\u0447\u0435\u0440\u043a\u043d\u0443\u0442\u044b\u0439",
