@@ -2,3 +2,5 @@
 /mebel13/nbproject/private/
 /application/config/database.php
 /application/config/config.php
+*.jpg
+*.png
