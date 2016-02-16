@@ -23,7 +23,7 @@ class Catalog extends CI_Controller {
         $dat['com'] = $this->user_model->getComp();
         $page = $this->input->get('page', true);
         $config['total_rows'] = $this->CurrentModel->get_count();
-        $config['base_url'] = "";
+        $config['base_url'] =  "";
         $config['cur_page'] = $page;
         $config['page_size'] = 6;
         $this->pagin->initialize($config);
