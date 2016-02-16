@@ -8,7 +8,8 @@
         maxHeigth: 1300,
         maxWidth: 500,
         minWidth: 350,
-        vid: "id_photo"
+        vid: "id_photo",
+        onlismall: "small"
     };
     //var fr = new FileReader();
     //var img = new Image();
@@ -128,6 +129,7 @@
                     formData.append("max", thiss.options.maxWidth);
                     formData.append("min", thiss.options.minWidth);
                     formData.append("vid", thiss.options.vid);
+                    formData.append("onlismall", thiss.options.onlismall);
                     formData.append("files", blob, "thumb.jpg");
                     var provTime = true;
                     getLoader();

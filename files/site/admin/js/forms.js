@@ -20,16 +20,16 @@ $(function () {
     if ($("#mainForm #Title").length && $("#mainForm #EnglishTitle").length) {
         tttrran($("#mainForm #Title"), $("#mainForm #EnglishTitle"));
     }
-    if ($("#loadImage").length){
+    if ($("#loadImage").length) {
         $("#loadImage").loadImage({maxWidth: 900});
     }
-    if ($("#itemFasad").length){
+    if ($("#itemFasad").length) {
         $("#itemFasad").loadImage({maxWidth: 500, vid: "itemFasad"});
     }
-    if ($("#itemColor").length){
+    if ($("#itemColor").length) {
         $("#itemColor").loadImage({maxWidth: 500, vid: "itemColor"});
     }
-     $('.datepicker').datetimepicker({
+    $('.datepicker').datetimepicker({
         lang: 'ru',
         timepicker: false,
         format: 'Y-m-d',
