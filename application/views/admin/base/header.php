@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/files/site/all/floara/css/plugins/video.css">
         <link rel="stylesheet" href="/files/site/all/floara/css/plugins/colors.css">
         <link rel="stylesheet" href="/files/site/all/floara/css/plugins/fullscreen.css">
-        <link rel="stylesheet" href="/files/site/all/floara/css/plugins/quick_insert.css">
+        <!--<link rel="stylesheet" href="/files/site/all/floara/css/plugins/quick_insert.css">-->
 
         <script type="text/javascript" src="/files/site/all/codemirror/codemirror.min.js"></script>
         <script type="text/javascript" src="/files/site/all/codemirror/xml.min.js"></script>
@@ -68,8 +68,8 @@
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/inline_style.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/save.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/fullscreen.min.js"></script>
-        <script type="text/javascript" src="/files/site/all/floara/js/plugins/quote.min.js"></script>
-        <script type="text/javascript" src="/files/site/all/floara/js/plugins/quick_insert.min.js"></script>
+<!--        <script type="text/javascript" src="/files/site/all/floara/js/plugins/quote.min.js"></script>
+        <script type="text/javascript" src="/files/site/all/floara/js/plugins/quick_insert.min.js"></script>-->
         <script type="text/javascript" src="/files/site/all/floara/js/languages/ru.js"></script>
 
         <script src='/files/site/all/drag/jquery.drag-drop.plugin.js'></script>
