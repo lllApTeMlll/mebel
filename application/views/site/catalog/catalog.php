@@ -7,7 +7,7 @@
     <?php foreach ($catList as $v) { ?>
     <div class="catalog-content__catalog-item" style="background: url(<?=$v['photo']?>) left top no-repeat;">
         <div class="catalog-item__caption">
-            <a href="" class="catalog-item__caption-link"><?=$v['Title']?></a>
+            <a href="<?="/catalog/item/" . $v["EnglishTitle"] . "/"?>" class="catalog-item__caption-link"><?=$v['Title']?></a>
         </div>
         <div class="catalog-item__caption-hover catalog-popup-show" data-id="<?=$v['id']?>">
             <div class="hover-icon"><a href="">посмотреть</a></div>

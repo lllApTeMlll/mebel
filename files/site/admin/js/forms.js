@@ -21,7 +21,7 @@ $(function () {
         tttrran($("#mainForm #Title"), $("#mainForm #EnglishTitle"));
     }
     if ($("#loadImage").length) {
-        $("#loadImage").loadImage({maxWidth: 900});
+        $("#loadImage").loadImage({maxWidth: 1100});
     }
     if ($("#itemFasad").length) {
         $("#itemFasad").loadImage({maxWidth: 500, vid: "itemFasad"});

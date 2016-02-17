@@ -1,69 +1,105 @@
 <?php
 
-$masT['start']="
+$masT['start'] = "
     <ol class='dd-list'>
          ";
-$masT['end']="
+$masT['end'] = "
     </ol>
          ";
 
-$masT['start1']="
+$masT['start1'] = "
     <ol class='dd-list'>
          ";
-$masT['end1']="
+$masT['end1'] = "
     </ol>
          ";
 
-$masT['first']="
-    <div class='dd-handle demo-icon  dd3-handle dd-nodrag dd-nodrag1'>&#xe869;</div>
-    <div class='dd4-handle demo-icon  dd-nodrag1'>&#xe9f6;</div>
-    <div class='dd3-content dd-nodrag1'><%Title%></div>
+function first($mas) {
+    return "
+    <div class='dd-handle demo-icon  dd3-handle dd-nodrag dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
+    <div class='dd4-handle demo-icon  dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
+    <div class='dd3-content dd-nodrag1'>{$mas['Title']}</div>
 ";
+}
 
-$masT['norm']="
-    <div class='dd-handle demo-icon dd3-handle dd-nodrag1'>&#xe869;</div>
-    <div class='dd5-handle demo-icon dd-nodrag1'>&#xea1c;</div>
-    <div class='dd4-handle demo-icon dd-nodrag1'>&#xe9f6;</div>
+;
+
+function norm($mas) {
+    return "
+    <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
+    <div class='dd5-handle  demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
+    <div class='dd4-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
     <div class='dd3-content dd-nodrag1'>
-        <div class='grup'>
-            <div class='colum2 col50'>
-                <label>
-                    Название
-                </label>
-                <input class='inp nam' type='text' name='Title[]' value='<%Title%>'>
-            </div>
-            <div class='colum2 col50'>
-                <label>
-                    Сылка
-                </label>
-               <input class='inp nam' type='text' name='Link[]' value='<%Link%>'>
-            </div>
-        </div>
-        <input type='hidden' name='parent_id[]' value='<%parent_id%>'>
-        <input type='hidden' name='id[]' value='<%id%>'>
+		<div class='grup'>
+			<div class='colum2 col50'>
+				<label>
+					Название
+				</label>
+				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
+			</div>
+			<div class='colum2 col50'>
+				<label>
+					Ссылка
+				</label>
+			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
+			</div>
+		</div>
+        <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
+        <input type='hidden' name='id[]' value='{$mas['id']}'>
     </div>
 ";
+}
 
-$masT['last']="
-        <div class='dd-handle demo-icon dd3-handle dd-nodrag1'>&#xe869;</div>
-        <div class='dd5-handle demo-icon dd-nodrag1'>&#xea1c;</div>
+function last($mas) {
+    return "
+        <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div> 
+        <div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
         <div class='dd3-content dd-nodrag1 max'>
-            <div class='grup'>
-                <div class='colum2 col50'>
-                    <label>
-                        Название
-                    </label>
-                    <input class='inp nam' type='text' name='Title[]' value='<%Title%>'>
-                </div>
-                <div class='colum2 col50'>
-                    <label>
-                        Сылка
-                    </label>
-                   <input class='inp nam' type='text' name='Link[]' value='<%Link%>'>
-                </div>
-            </div>
-            <input type='hidden' name='parent_id[]' value='<%parent_id%>'>
-            <input type='hidden' name='id[]' value='<%id%>'>
+            		<div class='grup'>
+			<div class='colum2 col50'>
+				<label>
+					Название
+				</label>
+				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
+			</div>
+			<div class='colum2 col50'>
+				<label>
+					Сcылка
+				</label>
+			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
+			</div>
+		</div>
+            <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
+            <input type='hidden' name='id[]' value='{$mas['id']}'>
         </div>
 ";
+}
+
+function jsPast() {
+    return "
+        function getNewEl(mas){
+        return  \"<div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>\"+
+        \"<div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>\"+
+        \"<div class='dd3-content dd-nodrag1 max'>\"+
+            		\"<div class='grup'>\"+
+			\"<div class='colum2 col50'>\"+
+				\"<label>\"+
+					\"Название\"+
+				\"</label>\"+
+				\"<input class='inp nam' type='text' name='Title[]' value=''>\"+
+			\"</div>\"+
+			\"<div class='colum2 col50'>\"+
+				\"<label>\"+
+					\"Сcылка\"+
+				\"</label>\"+
+			   \"<input class='inp nam' type='text' name='Link[]' value=''>\"+
+			\"</div>\"+
+		\"</div>\"+
+            \"<input type='hidden' name='Parent_id[]' value='\"+mas.Parent_id+\"'>\"+
+            \"<input type='hidden' name='id[]' value=''>\"+
+        \"</div>\";
+        }
+";
+}
+
 

@@ -39,7 +39,7 @@ function norm($mas) {
 			</div>
 			<div class='colum2 col50'>
 				<label>
-					Сылка
+					Ссылка
 				</label>
 			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
 			</div>
@@ -64,7 +64,7 @@ function last($mas) {
 			</div>
 			<div class='colum2 col50'>
 				<label>
-					Сылка
+					Сcылка
 				</label>
 			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
 			</div>
@@ -90,7 +90,7 @@ function jsPast() {
 			\"</div>\"+
 			\"<div class='colum2 col50'>\"+
 				\"<label>\"+
-					\"Сылка\"+
+					\"Сcылка\"+
 				\"</label>\"+
 			   \"<input class='inp nam' type='text' name='Link[]' value=''>\"+
 			\"</div>\"+

@@ -6,7 +6,7 @@
                     <div class="cart-slider flexslider" id="js-catalog-slider">
                         <ul class="slides">
                             <?php if (!empty($cat["photo"])) foreach ($cat["photo"] as $v) { ?>
-                            <li class="popup-slider__item">
+                            <li class="popup-slider__item" style="background: transparent url(<?= $v['Puth'] ?>big/<?= $v['Name'] ?>) no-repeat scroll left top;">
                                 <img src="<?=$v['Puth']?>big/<?=$v['Name']?>" alt="">
                             </li>
                             <?php } ?>

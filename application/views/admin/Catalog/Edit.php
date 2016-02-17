@@ -17,7 +17,7 @@
                         <input class="form-control" id="EnglishTitle" data_type="required" name="EnglishTitle" value="<?= $current['mas']["EnglishTitle"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="Articl">Артикль</label>
+                        <label for="Articl">Артикул</label>
                         <input class="form-control" id="Articl" data_type="required" name="Articl" value="<?= $current['mas']["Articl"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-6">
