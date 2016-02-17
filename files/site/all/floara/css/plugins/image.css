@@ -1,9 +1,9 @@
+
 /*!
  * froala_editor v2.1.1 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms
  * Copyright 2014-2016 Froala Labs
  */
-
 .clearfix::after {
   clear: both;
   display: block;
@@ -184,11 +184,42 @@
   display: block;
 }
 .fr-image-size-layer .fr-image-group .fr-input-line {
-  width: calc(50% - 5px);
+  width: calc(45%);
   display: inline-block;
 }
 .fr-image-size-layer .fr-image-group .fr-input-line + .fr-input-line {
   margin-left: 10px;
+}
+.fr-image-margin-layer {
+  text-align: center;
+}
+.fr-image-margin-layer .fr-input-coll {
+  width: 40%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.fr-image-margin-layer .fr-input-coll .fr-input-line {
+  margin-bottom: 0;
+}
+.fr-image-margin-layer .fr-btn-input {
+  overflow: hidden;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+  height: 86px;
+  margin: 0 10px;
+  padding: 0;
+  font-size: 17px;
+  line-height: 102px;
+  color: rgba(93, 141, 223, 0.67);
+}
+.fr-image-margin-layer .fr-btn-input.active i:before {
+  content: "\f127";
+}
+.fr-image-margin-layer .fr-action-buttons {
+  margin-top: 10px;
 }
 .fr-uploading {
   -webkit-opacity: 0.4;
