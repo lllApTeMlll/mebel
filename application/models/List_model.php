@@ -93,14 +93,14 @@ class list_model extends CI_Model {
         return $mas;
     }
 
-    public function get_Items($templ = "catList", $idd = 'nestable3', $type = 0, $lemit = 10) {
+    public function get_Items($templ = "catList", $idd = 'nestable3', $type = 0) {
 
         $mas = $this->get_List(array("id" => $this->typeId));
         require ENGINE . 'admin/List/Templates/' . $templ . '.php';
         //var_dump($masT);
         $st = "<div class='mainForm'>
                 <div class='grup list'>
-                    <div class='dd' id='{$idd}'>" . $this->getCat($mas, "", $this->typeId, 1, $masT, $type, $lemit) . "</div>"
+                    <div class='dd' id='{$idd}'>" . $this->getCat($mas, "", $this->typeId, 1, $masT, $type, $this->maxDeep) . "</div>"
                 . "</div>
                 </div>
                 <input type='hidden' name='root' value='{$this->typeId}'>";

@@ -26,7 +26,7 @@
             </div>
             <div class="popup-form-sidebar">
                 <h4><?=$cat['Title']?></h4>
-                <p><?=$cat['Description']?></p>
+                <p> <?php echo word_limiter($cat['Description'], 15) ?></p>
                 <div class="learn-more-btn">
                     <div class="btn"><a href="<?="/catalog/item/" . $cat["EnglishTitle"] . "/"?>">Узнать подробнее</a></div>
                 </div>

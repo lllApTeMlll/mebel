@@ -17,7 +17,7 @@ class Menu extends CI_Controller {
         $dat['com'] = $this->user_model->getComp();
         $this->CurrentModel->setId(13);
         $this->CurrentModel->setmaxDee(3);
-        $dat['cat'] = $this->CurrentModel->get_Items("catList", 'nestable3', 1,3);
+        $dat['cat'] = $this->CurrentModel->get_Items("manuList", 'nestable3', 1,3);
         $this->load->view('admin/base/header', $dat);
         $this->load->view('admin/'.$this->Component.'/List', $dat);
         $this->load->view('admin/base/footer');

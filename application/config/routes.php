@@ -62,6 +62,7 @@ $route['([a-zA-Z]+)/getInfo/(:any)'] = 'site/$1/getInfo/$2';
 $route['([a-zA-Z]+)'] = 'site/$1/index';  
 $route['([a-zA-Z]+)/([a-zA-Z\-0-9]*)'] = 'site/$1/index/$2';  
 $route['([a-zA-Z]+)/([a-zA-Z\-0-9]*)/([a-zA-Z\-0-9]*)'] = 'site/$1/index/$2/$3'; 
+$route['([a-zA-Z]+)/([a-zA-Z\-0-9]*)/([a-zA-Z\-0-9]*)/([a-zA-Z\-0-9]*)'] = 'site/$1/index/$2/$3/$4'; 
 
 //$route['catalog/item/(:any)']='site/Catalog/item/$1';
 //$route['catalog/getInfo/(:any)']='site/Catalog/getInfo/$1';

@@ -17,5 +17,7 @@
 </div>
 <div class="clear"></div>
 <div class="pager-wrap">
+    <div class="cont">
     <?=$pagin?>
+    </div>
 </div>

@@ -66,7 +66,7 @@ class Base_model extends CI_Model {
                     $sele = "selected";
                 $str.="<option {$sele} value='{$v['id']}'>{$poast}{$v['Title']}</option>";
                 $pod = $poast;
-                $pod .= "-";
+                $pod .= "---";
                 $str = $this->getOtion($v['id'], $str, $act, $pod);
             }
         }

@@ -3,7 +3,7 @@
 class Project extends CI_Controller {
 
     private $Component = "project";
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->model('Project_model');
@@ -14,8 +14,10 @@ class Project extends CI_Controller {
         $this->load->helper('text');
         $this->CurrentModel = $this->Project_model;
         $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
-        $cat = $this->list_model->get_List(array("Parent_id" => 1, "count" => 100));
-        $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/", "list" => $cat, "id" => 14)), "", "");
+        $cat = $this->list_model->get_List(array("Parent_id" => 28, "count" => 100));
+        $cat1 = $this->list_model->get_List(array("Parent_id" => 29, "count" => 100));
+        $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/catalog/", "list" => $cat, "id" => 14),
+            array("link" => "/catalog/material/", "list" => $cat1, "id" => 22)), "", "");
     }
 
     public function index() {
@@ -28,7 +30,7 @@ class Project extends CI_Controller {
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinks();
         $catalogList = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
-        $dat["catList"] = $this->madeTrueArray($catalogList,true);
+        $dat["catList"] = $this->madeTrueArray($catalogList, true);
         //var_dump($dat["catList"]);
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/' . $this->Component . '/list', $dat);
@@ -36,14 +38,14 @@ class Project extends CI_Controller {
         $this->load->view('site/' . $this->Component . '/listEnd', $dat);
         $this->load->view('site/base/footer');
     }
-    
+
     public function item() {
         $dat['d'] = "";
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/project/item', $dat);
         $this->load->view('site/base/footer');
     }
-    
+
     private function madeTrueArray($mas, $array = false) {
         foreach ($mas as $k => $v) {
             $pthoto = $this->Load_model->get_List(array('count' => ($array ? 100 : 1), "Type" => "project", "Item_id" => $v['id']));
@@ -57,4 +59,3 @@ class Project extends CI_Controller {
     }
 
 }
-

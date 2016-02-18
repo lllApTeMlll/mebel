@@ -12,43 +12,65 @@ class Catalog extends CI_Controller {
         $this->load->model('Load_model');
         $this->load->model('Seo_model');
         $this->load->library('pagin');
-        $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
-        $cat = $this->list_model->get_List(array("Parent_id" => 1, "count" => 100));
-        $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/", "list" => $cat, "id" => 14)), "", "");
-        $this->cat = $cat;
+        $this->load->helper('text');
+        $this->ajax = $this->input->post('type', true);
+        if (!$this->ajax) {
+            $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
+            $cat = $this->list_model->get_List(array("Parent_id" => 28, "count" => 100));
+            $cat1 = $this->list_model->get_List(array("Parent_id" => 29, "count" => 100));
+            $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/catalog/", "list" => $cat, "id" => 14),
+                array("link" => "/catalog/material/", "list" => $cat1, "id" => 22)), "", "");
+            $this->cat = $cat;
+            $this->cat1 = $cat1;
+        }
     }
 
-    public function index($cat1 = false, $cat2 = false) {
-        //var_dump($cat1,$cat2);die();
+    public function index($cat = "catalog", $cat1 = false, $cat2 = false) {
         $dat['menu'] = $this->menu;
-        $dat['cat'] = $this->getMenuCat($this->cat, $cat1, "");
+        $before = "/catalog/catalog/";
+        $TiteleFirest = "Каталог";
+        if ($cat === "catalog") {
+            if (!$this->ajax) {
+                $dat['cat'] = $this->getMenuCat($this->cat, $cat1, "", $before);
+            }
+        } else {
+            $before = "/catalog/material/";
+            $TiteleFirest = "Материалы";
+            if (!$this->ajax) {
+                $dat['cat'] = $this->getMenuCat($this->cat1, $cat1, "", $before);
+            }
+        }
         $page = $this->input->get('page', true);
-        $config['total_rows'] = $this->Catalog_model->get_count(array('cid' => array($cat1, $cat2)));
+        $config['total_rows'] = $this->Catalog_model->get_count(array('cid' => array($cat, $cat1, $cat2)));
         $config['base_url'] = "";
         $config['cur_page'] = $page;
-        $config['page_size'] = 3;
+        $config['page_size'] = 2;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinks();
-        $catalogList = $this->Catalog_model->get_List(array("current" => $page, "count" => $config['page_size'], 'cid' => array($cat1, $cat2)));
+        $catalogList = $this->Catalog_model->get_List(array("current" => $page, "count" => $config['page_size'], 'cid' => array($cat, $cat1, $cat2)));
         $dat["catList"] = $this->madeTrueArray($catalogList);
-        $dat["Crumbs"] = $this->getCrumbs(array($cat1, $cat2));
+        $dat["Crumbs"] = $this->getCrumbs(array($cat1, $cat2), false, $before, $TiteleFirest);
         //var_dump($dat["catList"]);
-        $this->load->view('site/base/header', $dat);
-        $this->load->view('site/catalog/list', $dat);
+        if (!$this->ajax) {
+            $this->load->view('site/base/header', $dat);
+            $this->load->view('site/catalog/list', $dat);
+        }
         $this->load->view('site/catalog/catalog', $dat);
-        $this->load->view('site/catalog/listEnd', $dat);
-        $this->load->view('site/base/footer');
+        if (!$this->ajax) {
+            $this->load->view('site/catalog/listEnd', $dat);
+            $this->load->view('site/base/footer');
+        }
     }
 
     public function item($id) {
         $dat['menu'] = $this->menu;
         $catalogItem = $this->Catalog_model->get_List(array("count" => 1, 'EnglishTitle' => $id));
         if (!$catalogItem) {
-            header("Location: /catalog/");
+            header("Location: /catalog/catalog/");
         }
         $dat['item'] = $this->madeTrueArrayForItem($catalogItem);
 
-        $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))),true);
+        $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))), true);
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/catalog/item', $dat);
         $this->load->view('site/base/footer');
@@ -56,6 +78,8 @@ class Catalog extends CI_Controller {
 
     public function getInfo($id) {
         $catalogList = $this->Catalog_model->get_List(array("count" => 1, 'id' => $id));
+        //$catalogList['Description'] = word_limiter($v['Description'], 50);
+        //var_dump($catalogList);die();
         $catList = $this->madeTrueArray(array($catalogList), true);
         $dat['cat'] = $catList[0];
         //var_dump($dat['cat']); die();
@@ -96,18 +120,18 @@ class Catalog extends CI_Controller {
         return $mas;
     }
 
-    private function getCrumbs($mas1,$pr = false) {
+    private function getCrumbs($mas1, $pr = false, $before = "/catalog/", $TiteleFirest = "Каталог") {
         //echo "<pre>";
-        $mas["Title"] = "Каталог";
+        $mas["Title"] = $TiteleFirest;
         $mas['Crumbs'] = "<ul class='grayline-list'>
             <li><a href='/'>Главная</a></li>
             <li class='sep'>/</li>";
-        $a = "<li><a href='/catalog/'>Каталог</a></li>";
-        $last = "<li>Каталог</li>";
-        $beforeLisnk = "/catalog/";
+        $a = "<li><a href='{$before}'>{$TiteleFirest}</a></li>";
+        $last = "<li>{$TiteleFirest}</li>";
+        $beforeLisnk = $before;
         foreach (($mas1) as $v) {
             //var_dump($v);
-            if ($v && $v !== 1) {
+            if ($v && $v !== '1' && $v !== '28' && $v !== '29') {
                 $currentList = $this->list_model->get_List(array("idLink" => $v, "count" => 1, "Parent_id_NOT" => 0));
                 //var_dump($currentList);
                 if ($currentList) {
@@ -120,7 +144,7 @@ class Catalog extends CI_Controller {
             }
         }
         $mas['Crumbs'] .= ($pr ? $a : $last);
-        // echo "</pre>";
+        //echo "</pre>";
         //var_dump($mas1);
         //var_dump($mas['Crumbs']);
         //die();
@@ -128,7 +152,7 @@ class Catalog extends CI_Controller {
         return $mas;
     }
 
-    private function getMenuCat($list, $act, $str) {
+    private function getMenuCat($list, $act, $str, $url) {
         $str .= '<ul class="sidemenu">';
         foreach ($list as $v) {
             $active = "";
@@ -138,7 +162,7 @@ class Catalog extends CI_Controller {
                 $style = "style='display: block;'";
             }
             $str .= '<li class="sidemenu__item ' . $active . '">
-                        <a href="/catalog/' . $v['Link'] . '/" class="sidemenu__item-link"><span>' . $v['Title'] . '</span></a>';
+                        <a href="' . $url . $v['Link'] . '/" class="sidemenu__item-link"><span>' . $v['Title'] . '</span></a>';
             $List11 = $this->list_model->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($List11) {
                 $str .=
@@ -146,7 +170,7 @@ class Catalog extends CI_Controller {
                             <div class="sidemenu__item-dropbox" ' . $style . '>
                                 <ul>';
                 foreach ($List11 as $v1) {
-                    $str.='<li><a href="/catalog/' . $v['Link'] . '/' . $v1['Link'] . '/"><span>' . $v1['Title'] . '<span></a></li>';
+                    $str.='<li><a href="' . $url . $v['Link'] . '/' . $v1['Link'] . '/"><span>' . $v1['Title'] . '<span></a></li>';
                 }
                 $str .= '</ul>';
             }

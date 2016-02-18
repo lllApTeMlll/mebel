@@ -3,14 +3,14 @@
 /********for Opera 10+ only*******/
 
 @font-face {
-	font-family: 'PFBeau SansPro Bold';
-	src: url('../fonts/PFBeauSansPro-Bold.eot');
-	src: url('../fonts/PFBeauSansPro-Bold.eot?#iefix') format('embeded-opentype');
-	src: local('☺'), url('../fonts/PFBeauSansPro-Bold.woff') format('woff'), 
-	url('../fonts/PFBeauSansPro-Bold.svg') format('svg'), 
-	url('../fonts/PFBeauSansPro-Bold.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'PFBeau SansPro Bold';
+    src: url('../fonts/PFBeauSansPro-Bold.eot');
+    src: url('../fonts/PFBeauSansPro-Bold.eot?#iefix') format('embeded-opentype');
+    src: local('☺'), url('../fonts/PFBeauSansPro-Bold.woff') format('woff'), 
+        url('../fonts/PFBeauSansPro-Bold.svg') format('svg'), 
+        url('../fonts/PFBeauSansPro-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
@@ -18,8 +18,8 @@
     src: url('../fonts/PFBeauSansPro-LightItalic.eot');
     src: url('../fonts/PFBeauSansPro-LightItalic.eot?#iefix') format('embeded-opentype');
     src: local('☺'), url('../fonts/PFBeauSansPro-LightItalic.woff') format('woff'), 
-    url('../fonts/PFBeauSansPro-LightItalic.svg') format('svg'), 
-    url('../fonts/PFBeauSansPro-LightItalic.ttf') format('truetype');
+        url('../fonts/PFBeauSansPro-LightItalic.svg') format('svg'), 
+        url('../fonts/PFBeauSansPro-LightItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -29,8 +29,8 @@
     src: url('../fonts/PFBeauSansPro-Light.eot');
     src: url('../fonts/PFBeauSansPro-Light.eot?#iefix') format('embeded-opentype');
     src: local('☺'), url('../fonts/PFBeauSansPro-Light.woff') format('woff'), 
-    url('../fonts/PFBeauSansPro-Light.svg') format('svg'), 
-    url('../fonts/PFBeauSansPro-Light.ttf') format('truetype');
+        url('../fonts/PFBeauSansPro-Light.svg') format('svg'), 
+        url('../fonts/PFBeauSansPro-Light.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -40,8 +40,8 @@
     src: url('../fonts/ProximaNova-Regular.eot');
     src: url('../fonts/ProximaNova-Regular.eot?#iefix') format('embeded-opentype');
     src: local('☺'), url('../fonts/ProximaNova-Regular.woff') format('woff'), 
-    url('../fonts/ProximaNova-Regular.svg') format('svg'), 
-    url('../fonts/ProximaNova-Regular.ttf') format('truetype');
+        url('../fonts/ProximaNova-Regular.svg') format('svg'), 
+        url('../fonts/ProximaNova-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -51,12 +51,12 @@
 /*=================== CSS RESET ==================*/
 
 * {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-	margin: 0;
-	padding: 0;
-	}
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
 *:before,
 *:after{
     -webkit-box-sizing: border-box;
@@ -73,22 +73,22 @@ acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, smal
 sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, label, legend, table, caption, tbody, 
 tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, 
 hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	}	
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}	
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block;
-	}
+    display: block;
+}
 
 BODY {
-	font-family: 'PFBeau SansPro Light', Arial, sans-serif; font-size: 15px; font-weight: normal; font-style: normal;
-	line-height: 18px; margin: 0px; padding: 0px; width: 100%; min-width: 1000px;
-	-webkit-font-smoothing: antialiased;
-	}
+    font-family: 'PFBeau SansPro Light', Arial, sans-serif; font-size: 15px; font-weight: normal; font-style: normal;
+    line-height: 18px; margin: 0px; padding: 0px; width: 100%; min-width: 1000px;
+    -webkit-font-smoothing: antialiased;
+}
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, dl, ol, ul, hr, p, pre, table, address, fieldset {
     margin: 0;
@@ -125,16 +125,16 @@ h6, .h6{
 }
 
 ol, ul {
-	list-style: none;
-	}
+    list-style: none;
+}
 
 blockquote, q {
-	quotes: none;
-	}
+    quotes: none;
+}
 
 blockquote:before, blockquote:after, q:before, q:after{
-	content: ''; content: none;
-	}
+    content: ''; content: none;
+}
 
 dl {
     position: relative;
@@ -149,8 +149,8 @@ dd {
 }
 
 table {
-	border-collapse: collapse; border-spacing: 0; width: 100%; 
-	}
+    border-collapse: collapse; border-spacing: 0; width: 100%; 
+}
 
 table thead {
     font-family: 'PFBeau SansPro Bold'; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;
@@ -169,7 +169,7 @@ table tbody tr:last-child {
 }
 
 table tbody tr td:last-child {
-   padding-left: 23px;
+    padding-left: 23px;
 }
 
 hr {
@@ -189,7 +189,7 @@ a:focus{
     text-decoration: none; border-bottom: none;
 }
 a:hover {
-   
+
 }
 
 a:hover, 
@@ -203,7 +203,7 @@ a img{
 }
 
 img {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 p {
@@ -213,8 +213,8 @@ p {
 }
 
 .clear{
-	height: 1px;
-	margin-top: -1px;
+    height: 1px;
+    margin-top: -1px;
     clear:both;
 }
 
@@ -369,7 +369,7 @@ form label {
 .wrapper{
     position: relative; width: 86.73091178650852%; margin: 0 auto; z-index: 99; max-width: 1400px;
 }
-	
+
 /*-----------CONTENT-------------*/
 
 .header {
@@ -406,7 +406,7 @@ form label {
 }
 
 .nav-item-wrap:hover .nav__item .nav__item-dropdown {
-   animation-name: fadeIn;
+    animation-name: fadeIn;
     -webkit-animation-name: fadeIn; 
 
     animation-duration: 0.3s;   
@@ -934,7 +934,7 @@ form label {
 }
 
 .catalog-row:nth-of-type(2n) .item-image {
-     float: right;
+    float: right;
 }
 
 
@@ -1344,6 +1344,7 @@ form label {
 #js-cart-slider .cart-slider__item {
     height: 485px!important;
     background-size: cover !important;
+    background-position: 50% 50% !important;
 }
 
 #js-cart-slider .cart-slider__item img{
@@ -1412,7 +1413,7 @@ form label {
 }
 
 .catalog-content .breadcrumbs li {
-     line-height: 45px;
+    line-height: 45px;
 }
 
 .catalog-content__catalog {
@@ -1615,7 +1616,7 @@ form label {
     text-decoration: underline;
 }
 
-.sidemenu__item-dropbox ul li a:hover {
+.sidemenu__item-dropbox ul li a:hover,.sidemenu__item-dropbox ul li.active a {
     color: #ff4e6c;
 }
 
@@ -1658,8 +1659,24 @@ form label {
 .pager-wrap {
     width: 100%;
     height: 42px;
-    padding-left: 22.485207100%;
+    text-align: center;
     margin-bottom: 51px;
+    /*white-space: nowrap;*/
+}
+
+.pager-wrap .cont{
+    display: inline-block;
+    width: auto;
+    white-space: nowrap;
+}
+
+.pager-wrap .list{
+    white-space: nowrap; 
+}
+
+.pager-wrap ul{
+    display: inline-block;
+    vertical-align: top;
 }
 
 .pager-title {
@@ -1676,7 +1693,7 @@ form label {
     width: 38px;
     height: 42px;
     display: block;
-    float: left;
+    display: inline-block;
     border: none;
     text-align: center;
     background-color: #fff;
@@ -1759,12 +1776,13 @@ form label {
 
 #js-projects-slider .cart-slider__item {
     height: 460px!important;
-    
+    position: 50% 50% !important;
+
 }
 
 #js-projects-slider .cart-slider__item img{
     display: none;
-    
+
 }
 
 #js-projects-slider .cart-slider__item img {
@@ -1852,7 +1870,7 @@ form label {
     height: 48px;
     border: 2px solid #e70027;
 }
-    
+
 .review-more a {
     display: block;
     height: 100%;
@@ -1929,7 +1947,7 @@ form label {
 }
 
 .close-popup:hover {
-     animation-name: rotate-left;
+    animation-name: rotate-left;
     -webkit-animation-name: rotate-left;
 
     animation-duration: 0.2s; 
@@ -1938,31 +1956,31 @@ form label {
 
 @keyframes rotate-left {
     0% {
-       -webkit-transform: rotate(20deg);
-       transform: rotate(20deg);
+        -webkit-transform: rotate(20deg);
+        transform: rotate(20deg);
     }
     50% {
         -webkit-transform: rotate(50deg);
-       transform: rotate(50deg);
+        transform: rotate(50deg);
     }
     100% {
         -webkit-transform: rotate(90deg);
-       transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 }
 
 @keyframes rotate-right {
     0% {
-       -webkit-transform: rotate(-20deg);
-       transform: rotate(-20deg);
+        -webkit-transform: rotate(-20deg);
+        transform: rotate(-20deg);
     }
     50% {
         -webkit-transform: rotate(-50deg);
-       transform: rotate(-50deg);
+        transform: rotate(-50deg);
     }
     100% {
         -webkit-transform: rotate(-90deg);
-       transform: rotate(-90deg);
+        transform: rotate(-90deg);
     }
 }
 
@@ -2002,6 +2020,7 @@ form label {
     height: 575px;
     width: 100%;
     background-size: cover !important;
+    background-position: 50% 50% !important;
 }
 
 #js-catalog-slider .popup-slider__item img{
@@ -2120,7 +2139,7 @@ form label {
 }
 
 .close-catalog-popup:hover {
-     animation-name: rotate-left;
+    animation-name: rotate-left;
     -webkit-animation-name: rotate-left;
 
     animation-duration: 0.2s; 
@@ -2139,10 +2158,10 @@ form label {
         display: none;
     }
 
-     .col-price .btn {
+    .col-price .btn {
         line-height: 48px;
         padding-top: 0;
-     }
+    }
 }
 
 

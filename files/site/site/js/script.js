@@ -216,30 +216,38 @@ $(document).ready(function () {
     $(document).on("click", ".sidemenu li", function (e) {
         try {
             history.pushState({}, "", "" + $(this).find('a').attr('href') + "");
-            var par = $(this).closest(".sidemenu__item");
-            par.toggleClass("active");
-            var child = $(this).closest(".sidemenu__item").find(".sidemenu__item-dropbox");
-            $(".sidemenu .sidemenu__item-dropbox").each(function(){
-                if ($(this) != child){
-                    $(this).slideUp();
-                }else{
-                    $(this).slideToggle()();
+            $.ajax({type: "POST", url: $(this).find('a').attr('href'), data: {type:"ajax"},
+                success: function (data) {
+                    //console.log(data);
+                    try {
+                        $(".catalog-content").html(data);
+                    } catch (e1) {
+                        console.log(data);
+                    }
+                }
+            });
+            var prov = $(e.target).closest(".sidemenu__item-dropbox").length;
+            var child = $(this).closest(".sidemenu__item").index();
+            $(".sidemenu__item-dropbox").find("li").removeClass("active");
+            $(".sidemenu .sidemenu__item").each(function (k, v) {
+                if (k !== child) {
+                    $(this).removeClass("active");
+                    $(this).find(".sidemenu__item-dropbox").slideUp();
+                } else {
+                    if (!prov) {
+                        $(this).addClass("active");
+                        $(this).find(".sidemenu__item-dropbox").slideDown();
+                    } else {
+                        $(e.target).closest("li").addClass("active");
+                    }
                 }
             });
             return false;
         } catch (e1) {
-            location.href = $(this).attr('href');
+            console.log(e1);
+            //location.href = $(this).attr('href');
             return true;
         }
-        //e.preventDefault();
-
-//        var parent = $(this).parent();
-//        parent.find(".sidemenu__item-dropbox").slideFadeToggle(300);
-//        if (parent.hasClass('active')) {
-//            parent.removeClass('active');
-//        } else {
-//            parent.addClass('active');
-//        }
     });
 });
 

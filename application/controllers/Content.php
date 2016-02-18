@@ -3,7 +3,7 @@
 class Content extends CI_Controller {
 
     private $menu = "";
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->model('Content_model');
@@ -12,15 +12,17 @@ class Content extends CI_Controller {
         $this->load->model('Seo_model');
         $this->load->library('pagin');
         $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
-        $cat = $this->list_model->get_List(array("Parent_id" => 1, "count" => 100));
-        $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/", "list" => $cat, "id" => 14)), "", "");
+        $cat = $this->list_model->get_List(array("Parent_id" => 28, "count" => 100));
+        $cat1 = $this->list_model->get_List(array("Parent_id" => 29, "count" => 100));
+        $this->menu = $this->list_model->menuCat($List11, array(array("link" => "/catalog/catalog/", "list" => $cat, "id" => 14),
+            array("link" => "/catalog/material/", "list" => $cat1, "id" => 22)), "", "");
     }
 
     public function index() {
         //echo "ok";die();
         $dat['menu'] = $this->menu;
-        $dat['content'] = $this->Content_model->get_List(array("count"=>1,"Url"=>$_SERVER['REQUEST_URI']));
-        if (!$dat['content']){
+        $dat['content'] = $this->Content_model->get_List(array("count" => 1, "Url" => $_SERVER['REQUEST_URI']));
+        if (!$dat['content']) {
             show_404();
             die();
         }

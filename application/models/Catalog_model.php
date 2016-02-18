@@ -102,7 +102,9 @@ class Catalog_model extends CI_Model {
 
     private function getIdCid($param) {
         $name = false;
-        if ($param[1] != false){
+        if ($param[2] != false){
+            $name = $param[2];
+        }elseif ($param[1] != false){
             $name = $param[1];
         }elseif ($param[0] != false) {
             $name = $param[0];

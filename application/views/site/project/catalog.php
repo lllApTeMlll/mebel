@@ -28,6 +28,8 @@
 <div class="clear"></div>
 <div class="wrapper">
     <div class="pager-wrap projects-pager">
+        <div>
         <?= $pagin ?>
+        </div>
     </div>
 </div>

@@ -27,6 +27,7 @@
         <!--<script src='/files/site/all/ckeditor/ckeditor.js'></script>
         <script src='/files/site/all/AjexFileManager/ajex.js'></script>-->
 
+        <script src='/files/site/admin/js/transfer.js'></script>
         <script src='/files/site/all/datapiker/js/jquery.datetimepicker.js'></script>
         <link rel="stylesheet" href="/files/site/all/datapiker/css/jquery.datetimepicker.css">
         
@@ -44,8 +45,8 @@
         <link rel="stylesheet" href="/files/site/all/floara/css/plugins/fullscreen.css">
         <!--<link rel="stylesheet" href="/files/site/all/floara/css/plugins/quick_insert.css">-->
 
-        <script type="text/javascript" src="/files/site/all/codemirror/codemirror.min.js"></script>
-        <script type="text/javascript" src="/files/site/all/codemirror/xml.min.js"></script>
+<!--        <script type="text/javascript" src="/files/site/all/codemirror/codemirror.min.js"></script>
+        <script type="text/javascript" src="/files/site/all/codemirror/xml.min.js"></script>-->
         <script type="text/javascript" src="/files/site/all/floara/js/froala_editor.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/align.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/code_beautifier.min.js"></script>
@@ -76,6 +77,10 @@
         <script src='/files/site/all/drag/drag.js'></script>
         <script src='/files/site/all/Translit.js'></script>
         <script src="/files/site/all/func.js"></script>
+        
+        <script src="/files/site/all/sort/jquery-ui.js"></script>
+        <script src="/files/site/all/sort/jquery.mjs.nestedSortable.js"></script>
+        
         <script src="/files/site/admin/js/loadImage.js"></script>
         <script src="/files/site/admin/js/forms.js"></script>
     </head>

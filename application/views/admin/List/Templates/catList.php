@@ -27,7 +27,7 @@ function first($mas) {
 function norm($mas) {
     return "
     <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
-    <label class='clav'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
+    <label class='clav demo-icon btn btn-social-icon'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
     <div class='dd5-handle  demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
     <div class='dd4-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
     <div class='dd3-content dd-nodrag1'>
@@ -36,13 +36,13 @@ function norm($mas) {
 				<label>
 					Название
 				</label>
-				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
+				<input class='inp nam natura' type='text' name='Title[]' value='{$mas['Title']}'>
 			</div>
 			<div class='colum2 col50'>
 				<label>
 					Ссылка
 				</label>
-			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
+			   <input class='inp nam result' type='text' name='Link[]' value='{$mas['Link']}'>
 			</div>
 		</div>
         <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
@@ -54,7 +54,7 @@ function norm($mas) {
 function last($mas) {
     return "
         <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div> 
-        <label class='clav'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
+        <label class='clav demo-icon btn btn-social-icon'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
         <div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
         <div class='dd3-content dd-nodrag1 max'>
             		<div class='grup'>
@@ -62,13 +62,13 @@ function last($mas) {
 				<label>
 					Название
 				</label>
-				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
+				<input class='inp nam natura' type='text' name='Title[]' value='{$mas['Title']}'>
 			</div>
 			<div class='colum2 col50'>
 				<label>
 					Сcылка
 				</label>
-			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
+			   <input class='inp nam result' type='text' name='Link[]' value='{$mas['Link']}'>
 			</div>
 		</div>
             <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
@@ -81,7 +81,7 @@ function jsPast() {
     return "
         function getNewEl(mas){
         return  \"<div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>\"+
-        \"<label class='clav'><input class='clas' type='checkbox' name='clav' value=''></label>\"+
+        \"<label class='clav demo-icon btn btn-social-icon'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>\"+
         \"<div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>\"+
         \"<div class='dd3-content dd-nodrag1 max'>\"+
             		\"<div class='grup'>\"+
@@ -89,13 +89,13 @@ function jsPast() {
 				\"<label>\"+
 					\"Название\"+
 				\"</label>\"+
-				\"<input class='inp nam' type='text' name='Title[]' value=''>\"+
+				\"<input class='inp nam natura' type='text' name='Title[]' value=''>\"+
 			\"</div>\"+
 			\"<div class='colum2 col50'>\"+
 				\"<label>\"+
 					\"Сcылка\"+
 				\"</label>\"+
-			   \"<input class='inp nam' type='text' name='Link[]' value=''>\"+
+			   \"<input class='inp nam result' type='text' name='Link[]' value=''>\"+
 			\"</div>\"+
 		\"</div>\"+
             \"<input type='hidden' name='Parent_id[]' value='\"+mas.Parent_id+\"'>\"+

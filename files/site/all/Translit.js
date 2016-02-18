@@ -16,9 +16,7 @@ function getSeoCat(mas){
 }
 
 function tttrran(el1,el2){
-	var trans=get_trans1(el1.val());
-	//el2.val(trans);
-	el1.input(function(){
+        $(document).on("input", el1, function (e) {
 		var trans=get_trans1(el1.val());
 		el2.val(trans);
 	});

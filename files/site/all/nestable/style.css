@@ -183,3 +183,36 @@
 .grup input[type="text"], .grup select, .grup textarea {
     width: 100%;
 }
+
+.clav{
+width: 38px;
+height: 36px;
+padding: 0;
+pointer-events: none;
+}
+
+.clav input{
+    display: none;
+}
+
+.clav span{
+  pointer-events: none;  
+}
+
+.clav span:before{
+    font: normal normal normal 24px/1 FontAwesome;
+    content: "\f11c";
+    display: block;
+    float: right;
+    color: #fff;
+    background: #dd9039;
+    padding: 5px 5px;
+    border-radius: 3px;
+    margin: 0px;
+    pointer-events: all;
+}
+
+.clav input:checked + span:before{
+    background: #bf5e2a;
+    opacity: 1;
+}

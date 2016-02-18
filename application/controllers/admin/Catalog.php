@@ -25,13 +25,13 @@ class Catalog extends CI_Controller {
         $config['total_rows'] = $this->CurrentModel->get_count();
         $config['base_url'] = "";
         $config['cur_page'] = $page;
-        $config['page_size'] = 6;
+        $config['page_size'] = 16;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
         $dat['catalog'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
         $this->list_model->setId(1);
-        $this->list_model->setmaxDee(3);
-        $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1, 3);
+        $this->list_model->setmaxDee(4);
+        $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1);
         $this->load->view('admin/base/header', $dat);
         $this->load->view('admin/' . $this->Component . '/List', $dat);
         $this->load->view('admin/base/footer');
