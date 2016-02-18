@@ -1,5 +1,5 @@
 function getSeoCat(mas){
-	console.log(mas);
+	//console.log(mas);
 	mas.find(" > li ").each(function(){
 		if ($(this).find("input[name='title[]']").length){
 			var i=0;
@@ -17,8 +17,8 @@ function getSeoCat(mas){
 
 function tttrran(el1,el2){
 	var trans=get_trans1(el1.val());
-	el2.val(trans);
-	el1.change(function(){
+	//el2.val(trans);
+	el1.input(function(){
 		var trans=get_trans1(el1.val());
 		el2.val(trans);
 	});

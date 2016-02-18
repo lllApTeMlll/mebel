@@ -58,10 +58,8 @@
         init: function ()
         {
             var list = this;
-
             list.reset();
             list.start();
-
             list.el.data('nestable-group', this.options.group);
 
             list.placeEl = $('<div class="' + list.options.placeClass + '"/>');
@@ -159,7 +157,7 @@
                 var pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
                 var dragDepthCur = pointEl.parents(opt.listNodeName).length;
                 ol.append('<li class="dd-item dd3-item " data-id="-1">' +
-                        getNewEl({Parent_id:dat_id}) +
+                        getNewEl({Parent_id: dat_id}) +
                         ' </li>');
                 var newE = il.find(" > ol > li:last-child");
                 newE.fadeOut(0);

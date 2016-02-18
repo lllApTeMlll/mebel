@@ -213,16 +213,33 @@ $(document).ready(function () {
         padding: 10
     });
 
-    $(document).on("click", ".sidemenu__item-link", function (e) {
-        e.preventDefault();
-
-        var parent = $(this).parent();
-        parent.find(".sidemenu__item-dropbox").slideFadeToggle(300);
-        if (parent.hasClass('active')) {
-            parent.removeClass('active');
-        } else {
-            parent.addClass('active');
+    $(document).on("click", ".sidemenu li", function (e) {
+        try {
+            history.pushState({}, "", "" + $(this).find('a').attr('href') + "");
+            var par = $(this).closest(".sidemenu__item");
+            par.toggleClass("active");
+            var child = $(this).closest(".sidemenu__item").find(".sidemenu__item-dropbox");
+            $(".sidemenu .sidemenu__item-dropbox").each(function(){
+                if ($(this) != child){
+                    $(this).slideUp();
+                }else{
+                    $(this).slideToggle()();
+                }
+            });
+            return false;
+        } catch (e1) {
+            location.href = $(this).attr('href');
+            return true;
         }
+        //e.preventDefault();
+
+//        var parent = $(this).parent();
+//        parent.find(".sidemenu__item-dropbox").slideFadeToggle(300);
+//        if (parent.hasClass('active')) {
+//            parent.removeClass('active');
+//        } else {
+//            parent.addClass('active');
+//        }
     });
 });
 
