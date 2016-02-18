@@ -59,44 +59,45 @@
                 return false;
             });
             list.closest(".box-body").find('li').unbind('mousedown');
-            list.closest(".box-body").find('li').dragdrop({
-                makeClone: true,
-                sourceHide: true,
-                dragClass: "shadow",
-                container: list.closest(".box-body"),
-                canDrag: function ($src, event) {
-                    $srcElement = $src;
-                    srcIndex = $srcElement.index();
-                    dstIndex = srcIndex;
-                    return $src;
-                },
-                canDrop: function ($dst) {
-                    if ($dst.is("li")) {
-                        dstIndex = $dst.index();
-                        if (srcIndex < dstIndex)
-                            $srcElement.insertAfter($dst);
-                        else
-                            $srcElement.insertBefore($dst);
-                    }
-                    else {
-                        $dst = $dst.closest("li");
-                        dstIndex = $dst.index();
-                        if (srcIndex < dstIndex)
-                            $srcElement.insertAfter($dst);
-                        else
-                            $srcElement.insertBefore($dst);
-                    }
-                    return true;
-                },
-                didDrop: function ($src, $dst) {
-                    // Must have empty function in order to NOT move anything.
-                    // Everything that needs to be done has been done in canDrop.
-
-                    //if (srcIndex != dstIndex) {
-                    //newZ();
-                    //}
-                }
-            });
+            list.closest(".box-body").find(".photoActiv").sortable({});
+//            list.closest(".box-body").find('li').dragdrop({
+//                makeClone: true,
+//                sourceHide: true,
+//                dragClass: "shadow",
+//                container: list.closest(".box-body"),
+//                canDrag: function ($src, event) {
+//                    $srcElement = $src;
+//                    srcIndex = $srcElement.index();
+//                    dstIndex = srcIndex;
+//                    return $src;
+//                },
+//                canDrop: function ($dst) {
+//                    if ($dst.is("li")) {
+//                        dstIndex = $dst.index();
+//                        if (srcIndex < dstIndex)
+//                            $srcElement.insertAfter($dst);
+//                        else
+//                            $srcElement.insertBefore($dst);
+//                    }
+//                    else {
+//                        $dst = $dst.closest("li");
+//                        dstIndex = $dst.index();
+//                        if (srcIndex < dstIndex)
+//                            $srcElement.insertAfter($dst);
+//                        else
+//                            $srcElement.insertBefore($dst);
+//                    }
+//                    return true;
+//                },
+//                didDrop: function ($src, $dst) {
+//                    // Must have empty function in order to NOT move anything.
+//                    // Everything that needs to be done has been done in canDrop.
+//
+//                    //if (srcIndex != dstIndex) {
+//                    //newZ();
+//                    //}
+//                }
+//            });
         },
         handleFiles: function (filesToUpload, list) {
             var thiss = this;

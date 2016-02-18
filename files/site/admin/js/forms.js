@@ -39,23 +39,22 @@ $(function () {
         forcePlaceholderSize: true,
         handle: '.dd3-handle',
         helper: 'clone',
-        items: 'li',
+        items: '.dd-item',
         opacity: .6,
         placeholder: 'placeholder',
         revert: 250,
         tabSize: 25,
         tolerance: 'pointer',
-        toleranceElement: '> div',
+        //toleranceElement: '> div',
         maxLevels: 4,
         isTree: true,
         expandOnHover: 700,
         startCollapsed: false,
-        startCollapsed: true,
-                protectRoot: true,
+        protectRoot: true,
         disableParentChange: true,
-        change: function () {
-            console.log('Relocated item');
-        }
+//        change: function () {
+//            console.log('Relocated item');
+//        }
     });
 });
 

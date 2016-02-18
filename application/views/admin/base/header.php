@@ -73,8 +73,8 @@
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/quick_insert.min.js"></script>-->
         <script type="text/javascript" src="/files/site/all/floara/js/languages/ru.js"></script>
 
-        <script src='/files/site/all/drag/jquery.drag-drop.plugin.js'></script>
-        <script src='/files/site/all/drag/drag.js'></script>
+<!--        <script src='/files/site/all/drag/jquery.drag-drop.plugin.js'></script>
+        <script src='/files/site/all/drag/drag.js'></script>-->
         <script src='/files/site/all/Translit.js'></script>
         <script src="/files/site/all/func.js"></script>
         
