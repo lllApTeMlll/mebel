@@ -28,12 +28,12 @@ class User_model extends CI_Model {
         if (!$this->session->has_userdata('user_id')) {
             //echo $_SERVER['REQUEST_URI'];die();
             if ($_SERVER['REQUEST_URI'] !== "/fasadm/" && $_SERVER['REQUEST_URI'] !== "/fasadm/avtoris/") {
-                header("/fasadm/");
+                header("Location: /fasadm/");
             }
         } else {
             //echo $_SERVER['REQUEST_URI'];die();
         }
-
+        
         //echo $this->router->fetch_class();
     }
 

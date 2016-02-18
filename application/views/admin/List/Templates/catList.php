@@ -27,6 +27,7 @@ function first($mas) {
 function norm($mas) {
     return "
     <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
+    <label class='clav'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
     <div class='dd5-handle  demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
     <div class='dd4-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
     <div class='dd3-content dd-nodrag1'>
@@ -53,6 +54,7 @@ function norm($mas) {
 function last($mas) {
     return "
         <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div> 
+        <label class='clav'><input class='clas' type='checkbox' name='clav' value=''><span></span></label>
         <div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
         <div class='dd3-content dd-nodrag1 max'>
             		<div class='grup'>
@@ -79,6 +81,7 @@ function jsPast() {
     return "
         function getNewEl(mas){
         return  \"<div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>\"+
+        \"<label class='clav'><input class='clas' type='checkbox' name='clav' value=''></label>\"+
         \"<div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>\"+
         \"<div class='dd3-content dd-nodrag1 max'>\"+
             		\"<div class='grup'>\"+
