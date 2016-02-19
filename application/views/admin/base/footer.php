@@ -7,6 +7,7 @@
                 <strong>2014-2015</strong> All rights reserved.
             </footer>
         </div><!-- ./wrapper -->
+        <?php require_once 'modal.php';?>
     </body>
 </html>
 

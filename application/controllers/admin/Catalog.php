@@ -7,6 +7,7 @@ class Catalog extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('user_model');
+        $this->user_model->isAvtoris();
         $this->load->model('Catalog_model');
         $this->load->model('Base_model');
         $this->load->model('Load_model');
@@ -16,7 +17,7 @@ class Catalog extends CI_Controller {
         $this->load->helper('text');
         $this->load->library('session');
         $this->CurrentModel = $this->Catalog_model;
-        $this->user_model->isAvtoris();
+        $this->ajax = $this->input->post('type', true) === "ajax"  ? true : false;
     }
 
     public function index() {
@@ -50,6 +51,7 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
+            $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             //$cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", -1, "");
             $this->load->view('admin/base/header', $dat);
@@ -59,11 +61,13 @@ class Catalog extends CI_Controller {
     }
 
     public function editItem($id) {
-        //var_dump(phpinfo());die();
+        //var_dump($this->ajax);die();
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            if (!$this->ajax) {
+                header("Location: /fasadm/{$this->Component}/");
+            }
         } else {
             $this->Load_model->delWithout();
             $dat['com'] = $this->user_model->getComp();
@@ -71,9 +75,10 @@ class Catalog extends CI_Controller {
             $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
+            $dat['current']['action'] = "/fasadm/{$this->Component}/edit/{$id}/";
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "item", "Item_id" => $id, "count" => 100));
-            $dat['current']['itemFasad'] = $this->Load_model->getPhotos(array("Type" => "itemFasad", "Item_id" => $id, "count" => 100),"itemFasad");
-            $dat['current']['itemColor'] = $this->Load_model->getPhotos(array("Type" => "itemColor", "Item_id" => $id, "count" => 100),"itemColor");
+            $dat['current']['itemFasad'] = $this->Load_model->getPhotos(array("Type" => "itemFasad", "Item_id" => $id, "count" => 100), "itemFasad");
+            $dat['current']['itemColor'] = $this->Load_model->getPhotos(array("Type" => "itemColor", "Item_id" => $id, "count" => 100), "itemColor");
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", $this->getFirstCat($dat['current']['mas']['Cat']), "");
             //echo "<pre>";
             //var_dump($dat);die();
@@ -144,6 +149,7 @@ class Catalog extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
+        echo "ok";
         //var_dump($id);die();
     }
 
