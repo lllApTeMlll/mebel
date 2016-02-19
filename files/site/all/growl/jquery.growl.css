@@ -1,0 +1,99 @@
+/* jQuery Growl
+ * Copyright 2015 Kevin Sylvestre
+ * 1.3.1
+ */
+#growls {
+  z-index: 99999999999999999;
+  position: fixed; }
+  #growls.default {
+    top: 10px;
+    right: 10px; }
+  #growls.tl {
+    top: 10px;
+    left: 10px; }
+  #growls.tr {
+    top: 10px;
+    right: 10px; }
+  #growls.bl {
+    bottom: 10px;
+    left: 10px; }
+  #growls.br {
+    bottom: 10px;
+    right: 10px; }
+  #growls.tc {
+    top: 10px;
+    right: 10px;
+    left: 10px; }
+  #growls.bc {
+    bottom: 10px;
+    right: 10px;
+    left: 10px; }
+  #growls.tc .growl, #growls.bc .growl {
+    margin-left: auto;
+    margin-right: auto; }
+
+.growl {
+    filter: alpha(opacity=80);
+    position: relative;
+    border-radius: 4px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    background-color: #fff;
+    border-left: 3px solid transparent;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.17);
+}
+  .growl.growl-incoming {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    margin-left: 200% !important;
+  }
+  .growl.growl-outgoing {
+    opacity: 0;
+    filter: alpha(opacity=0);
+      margin-left: 200% !important;
+  }
+  .growl.growl-small {
+    width: 200px;
+    padding: 5px;
+    margin: 5px; }
+  .growl.growl-medium {
+    /*width: 250px;*/
+    padding: 10px;
+    margin: 10px; }
+  .growl.growl-large {
+    width: 300px;
+    padding: 15px;
+    margin: 15px; }
+  .growl.growl-default{
+      border-color: #7f8c8d;
+  }
+  .growl.growl-error {
+      border-color: #C0392B;
+  }
+  .growl.growl-notice {
+      border-color: #2ECC71;
+  }
+  .growl.growl-warning {
+      border-color: #F39C12;
+  }
+  .growl .growl-close {
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: normal;
+    font-family: helvetica, verdana, sans-serif; }
+  .growl .growl-title {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: bold;
+      border-bottom: 1px dashed #eee;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+  }
+  .growl .growl-message {
+    font-size: 14px;
+    line-height: 18px;
+      font-weight: normal;
+  }

@@ -1,4 +1,23 @@
 $(function () {
+    $(document).on("click", ".ajax", function (e) {
+        e.preventDefault();
+        var form = $(this).closest("form");
+        if (valid(form)) {
+            var data = form.serializeArray();
+            var ajax = {name: "type", value: "ajax"}
+            data.push(ajax);
+            //console.log(data);
+            ajaxLoad(data, form.attr('action')).complete(function (dat) {
+                var result = dat.responseText;
+                if (result === "ok") {
+                    sendMesseg("Ваши данные сохранены", "");
+                } else {
+                    sendMesseg("Ошибка при сохранении", "");
+                }
+                //console.log(dat.responseText);
+            });
+        }
+    });
     $("form").submit(function () {
         if (valid($(this))) {
             console.log($(this).serializeArray());
@@ -52,9 +71,6 @@ $(function () {
         startCollapsed: false,
         protectRoot: true,
         disableParentChange: true,
-//        change: function () {
-//            console.log('Relocated item');
-//        }
     });
 });
 
