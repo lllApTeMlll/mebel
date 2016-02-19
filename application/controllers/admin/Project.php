@@ -14,6 +14,7 @@ class Project extends CI_Controller {
         $this->load->helper('text');
         $this->CurrentModel = $this->Project_model;
         $this->user_model->isAvtoris();
+        $this->ajax = $this->input->post('type', true) === "ajax"  ? true : false;
     }
 
     public function index() {
@@ -43,6 +44,7 @@ class Project extends CI_Controller {
             $dat['current']['type'] = "add";
             $dat['current']['image'] = "";
             $dat['current']['id'] = "";
+            $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/' . $this->Component . '/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -62,13 +64,16 @@ class Project extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            if (!$this->ajax) {
+                header("Location: /fasadm/{$this->Component}/");
+            }
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = $this->Seo_model->get_List(array("count" => 1, "Url" => "/{$this->Component}/item/" . $id . "/"));
             $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
+            $dat['current']['action'] = "/fasadm/{$this->Component}/edit/{$id}/";
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "project", "Item_id" => $id, "count" => 100));
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/' . $this->Component . '/Edit', $dat);
@@ -108,6 +113,7 @@ class Project extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
+        if ($this->ajax) echo "ok";
     }
 
 }

@@ -6,7 +6,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab_2">
-                <form role="form" id="" action="/fasadm/Menu/addCat/" method="POST">
+                <form role="form" id="" action="/fasadm/<?= $this->router->fetch_class() ?>/addCat/" method="POST">
                     <div class="box-body">
                         <div class="form-group col-lg-12">
 <?= $cat ?>
@@ -14,6 +14,7 @@
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" class="btn btn-success ajax">Применить</button>
                     </div>
                 </form>
             </div><!-- /.tab-pane -->

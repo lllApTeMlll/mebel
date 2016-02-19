@@ -69,8 +69,12 @@ class Catalog extends CI_Controller {
             header("Location: /catalog/catalog/");
         }
         $dat['item'] = $this->madeTrueArrayForItem($catalogItem);
-
-        $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))), true);
+        $before = "/catalog/catalog/";
+        //var_dump(array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0]);die();
+        if (array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0]==29){
+            $before = "/catalog/material/";
+        }
+        $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))), true, $before);
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/catalog/item', $dat);
         $this->load->view('site/base/footer');

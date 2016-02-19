@@ -51,6 +51,8 @@ class Catalog extends CI_Controller {
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
+            $dat['current']['itemFasad'] = "";
+            $dat['current']['itemColor'] = "";
             $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             //$cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", -1, "");
@@ -95,10 +97,11 @@ class Catalog extends CI_Controller {
 
     public function addCat() {
         $mas = ($this->input->post(null, true));
-        //echo "<pre>";
-        //var_dump($mas);//die();
         $this->list_model->saveCat($mas, array('Title', 'Link', 'id', 'Parent_id'));
-        header("Location: /fasadm/{$this->Component}/");
+        if (!$this->ajax) {
+            header("Location: /fasadm/{$this->Component}/");
+        }
+        echo "ok";
     }
 
     private function getFirstCat($cat) {
@@ -149,7 +152,7 @@ class Catalog extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
-        echo "ok";
+        if ($this->ajax) echo "ok";
         //var_dump($id);die();
     }
 

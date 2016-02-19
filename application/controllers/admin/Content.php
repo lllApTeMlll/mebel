@@ -12,6 +12,7 @@ class Content extends CI_Controller {
         $this->load->library('pagin');
         $this->CurrentModel = $this->Content_model;
         $this->user_model->isAvtoris();
+        $this->ajax = $this->input->post('type', true) === "ajax"  ? true : false;
     }
 
     public function index() {
@@ -40,6 +41,7 @@ class Content extends CI_Controller {
             $dat['current']['mas'] = array("Title" => "", "Puth" => "", "Description" => "");
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
+            $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/'.$this->Component.'/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -51,13 +53,16 @@ class Content extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            if (!$this->ajax) {
+                header("Location: /fasadm/{$this->Component}/");
+            }
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = $this->Seo_model->get_List(array("count" => 1, "Url" => "/{$this->Component}/item/" . $id . "/"));
             $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
+            $dat['current']['action'] = "/fasadm/{$this->Component}/edit/{$id}/";
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/'.$this->Component.'/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -83,6 +88,7 @@ class Content extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id ."/";
         $mas["Psevdonime"] = $mas["Puth"];
         $this->Seo_model->insert($mas);
+        if ($this->ajax) echo "ok";
         //var_dump($id);die();
     }
 

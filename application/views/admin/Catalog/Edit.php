@@ -43,7 +43,9 @@
                 <input type="hidden" name="id" value="<?= $current['id'] ?>">
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
                     <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
 
@@ -84,6 +86,9 @@
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
+                    <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
             </div><!-- /.tab-pane -->
@@ -105,6 +110,9 @@
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
+                    <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
             </div><!-- /.tab-pane -->

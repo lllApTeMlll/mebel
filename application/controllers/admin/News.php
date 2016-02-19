@@ -3,7 +3,7 @@
 class News extends CI_Controller {
 
     private $Component = "News";
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->model('user_model');
@@ -16,6 +16,7 @@ class News extends CI_Controller {
         $this->load->helper('text');
         $this->CurrentModel = $this->News_model;
         $this->user_model->isAvtoris();
+        $this->ajax = $this->input->post('type', true) === "ajax" ? true : false;
     }
 
     public function index() {
@@ -32,7 +33,7 @@ class News extends CI_Controller {
         $this->list_model->setmaxDee(2);
         $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1, 1);
         $this->load->view('admin/base/header', $dat);
-        $this->load->view('admin/'.$this->Component.'/List', $dat);
+        $this->load->view('admin/' . $this->Component . '/List', $dat);
         $this->load->view('admin/base/footer');
     }
 
@@ -44,25 +45,27 @@ class News extends CI_Controller {
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
-            
+
             $dat['current']['mas'] = array("Title" => "", "Date" => "", "Type" => "", "Description" => "", "EnglishTitle" => "");
             $dat['current']['type'] = "add";
             $dat['current']['image'] = "";
             $dat['current']['id'] = "";
+            $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             $dat['current']['cat'] = $this->Base_model->getOtion(19, "", -1, "");
             $this->load->view('admin/base/header', $dat);
-            $this->load->view('admin/'.$this->Component.'/Edit', $dat);
+            $this->load->view('admin/' . $this->Component . '/Edit', $dat);
             $this->load->view('admin/base/footer');
         }
     }
-    
 
     public function editItem($id) {
         //var_dump(phpinfo());die();
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            if (!$this->ajax) {
+                header("Location: /fasadm/{$this->Component}/");
+            }
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = $this->Seo_model->get_List(array("count" => 1, "Url" => "/{$this->Component}/item/" . $id . "/"));
@@ -70,21 +73,23 @@ class News extends CI_Controller {
             $dat['current']['type'] = "edit";
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "news", "Item_id" => $id, "count" => 100));
             $dat['current']['id'] = $id;
+            $dat['current']['action'] = "/fasadm/{$this->Component}/edit/{$id}/";
             $dat['current']['cat'] = $this->Base_model->getOtion(19, "", $dat['current']['mas']['Type'], "");
             $this->load->view('admin/base/header', $dat);
-            $this->load->view('admin/'.$this->Component.'/Edit', $dat);
+            $this->load->view('admin/' . $this->Component . '/Edit', $dat);
             $this->load->view('admin/base/footer');
         }
     }
 
     public function addCat() {
         $mas = ($this->input->post(null, true));
-        //echo "<pre>";
-        //var_dump($mas);//die();
-        $this->list_model->saveCat($mas, array('Title','Link','id','Parent_id'));
-        header("Location: /fasadm/{$this->Component}/");
+        $this->list_model->saveCat($mas, array('Title', 'Link', 'id', 'Parent_id'));
+        if (!$this->ajax) {
+            header("Location: /fasadm/{$this->Component}/");
+        }
+        if ($this->ajax) echo "ok";
     }
-    
+
     public function delitItem($id) {
         $this->CurrentModel->delete($id);
         header("Location: /fasadm/{$this->Component}/");
@@ -118,6 +123,7 @@ class News extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/News/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
+        if ($this->ajax) echo "ok";
     }
 
 }

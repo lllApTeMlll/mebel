@@ -4,7 +4,7 @@
         <li><a href="#tab_2" data-toggle="tab">Добавление фото</a></li>
         <li><a href="#tab_3" data-toggle="tab">Seo</a></li>
     </ul>
-    <form role="form" id="mainForm" method="POST">
+    <form role="form" id="mainForm" method="POST"  action="<?=$current['action']?>">
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
                 <div class="box-body">
@@ -36,6 +36,9 @@
                 <input type="hidden" name="id" value="<?= $current['id'] ?>">
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
+                    <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
 
@@ -54,6 +57,9 @@
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
+                    <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
             </div><!-- /.tab-pane -->
@@ -75,6 +81,9 @@
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <?php if ($current['type']==="edit"){?>
+                    <button type="submit" class="btn btn-success ajax">Применить</button>
+                    <?php }?>
                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/" class="btn btn-danger">Отмена</a>
                 </div>
             </div><!-- /.tab-pane -->
