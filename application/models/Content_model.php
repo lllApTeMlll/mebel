@@ -77,7 +77,7 @@ class Content_model extends CI_Model {
     }
 
     private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Puth", "Description");
+        $clearArray = array("Title", "Puth", "Description", "Cat");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);

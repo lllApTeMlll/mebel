@@ -3,7 +3,7 @@
 </div>
 <div class="clear"></div>
 <h2><?=$Crumbs['Title']?></h2>
-<div class="catalog-content__catalog justifyfix">
+<div class="catalog-content__catalog ">
     <?php foreach ($catList as $v) { ?>
     <div class="catalog-content__catalog-item" style="background: url(<?=$v['photo']?>) left top no-repeat;">
         <div class="catalog-item__caption">

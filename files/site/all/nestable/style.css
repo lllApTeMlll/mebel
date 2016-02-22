@@ -187,7 +187,7 @@
 .clav{
 width: 38px;
 height: 36px;
-padding: 0;
+padding: 0 3px !important;
 pointer-events: none;
 }
 
@@ -204,15 +204,31 @@ pointer-events: none;
     content: "\f11c";
     display: block;
     float: right;
-    color: #fff;
-    background: #dd9039;
+    color: #555;
     padding: 5px 5px;
     border-radius: 3px;
     margin: 0px;
     pointer-events: all;
+    cursor: pointer;
 }
 
 .clav input:checked + span:before{
-    background: #bf5e2a;
+    color: #bf5e2a;
     opacity: 1;
+}
+
+.input-group input.w50{
+    width: 50%;
+    height: 41px;
+}
+
+.input-group-addon {
+    padding: 1px 14px;
+    font-size: 17px;
+    line-height: 1px;
+    cursor: pointer;
+}
+
+.input-group{
+    margin-bottom: 5px;
 }

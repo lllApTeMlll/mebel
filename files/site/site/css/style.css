@@ -156,7 +156,7 @@ table thead {
     font-family: 'PFBeau SansPro Bold'; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;
 }
 
-table thead tr td {
+table thead tr td,table thead tr th {
     line-height: 53px; border-bottom: 1px solid #626569;
 }
 
@@ -868,6 +868,11 @@ form label {
     float: none;
 }
 
+.news .catalog-row {
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
 .catalog-row__item {
     overflow: hidden;
     width: 50%;
@@ -877,6 +882,17 @@ form label {
 .item-image {
     float: left;
     position: relative;
+}
+
+.news .item-image {
+    width: 30%;
+    height: 285px;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+}
+
+.news .item-image img{
+    display: none;
 }
 
 .item-image img {
@@ -901,6 +917,15 @@ form label {
     padding-left: 40px;
 }
 
+.news .item-caption {
+    padding: 30px;
+    width: 70%;
+}
+
+.news .btn.need-help-btn.review-more {
+    float: right;
+}
+
 .js-item-image,
 .js-item-caption {
     visibility: hidden;
@@ -908,6 +933,10 @@ form label {
 
 .item-caption h3 {
     text-transform: none;
+}
+
+.news .item-caption h3 {
+    color: #060606;
 }
 
 .item-caption .sep {
@@ -931,6 +960,12 @@ form label {
 
 .item-caption p {
     padding-right: 30px;
+}
+
+.news .diskrNews {
+    min-height: 100px;
+    max-height: 100px;
+    overflow: hidden;
 }
 
 .catalog-row:nth-of-type(2n) .item-image {
@@ -1000,6 +1035,14 @@ form label {
 }
 
 .company {
+    font-family: 'PFBeau SansPro Bold';
+    font-size: 28px;
+    line-height: 37px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.contacts h3 {
     font-family: 'PFBeau SansPro Bold';
     font-size: 28px;
     line-height: 37px;
@@ -1243,6 +1286,10 @@ form label {
     margin-bottom: 123px;
 }
 
+.cart-description-table.iner {
+    padding-bottom: 10px;
+}
+
 .cart-slider__item {
     position: relative;
     background: transparent;
@@ -1406,6 +1453,33 @@ form label {
     color: #fff;
     padding-top: 10px;
     padding-left: 30px;
+}
+
+.iner{
+    /*font-size: 0px;*/
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.iner .catalog-content {
+    background: #fff;
+}
+
+.iner .catalog-sidebar{
+
+}
+
+.iner .grayline-list li a {
+    color: #373A3C;
+}
+
+.iner .grayline-list li {
+    color: #373A3C;
+}
+
+.iner h2 {
+    color: #373A3C;
 }
 
 .catalog-content .breadcrumbs {

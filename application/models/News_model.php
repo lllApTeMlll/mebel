@@ -10,7 +10,7 @@ class News_model extends CI_Model {
 
     public function get_List($mas = "") {
         $config = array(
-            'Type' => FALSE, //тип
+            'Cat' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
             'EnglishTitle' => FALSE,
@@ -27,8 +27,8 @@ class News_model extends CI_Model {
         if ($config['EnglishTitle'] != FALSE) {
             $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
         }
-        if ($config['Type'] !== FALSE) {
-            $this->db->where('`Type`', $config['Type']);
+        if ($config['Cat'] !== FALSE) {
+            $this->db->where('`Cat`', $config['Cat']);
         }
 
         $query = $this->db->get($this->table, $config['count'], $config['current']);
@@ -40,7 +40,7 @@ class News_model extends CI_Model {
 
     public function get_count($mas = "") {
         $config = array(
-            'Type' => FALSE, //тип
+            'Cat' => FALSE, //тип
             'count' => 8, //count enement in one page
             'current' => 0, //current element
             'EnglishTitle' => FALSE,
@@ -57,8 +57,8 @@ class News_model extends CI_Model {
         if ($config['EnglishTitle'] != FALSE) {
             $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
         }
-        if ($config['Type'] !== FALSE) {
-            $this->db->where('`Type`', $config['Type']);
+        if ($config['Cat'] !== FALSE) {
+            $this->db->where('`Cat`', $config['Cat']);
         }
         return $this->db->count_all_results($this->table);
     }
@@ -83,7 +83,7 @@ class News_model extends CI_Model {
     }
 
     private function clearWhiteList($mas) {
-        $clearArray = array("Title","Type", "Date", "Description", "EnglishTitle");
+        $clearArray = array("Title","Cat", "Date", "Description", "EnglishTitle");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);

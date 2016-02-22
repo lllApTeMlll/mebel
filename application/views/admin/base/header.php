@@ -6,7 +6,7 @@
         <title>Административная панель</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <?php require_once 'froalaAdmin.php';?>
+        <?php require_once 'froalaAdmin.php'; ?>
 
 <!--        <script src='/files/site/all/drag/jquery.drag-drop.plugin.js'></script>
         <script src='/files/site/all/drag/drag.js'></script>-->
@@ -35,7 +35,18 @@
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
                     </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="">
+                                <a href="#" class="logout">
+                                    <i class="fa fa-sign-out"></i>
+                                    Выход
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
+
             </header>
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar">

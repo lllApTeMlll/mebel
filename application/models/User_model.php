@@ -38,7 +38,7 @@ class User_model extends CI_Model {
     }
 
     public function getComp() {
-        $query = $this->db->get('Component', 130, 0);
+        $query = $this->db->where('`Show`', 0)->get('Component', 130, 0);
         $component = $query->result_array();
         $componetnArray['Crumbs'] = '<li><a href="/fasadm/"><i class="fa fa-dashboard"></i>Корень</a></li>';
         $componetnArray['Name'] = '';

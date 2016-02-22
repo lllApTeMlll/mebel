@@ -29,7 +29,8 @@ class Catalog extends CI_Controller {
         $config['page_size'] = 16;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
-        $dat['catalog'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
+        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
+        $dat['content'] = $this->Base_model->getRightName($dat['content']);
         $this->list_model->setId(1);
         $this->list_model->setmaxDee(4);
         $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1);

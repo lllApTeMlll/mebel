@@ -45,10 +45,10 @@ class list_model extends CI_Model {
         }
 
         if ($config['idLink'] !== FALSE) {
-                $this->db->group_start();
-                    $this->db->or_where('`id`', $config['idLink']);
-                    $this->db->or_where('`Link`', $config['idLink']);
-                $this->db->group_end();
+            $this->db->group_start();
+            $this->db->or_where('`id`', $config['idLink']);
+            $this->db->or_where('`Link`', $config['idLink']);
+            $this->db->group_end();
         }
         if ($config['Parent_id'] !== FALSE) {
             $this->db->where('`Parent_id`', $config['Parent_id']);
@@ -56,9 +56,9 @@ class list_model extends CI_Model {
         if ($config['Parent_id_NOT'] !== FALSE) {
             $this->db->where('`Parent_id`<>', $config['Parent_id_NOT']);
         }
-        
+
         $this->db->order_by('Order', 'ASC');
-        
+
         $query = $this->db->get($this->table, $config['count'], $config['current']);
         //var_dump($this->db->last_query());
         if ($config['count'] == 1) {
@@ -84,7 +84,7 @@ class list_model extends CI_Model {
     }
 
     private function clearWhite($mas) {
-        $clearArray = array("Title", "Link", "Parent_id", "id", "Order");
+        $clearArray = array("Title", "Link", "Parent_id", "id", "Order","Create");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);
@@ -112,15 +112,8 @@ class list_model extends CI_Model {
     }
 
     private function getCat($mas, $st, $par, $deep, $temp, $type, $lemit) {
-        //$Zupr = new IC_Zapr_Class();
-        //$func = new IC_Func_Class();
-        if ($deep == 1) {
-            $st.=$temp['start'];
-        } else {
-            $st.=$temp['start1'];
-        }
+        $st.=$temp['start'];
         foreach ($mas as $k => $v) {
-            //$ma = $Zupr->selectElAll("`cat`", " WHERE parent_id={$v['id']}  ORDER BY  `order` ASC  ", 0, 100);
             $ma = $this->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($ma && $deep <= $lemit) {
                 $deep1 = $deep;
@@ -144,11 +137,7 @@ class list_model extends CI_Model {
                     {$varr}
                 </li>";
         }
-        if ($deep == 1) {
-            $st.=$temp['end'];
-        } else {
-            $st.=$temp['end1'];
-        }
+        $st.=$temp['end'];
         return $st;
     }
 

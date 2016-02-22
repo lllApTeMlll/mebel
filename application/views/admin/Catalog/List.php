@@ -10,14 +10,16 @@
                 <table class="table table-hover">
                     <tbody><tr>
                             <th>ID</th>
+                            <th>Категория</th>
                             <th>Заголовок</th>
                             <th>Цена</th>
                             <th>Артикль</th>
                             <th>Действие</th>
                         </tr>
-                        <?php foreach ($catalog as $v) { ?>
+                        <?php foreach ($content as $v) { ?>
                             <tr>
                                 <td><?= $v['id'] ?></td>
+                                <td><?= $v['Cat'] ?></td>
                                 <td><?= $v['Title'] ?></td>
                                 <td><?= $v['Price'] ?></td>
                                 <td><?= $v['Articl'] ?></td>

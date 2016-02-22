@@ -10,16 +10,14 @@
                     <tbody><tr>
                             <th>ID</th>
                             <th>Заголовок</th>
-                            <th>Путь</th>
-                            <th>Шаблон</th>
+                            <th>Описание</th>
                             <th>Действие</th>
                         </tr>
                         <?php foreach ($content as $v) { ?>
                             <tr>
                                 <td><?= $v['id'] ?></td>
                                 <td><?= $v['Title'] ?></td>
-                                <td><?= $v['Puth'] ?></td>
-                                <td><?= $v['Cat'] ?></td>
+                                <td><?php echo word_limiter($v['Description'],50) ?></td>
                                 <td>
                                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/edit/<?= $v['id'] ?>/" class="btn btn-social-icon btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                     <a onclick="if (!confirm('Удалить')) {

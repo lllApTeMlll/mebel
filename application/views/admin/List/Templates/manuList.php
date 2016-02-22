@@ -7,18 +7,12 @@ $masT['end'] = "
     </ol>
          ";
 
-$masT['start1'] = "
-    <ol class='dd-list'>
-         ";
-$masT['end1'] = "
-    </ol>
-         ";
-
 function first($mas) {
     return "
-    <div class='dd-handle demo-icon  dd3-handle dd-nodrag dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
-    <div class='dd4-handle demo-icon  dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
-    <div class='dd3-content dd-nodrag1'>{$mas['Title']}</div>
+    <div class='input-group'>
+        <span class='input-group-addon plus'><i class='fa fa-plus'></i></span>
+        {$mas['Title']}
+    </div>
 ";
 }
 
@@ -26,75 +20,42 @@ function first($mas) {
 
 function norm($mas) {
     return "
-    <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>
-    <div class='dd5-handle  demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
-    <div class='dd4-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-plus'></i></div>
-    <div class='dd3-content dd-nodrag1'>
-		<div class='grup'>
-			<div class='colum2 col50'>
-				<label>
-					Название
-				</label>
-				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
-			</div>
-			<div class='colum2 col50'>
-				<label>
-					Ссылка
-				</label>
-			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
-			</div>
-		</div>
-        <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
-        <input type='hidden' name='id[]' value='{$mas['id']}'>
-    </div>
-";
+        <div class='input-group'>
+            <span class='input-group-addon dd3-handle'><i class='fa fa-arrows-alt'></i></span>
+            <span class='input-group-addon' title='создать страницу'><input name='Create[]' value='checked' {$mas['Create']} type='checkbox'></span>
+            <span class='input-group-addon dell'><i class='fa fa-close'></i></span>
+            <span class='input-group-addon plus'><i class='fa fa-plus'></i></span>
+            <input class='form-control w50' name='Title[]' value='{$mas['Title']}' placeholder='имя' type='text'>
+            <input class='form-control w50' name='Link[]' value='{$mas['Link']}' placeholder='Ссылка' type='text'>
+            <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
+            <input type='hidden' name='id[]' value='{$mas['id']}'>
+        </div> 
+        ";
 }
 
 function last($mas) {
     return "
-        <div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div> 
-        <div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>
-        <div class='dd3-content dd-nodrag1 max'>
-            		<div class='grup'>
-			<div class='colum2 col50'>
-				<label>
-					Название
-				</label>
-				<input class='inp nam' type='text' name='Title[]' value='{$mas['Title']}'>
-			</div>
-			<div class='colum2 col50'>
-				<label>
-					Сcылка
-				</label>
-			   <input class='inp nam' type='text' name='Link[]' value='{$mas['Link']}'>
-			</div>
-		</div>
+        <div class='input-group'>
+            <span class='input-group-addon dd3-handle'><i class='fa fa-arrows-alt'></i></span>
+            <span class='input-group-addon' title='создать страницу'><input  name='Create[]' value='checked' {$mas['Create']} type='checkbox'></span>
+            <span class='input-group-addon dell'><i class='fa fa-close'></i></span>
+            <input class='form-control w50' name='Title[]' value='{$mas['Title']}' placeholder='имя' type='text'>
+            <input class='form-control w50' name='Link[]' value='{$mas['Link']}' placeholder='Ссылка' type='text'>
             <input type='hidden' name='Parent_id[]' value='{$mas['Parent_id']}'>
             <input type='hidden' name='id[]' value='{$mas['id']}'>
-        </div>
+        </div>  
 ";
 }
 
 function jsPast() {
     return "
         function getNewEl(mas){
-        return  \"<div class='dd-handle demo-icon dd3-handle dd-nodrag1 btn btn-social-icon'><i class='fa fa-arrows-alt'></i></div>\"+
-        \"<div class='dd5-handle demo-icon dd-nodrag1 btn btn-social-icon'><i class='fa fa-close'></i></div>\"+
-        \"<div class='dd3-content dd-nodrag1 max'>\"+
-            		\"<div class='grup'>\"+
-			\"<div class='colum2 col50'>\"+
-				\"<label>\"+
-					\"Название\"+
-				\"</label>\"+
-				\"<input class='inp nam' type='text' name='Title[]' value=''>\"+
-			\"</div>\"+
-			\"<div class='colum2 col50'>\"+
-				\"<label>\"+
-					\"Сcылка\"+
-				\"</label>\"+
-			   \"<input class='inp nam' type='text' name='Link[]' value=''>\"+
-			\"</div>\"+
-		\"</div>\"+
+        return  \"<div class='input-group'>\"+
+            \"<span class='input-group-addon dd3-handle'><i class='fa fa-arrows-alt'></i></span>\"+
+            \"<span class='input-group-addon' title='создать страницу'><input name='Create[]' value='checked' type='checkbox'></span>\"+
+            \"<span class='input-group-addon dell'><i class='fa fa-close'></i></span>\"+
+            \"<input class='form-control w50' name='Title[]' value='' placeholder='имя' type='text'>\"+
+            \"<input class='form-control w50' name='Link[]' value='' placeholder='Ссылка' type='text'>\"+
             \"<input type='hidden' name='Parent_id[]' value='\"+mas.Parent_id+\"'>\"+
             \"<input type='hidden' name='id[]' value=''>\"+
         \"</div>\";

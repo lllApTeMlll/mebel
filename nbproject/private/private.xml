@@ -4,13 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/serega/project/mebel/files/site/site/css/style.css</file>
-            <file>file:/home/serega/project/mebel/application/views/admin/base/header.php</file>
-            <file>file:/home/serega/project/mebel/files/site/admin/js/loadImage.js</file>
-            <file>file:/home/serega/project/mebel/files/site/all/sort/jquery.mjs.nestedSortable.js</file>
-            <file>file:/home/serega/project/mebel/application/controllers/Main.php</file>
-            <file>file:/home/serega/project/mebel/application/models/List_model.php</file>
-            <file>file:/home/serega/project/mebel/files/site/admin/js/forms.js</file>
-            <file>file:/home/serega/project/mebel/files/site/admin/css/admin.css</file>
+            <file>file:/home/serega/project/mebel/application/views/site/news/catalog.php</file>
+            <file>file:/home/serega/project/mebel/application/views/site/project/catalog.php</file>
+            <file>file:/home/serega/project/mebel/application/controllers/admin/News.php</file>
+            <file>file:/home/serega/project/mebel/application/controllers/site/Catalog.php</file>
+            <file>file:/home/serega/project/mebel/application/controllers/site/News.php</file>
         </group>
     </open-files>
 </project-private>

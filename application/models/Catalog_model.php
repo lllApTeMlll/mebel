@@ -39,6 +39,9 @@ class Catalog_model extends CI_Model {
         if ($config['EnglishTitle'] != FALSE) {
             $this->db->where('`EnglishTitle`', $config['EnglishTitle']);
         }
+        
+        $this->db->order_by('Cat', 'ASC');
+        
         $query = $this->db->get($this->table, $config['count'], $config['current']);
         //var_dump($this->db->last_query());
         if ($config['count'] == 1) {

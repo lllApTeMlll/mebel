@@ -9,10 +9,13 @@ class Content extends CI_Controller {
         $this->load->model('user_model');
         $this->load->model('Content_model');
         $this->load->model('Seo_model');
+        $this->load->model('Base_model');
         $this->load->library('pagin');
         $this->CurrentModel = $this->Content_model;
         $this->user_model->isAvtoris();
         $this->ajax = $this->input->post('type', true) === "ajax"  ? true : false;
+        $this->template = array(array("id" => "iner","Title" => "С левым меню"),
+            array("id" => "contact","Title" => "Контакты"));
     }
 
     public function index() {
@@ -25,6 +28,7 @@ class Content extends CI_Controller {
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
         $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
+        $dat['content'] = $this->Base_model->getRightNameForArray($dat['content'],$this->template);
         $this->load->view('admin/base/header', $dat);
         $this->load->view('admin/'.$this->Component.'/List', $dat);
         $this->load->view('admin/base/footer');
@@ -42,6 +46,7 @@ class Content extends CI_Controller {
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
+            $dat['current']['cat'] = $this->Base_model->getOtionForArray($this->template, "", -1);
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/'.$this->Component.'/Edit', $dat);
             $this->load->view('admin/base/footer');
@@ -62,6 +67,7 @@ class Content extends CI_Controller {
             $dat['current']['mas'] = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             $dat['current']['type'] = "edit";
             $dat['current']['id'] = $id;
+            $dat['current']['cat'] = $this->Base_model->getOtionForArray($this->template, "", $dat['current']['mas']['Cat']);
             $dat['current']['action'] = "/fasadm/{$this->Component}/edit/{$id}/";
             $this->load->view('admin/base/header', $dat);
             $this->load->view('admin/'.$this->Component.'/Edit', $dat);

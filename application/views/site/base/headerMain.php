@@ -44,7 +44,7 @@
                             <a href="/"><img src="/files/site/site/images/logo.png" alt=""></a>
                 </div>
                 <div class="phone">
-                    <i class="icon icon-phone"></i><a href="tel:+73952500225">8 (3952) 500-225</a>
+                    <i class="icon icon-phone"></i><?=$vstavka[0]['Description']?>
                 </div>
             </div>
         </div>

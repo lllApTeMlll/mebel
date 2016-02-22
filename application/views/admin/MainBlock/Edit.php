@@ -1,28 +1,22 @@
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab_1" data-toggle="tab">Характеристики</a></li>
-        <li><a href="#tab_3" data-toggle="tab">Seo</a></li>
+        <li><a href="#tab_2" data-toggle="tab">Добавление фото</a></li>
     </ul>
-    <form role="form" id="mainForm" method="POST" action="<?= $current['action'] ?>">
+    <form role="form" id="mainForm" method="POST"  action="<?= $current['action'] ?>">
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
                 <div class="box-body">
                     <div class="form-group col-lg-6">
-                        <label for="Title">Заголовок</label>
+                        <label for="Title">Название</label>
                         <input class="form-control" id="Title" data_type="required" name="Title" value="<?= $current['mas']["Title"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-6">
-                        <label for="Puth">Путь</label>
-                        <input class="form-control" id="Puth" data_type="required" name="Puth" value="<?= $current['mas']["Puth"] ?>"  type="text">
+                        <label for="Url">Ссылка</label>
+                        <input class="form-control" id="Url" data_type="required" name="Url" value="<?= $current['mas']["Url"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-12">
-                        <label for="Cat">Шаблон</label>
-                        <select name='Cat'>
-                            <?= $current['cat'] ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-12">
-                        <label for="Description">Описание</label>
+                        <label for="Description">Наполнение</label>
                         <textarea class="form-control ckedit" id="Description" name="Description" ><?= $current['mas']["Description"] ?></textarea>
                     </div>
                 </div><!-- /.box-body -->
@@ -37,22 +31,18 @@
                 </div>
 
             </div><!-- /.tab-pane -->
-            <div class="tab-pane" id="tab_3">
+            <div class="tab-pane" id="tab_2">
                 <div class="box-body">
                     <div class="form-group col-lg-12">
-                        <label for="SeoTitle">Seo title</label>
-                        <input class="form-control" id="SeoTitle" name="SeoTitle" value="<?= $Seo['SeoTitle'] ?>"  type="text">
+                        <label for="loadImageMain">Загрузка фото</label>
+                        <input id="loadImageMain" class="loadImage" type="file" multiple name="files[]">
                     </div>
                     <div class="form-group col-lg-12">
-                        <label for="SeoDescription">Seo Description</label>
-                        <textarea class="form-control" id="SeoDescription" name="SeoDescription"><?= $Seo['SeoDescription'] ?></textarea>
+                        <ul class="photoActiv">
+                            <?= $current['image'] ?>
+                        </ul>
                     </div>
-                    <div class="form-group col-lg-12">
-                        <label for="SeoKeyword">Seo Keyword</label>
-                        <textarea class="form-control" id="SeoKeyword" name="SeoKeyword"><?= $Seo['SeoKeyword'] ?></textarea>
-                    </div>
-                </div><!-- /.box-body -->
-
+                </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                     <?php if ($current['type'] === "edit") { ?>

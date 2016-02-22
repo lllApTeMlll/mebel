@@ -63,17 +63,17 @@
         start: function ()
         {
             var list = this;
-            list.el.find('.dd4-handle').unbind('click');
-            list.el.find('.dd5-handle').unbind('click');
-            list.el.find('.dd4-handle').on('click', function (e) {
+            //list.el.find('.dd4-handle').unbind('click');
+            list.el.find('.plus,.dell').unbind('click');
+            list.el.find('.plus').on('click', function (e) {
                 var opt = list.options;
-                var dat_id = $(this).parent().attr('data-id');
-                var il = $(this).parent();
+                var dat_id = $(this).closest("li").attr('data-id');
+                var il = $(this).closest("li");
                 if (il.find('ol').length) {
                     var ol = il.find('>ol');
                 } else {
                     var list1 = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);
-                    $(this).parent().append(list1);
+                    il.append(list1);
                     var ol = il.find('>ol');
                 }
                 var pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
@@ -87,7 +87,7 @@
                 // }
                 list.start();
             });
-            list.el.find('.dd5-handle').on('click', function (e) {
+            list.el.find('.dell').on('click', function (e) {
                 if (!confirm('Удалить')) {
                     return false;
                 }

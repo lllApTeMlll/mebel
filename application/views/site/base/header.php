@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/jquery.fancybox.css"/> 
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/grid.css"/> 
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/style.css"/> 
+        <link rel="stylesheet" type="text/css" href="/files/site/base/css/froala.css"/> 
         <script src="/files/site/site/js/jquery.js" type="text/javascript" charset="utf-8"></script>  
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;language=ru"></script>
         <script src="/files/site/site/js/jquery.bxslider.js" type="text/javascript" charset="utf-8"></script>  

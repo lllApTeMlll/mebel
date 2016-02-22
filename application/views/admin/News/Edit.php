@@ -21,8 +21,8 @@
                         <input class="form-control datepicker" id="Date" name="Date" value="<?= $current['mas']["Date"] ?>"  type="text">
                     </div>
                     <div class="form-group col-lg-12">
-                        <label for="Type">Тип</label>
-                        <select name='Type'>
+                        <label for="Cat">Тип</label>
+                        <select name='Cat'>
                             <?=$current['cat'] ?>
                         </select>
                     </div>
@@ -46,8 +46,8 @@
             <div class="tab-pane" id="tab_2">
                 <div class="box-body">
                     <div class="form-group col-lg-12">
-                        <label for="loadImage">Загрузка фото</label>
-                        <input id="loadImage" class="loadImage" type="file" multiple name="files[]">
+                        <label for="loadImageNews">Загрузка фото</label>
+                        <input id="loadImageNews" class="loadImage" type="file" multiple name="files[]">
                     </div>
                     <div class="form-group col-lg-12">
                         <ul class="photoActiv">

@@ -6,7 +6,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab_2">
-                <form role="form" id="" action="/fasadm/<?= $this->router->fetch_class() ?>/addCat/" method="POST">
+                <form role="form" id="menu" action="/fasadm/<?= $this->router->fetch_class() ?>/addCat/" method="POST">
                     <div class="box-body">
                         <div class="form-group col-lg-12">
 <?= $cat ?>

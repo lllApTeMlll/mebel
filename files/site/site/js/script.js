@@ -209,14 +209,17 @@ $(document).ready(function () {
         }
     });
 
-    $(".fancyimage").fancybox({
-        padding: 10
-    });
+    if ($(".fancyimage").length) {
+        $(".fancyimage").fancybox({
+            padding: 10
+        });
 
-    $(document).on("click", ".sidemenu li", function (e) {
+    }
+
+    $(document).on("click", ".sidemenu:not('.noajax') li", function (e) {
         try {
             history.pushState({}, "", "" + $(this).find('a').attr('href') + "");
-            $.ajax({type: "POST", url: $(this).find('a').attr('href'), data: {type:"ajax"},
+            $.ajax({type: "POST", url: $(this).find('a').attr('href'), data: {type: "ajax"},
                 success: function (data) {
                     //console.log(data);
                     try {

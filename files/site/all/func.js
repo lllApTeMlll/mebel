@@ -3,8 +3,8 @@ $(function(){
     $('input,textarea').focus(
     function(){
         $('.rt.error').remove();
-        $("input").removeClass("error").removeClass("valid");
-        $("input").closest(".form-group").removeClass("valid").removeClass("has-error");
+        $("input").removeClass("error").removeClass("has-success");
+        $("input").closest(".form-group").removeClass("has-success").removeClass("has-error");
     });
    // console.log('ff');
 });		
@@ -12,7 +12,7 @@ $(function(){
 
 function valid(par,nom){
     $('.rt.error').remove();
-    $("input").removeClass("error");
+    $("input").removeClass("has-error");
     $("input").removeClass("valid");
     var nomm=(nom || 100);
     var i=0;
@@ -21,36 +21,31 @@ function valid(par,nom){
         switch($(this).attr('data_type')){
             case 'email':
                 if($(this).val().match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/) === null){
-                    $(this).closest(".form-group").addClass("has-error");
-                    $(this).after( addExcept('не коректный email') );
+                    addExcept('не корректный email',$(this));
                     result = false;
                 }
             break;
             case 'phone':
                 if($(this).val().length < 4){
-                    $(this).closest(".form-group").addClass("has-error");
-                    $(this).after( addExcept('число должно быть длинее 3 символов') );
+                    addExcept('не корректное значение',$(this));
                     result = false;
                 }else{
                     if($(this).val().match(/^[+0-9,. ()-]+$/) === null){
-                        $(this).closest(".form-group").addClass("has-error");
-                        $(this).after( addExcept('не корректный номер телефона') );
+                        addExcept('не корректное значение',$(this));
                         result = false;
                     }
                 }
             break;
             case 'required':
+                //console.log($(this).closest("form-group"));
                 if ($(this).attr('type')=='checkbox'){
                     if(! $(this).is(':checked') ){
-                        $(this).closest(".form-group").addClass("has-error");
-                        $(this).after( addExcept('это поле обязательно для заполнения') );
+                        addExcept('поле обязательно для заполнения',$(this));
                         result = false;
                     }
                 }else{
                     if($(this).val()==""){
-                        //console.log($(this).closest("form-group"));
-                        $(this).closest(".form-group").addClass("has-error");
-                        $(this).after( addExcept('это поле обязательно для заполнения') );
+                        addExcept('поле обязательно для заполнения',$(this));
                         result = false;
                     }
                 }
@@ -70,8 +65,13 @@ function valid(par,nom){
     return n+' '+s1;
 }
 
-function addExcept(text){ 
-    return "<div for='email_inp' generated='true' class='error rt'>"+text+"</div>";
+function addExcept(text,element){ 
+   element.closest(".form-group").addClass("has-error");
+   if (element.closest(".form-group").find("label").length){
+       $.growl.error({ message: "Не корректно заполнено поле - "+element.closest(".form-group").find("label").text()});
+   }
+    element.after("<div for='email_inp' generated='true' class='error rt'>"+text+"</div>");
+    
 }
 
  function floorN(x, n)

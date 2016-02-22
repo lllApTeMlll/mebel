@@ -1,5 +1,6 @@
 $(function () {
-    $('.button').click(function () {
+    $('form').submit(function (e) {
+        e.preventDefault();
         var form = $(this).closest('form');
         if (valid(form)) {
             var data = form.serializeArray();
@@ -14,7 +15,7 @@ $(function () {
                         switch (event.result) {
                             case 'ok':
                                 console.log("ok");
-                                sendMesseg("Вы авторизовались", "");
+                                $.growl.notice({ message: "Вы авторизовались" });
                                 setTimeout(function () {
                                     location.reload();
                                 }, 500);
@@ -22,15 +23,17 @@ $(function () {
                                 break;
                             case 'no':
                                 console.log("no");
-                                sendMesseg(event.mess);
+                                $.growl.error({ message: event.mess });
+                                form.find(".form-group").addClass("has-error");
                                 pr = false;
                                 break;
                             default:
-                                sendMesseg("Ошибка", "");
+                                $.growl.error({ message: "Ошибка" });
                                 break;
                         }
-                    } catch (e) {
-                        sendMesseg("Ошибка", "");
+                    } catch (e1) {
+                        $.growl.error({ message: e1 });
+                        console.log(e1);
                     }
                 }
             });

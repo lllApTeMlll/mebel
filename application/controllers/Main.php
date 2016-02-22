@@ -6,9 +6,14 @@ class Main extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        //$this->load->model('Catalog_model');
+        $this->load->model('Base_model');
+        $this->Base_model->set_table("Text");
+        $this->vstavka = $this->Base_model->get_ListV();
         $this->load->model('list_model');
         $this->load->model('Seo_model');
+        $this->load->model('Load_model');
+        $this->load->model('Content_model');
+        $this->load->helper('text');
         $this->load->library('pagin');
         $List11 = $this->list_model->get_List(array("Parent_id" => 13, "count" => 100));
         $cat = $this->list_model->get_List(array("Parent_id" => 28, "count" => 100));
@@ -20,9 +25,28 @@ class Main extends CI_Controller {
     public function index() {
         //echo "ok";die();
         $dat['menu'] = $this->menu;
+        $dat['vstavka'] = $this->vstavka;
+        $this->Base_model->set_table("MainBlock");
+        $dat["block"] = $this->Base_model->get_List(array());
+        $dat["block"] = $this->madeTrueArray($dat["block"]);
+        $this->Base_model->set_table("Slider");
+        $dat["slider"] = $this->Base_model->get_List(array());
+        $dat["slider"] = $this->madeTrueArray($dat["slider"],"slider");
+        $dat["contact"] = $this->Content_model->get_List(array("count" => 1, "Url" => "/contacts/"));
         $this->load->view('site/base/headerMain', $dat);
         $this->load->view('site/main', $dat);
-        $this->load->view('site/base/footerMain');
+    }
+    
+    private function madeTrueArray($mas, $type = "main", $array = false) {
+        foreach ($mas as $k => $v) {
+            $pthoto = $this->Load_model->get_List(array('count' => ($array ? 100 : 1), "Type" => $type, "Item_id" => $v['id']));
+            if ($pthoto) {
+                $mas[$k]['photo'] = ($array ? $pthoto : $pthoto['Puth'] . "small/" . $pthoto['Name']);
+            } else {
+                $mas[$k]['photo'] = "";
+            }
+        }
+        return $mas;
     }
 
 }

@@ -6,48 +6,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Авторизация</title>
         <link rel="stylesheet" href="/files/site/all/font-awesome/css/font-awesome.min.css"  />
-        <link rel="stylesheet" href="/files/site/admin/css/avtor.css" />
-        <link rel='stylesheet' href='/files/site/all/modal1/css/style.css' type='text/css' />
+        <link rel="stylesheet" href="/files/site/all/bootstrap/css/bootstrap.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/files/site/all/font-awesome/css/font-awesome.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/files/site/admin/dist/css/AdminLTE.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="/files/site/all/growl/jquery.growl.css">
+        <link rel="stylesheet" href="/files/site/admin/css/admin.css">
+        <link rel="stylesheet" href="/files/site/admin/dist/css/skins/_all-skins.min.css">
     </head>
     <body>
-        <form id='avtor'>
-            <div class="comment-box">
-                <div class="comment-head">
-                    <h1 class="comment-name">Авторизация</h1>
-                </div>
-                <div class="comment-content">
-                    <div class="grup">
-                        <label>
-                            Имя пользователя
-                        </label>
-                        <input class='inp nam' data-type="required" type="text" name="name" value="">	
+        <div class="login-box">
+            <div class="login-logo">
+                <b>Admin</b>LTE</a>
+            </div><!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Введите ваш email и пароль</p>
+                <form action="" method="post">
+                    <div class="form-group has-feedback">
+                        <input type="text" data_type="required" name="name" class="form-control" placeholder="Email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
-                    <div class="grup">
-                        <label>
-                            Пароль
-                        </label>
-                        <input class='inp nam' data-type="required" type="password" name="password" value="">
+                    <div class="form-group has-feedback">
+                        <input type="password" data_type="required" name="password" class="form-control" placeholder="Пароль">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
-                    <div class="grup">
-                        <input type="hidden" name='action' value="add">
-                        <input type="button" class="button" value="Авторизоваться" >
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-flat">Авторизоваться</button>
+                        </div><!-- /.col -->
                     </div>
-                </div>
-            </div>
-        </form>
-        <div class='modal' id='messM'>
-            <div class='close'>&times;</div>
-            <div >
-                <h2 class='hed'>
-                </h2>
-            </div>
-            <div class='grup'>
-                <p class='texxt'></p>
-            </div>
-        </div>
+                </form> 
+            </div><!-- /.login-box-body -->
+        </div><!-- /.login-box -->
         <script src="/files/site/all/jQuery-2.1.4.min.js"></script>
         <script type="text/javascript" src="/files/site/all/func.js"></script>
-        <script type='text/javascript' src='/files/site/all/modal1/js/script.js'></script>
+        <script type="text/javascript" src="/files/site/all/growl/jquery.growl.js"></script>
         <script src="/files/site/admin/js/avtoris.js"></script>
     </body>
 </html>

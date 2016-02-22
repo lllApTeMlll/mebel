@@ -1,25 +1,38 @@
 $(function () {
+    $(document).on("click", ".logout", function (e) {
+        e.preventDefault();
+        ajaxLoad({}, "/fasadm/loggout/").complete(function (dat) {
+            location.reload();
+        });
+    });
     $(document).on("click", ".ajax", function (e) {
         e.preventDefault();
         var form = $(this).closest("form");
         if (valid(form)) {
+            modefForMenu(form);
             var data = form.serializeArray();
             var ajax = {name: "type", value: "ajax"}
             data.push(ajax);
             //console.log(data);
+            getLoader();
             ajaxLoad(data, form.attr('action')).complete(function (dat) {
                 var result = dat.responseText;
                 if (result === "ok") {
-                    sendMesseg("Ваши данные сохранены", "");
+                    $.growl.notice({message: "Ваши данные сохранены"});
+                    //sendMesseg("Ваши данные сохранены", "");
                 } else {
-                    sendMesseg("Ошибка при сохранении", "");
+                    $.growl.error({message: "Ошибка при сохранении"});
+                    //sendMesseg("Ошибка при сохранении", "");
                 }
+                modefForMenuBack(form);
+                removeLoader();
                 //console.log(dat.responseText);
             });
         }
     });
     $("form").submit(function () {
         if (valid($(this))) {
+            modefForMenu($(this));
             console.log($(this).serializeArray());
             return true;
         } else {
@@ -41,6 +54,15 @@ $(function () {
     }
     if ($("#loadImage").length) {
         $("#loadImage").loadImage({maxWidth: 1100});
+    }
+    if ($("#loadImageMain").length) {
+        $("#loadImageMain").loadImage({maxWidth: 850,minWidth: 850,onlismall:"true"});
+    }
+    if ($("#loadImageNews").length) {
+        $("#loadImageNews").loadImage({maxWidth: 350,minWidth: 350,onlismall:"true"});
+    }
+    if ($("#loadImageSlider").length) {
+        $("#loadImageSlider").loadImage({maxWidth: 1920,minWidth: 1920,onlismall:"true"});
     }
     if ($("#itemFasad").length) {
         $("#itemFasad").loadImage({maxWidth: 500, vid: "itemFasad"});
@@ -74,6 +96,27 @@ $(function () {
     });
 });
 
+function modefForMenu(form) {
+    if (form.attr('id') === "menu") {
+        form.find("[type='checkbox']").each(function () {
+            if (!$(this).prop("checked")){
+                $(this).val("");
+                $(this)[0].checked = true;
+            }
+        });
+    }
+}
+
+function modefForMenuBack(form) {
+    if (form.attr('id') === "menu") {
+        form.find("[type='checkbox']").each(function () {
+            if ($(this).val() === ""){
+                $(this).val("checked");
+                $(this)[0].checked = false;
+            }
+        });
+    }
+}
 
 function ajaxLoad(data, url, type) {
     type = type || "data";

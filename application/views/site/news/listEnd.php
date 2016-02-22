@@ -1,4 +1,4 @@
-</div>   
-</div>
-</section>
-<div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </section>

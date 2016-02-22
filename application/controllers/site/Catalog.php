@@ -4,6 +4,7 @@ class Catalog extends CI_Controller {
 
     private $menu = "";
     private $cat = "";
+    private $Component = "catalog";
 
     public function __construct() {
         parent::__construct();
@@ -44,7 +45,7 @@ class Catalog extends CI_Controller {
         $config['total_rows'] = $this->Catalog_model->get_count(array('cid' => array($cat, $cat1, $cat2)));
         $config['base_url'] = "";
         $config['cur_page'] = $page;
-        $config['page_size'] = 2;
+        $config['page_size'] = 12;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinks();
         $catalogList = $this->Catalog_model->get_List(array("current" => $page, "count" => $config['page_size'], 'cid' => array($cat, $cat1, $cat2)));
@@ -53,11 +54,11 @@ class Catalog extends CI_Controller {
         //var_dump($dat["catList"]);
         if (!$this->ajax) {
             $this->load->view('site/base/header', $dat);
-            $this->load->view('site/catalog/list', $dat);
+            $this->load->view('site/' . $this->Component . '/list', $dat);
         }
-        $this->load->view('site/catalog/catalog', $dat);
+        $this->load->view('site/' . $this->Component . '/catalog', $dat);
         if (!$this->ajax) {
-            $this->load->view('site/catalog/listEnd', $dat);
+            $this->load->view('site/' . $this->Component . '/listEnd', $dat);
             $this->load->view('site/base/footer');
         }
     }
@@ -66,17 +67,16 @@ class Catalog extends CI_Controller {
         $dat['menu'] = $this->menu;
         $catalogItem = $this->Catalog_model->get_List(array("count" => 1, 'EnglishTitle' => $id));
         if (!$catalogItem) {
-            header("Location: /catalog/catalog/");
+            header("Location: /{$this->Component}/catalog/");
         }
         $dat['item'] = $this->madeTrueArrayForItem($catalogItem);
         $before = "/catalog/catalog/";
-        //var_dump(array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0]);die();
-        if (array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0]==29){
+        if (array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0] == 29) {
             $before = "/catalog/material/";
         }
         $dat["Crumbs"] = $this->getCrumbs(array_reverse(explode(",", trim($dat['item']['Cat'], ","))), true, $before);
         $this->load->view('site/base/header', $dat);
-        $this->load->view('site/catalog/item', $dat);
+        $this->load->view('site/' . $this->Component . '/item', $dat);
         $this->load->view('site/base/footer');
     }
 

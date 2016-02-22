@@ -18,7 +18,7 @@
                         <?php foreach ($content as $v) { ?>
                             <tr>
                                 <td><?= $v['id'] ?></td>
-                                <td><?= $v['Type'] ?></td>
+                                <td><?= $v['Cat'] ?></td>
                                 <td><?= $v['Title'] ?></td>
                                 <td><?= $v['Date'] ?></td>
                                 <td>
