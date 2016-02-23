@@ -396,13 +396,15 @@ form label {
     position: relative;
     width: 800px;
     float: left;
+    white-space: nowrap;
 }
 
 .nav-item-wrap {
     height: 110px;
-    float: left;
+    /*float: left;*/
     padding-top: 38px;
     cursor: pointer;
+    display: inline-block;
 }
 
 .nav-item-wrap:hover .nav__item .nav__item-dropdown {
@@ -477,6 +479,8 @@ form label {
     border-bottom: 1px solid #ff0731;
 }
 
+
+
 .nav__item-link-dropdown:after {
     content: '';
     display: block;
@@ -484,8 +488,8 @@ form label {
     width: 8px;
     height: 6px;
     background: url(../images/down.png) top no-repeat; 
-    margin-left: 3px;
-    margin-top: 22px;
+    margin-left: 16px;
+    margin-top: -28px;
 }
 
 .nav__item-dropdown {
@@ -799,23 +803,25 @@ form label {
     float: right;
 }
 
-.grayline-list {
+.grayline-wrap ul {
     float: left;
     margin-right: 15px;
 }
 
-.grayline-list li {
+.grayline-wrap ul li {
     display: inline-block;
     line-height: 60px;
+    color: #fff;
+    margin: 0 4px;
 }
 
-.grayline-list li a {
+.grayline-wrap ul li a {
     color: #fff;
     text-decoration: none;
     border: none;
 }
 
-.grayline-list li a:hover {
+.grayline-wrap ul li a:hover {
     text-decoration: underline;
 }
 
@@ -1124,11 +1130,15 @@ form label {
     line-height: 137px;
 }
 
-.footer .grayline-list li {
+.footer .grayline-wrap ul  li {
     line-height: 137px;
 }
 
-.footer .grayline-list li a:hover {
+.footer .grayline-wrap.iner ul  li {
+    line-height: 60px;
+}
+
+.footer .grayline-wrap ul li a:hover {
     color: #db2840;
 }
 
@@ -1392,6 +1402,7 @@ form label {
     height: 485px!important;
     background-size: cover !important;
     background-position: 50% 50% !important;
+    border-radius: 5px;
 }
 
 #js-cart-slider .cart-slider__item img{
@@ -1995,6 +2006,20 @@ form label {
     padding: 50px 90px 0 100px;
 }
 
+.secses {
+position: fixed;
+left: 0;
+top: 10%;
+width: 100%;
+z-index: 10000;
+display: none;
+height: 100%;
+}
+
+.secses .popup-form{
+    height: 300px;
+}
+
 .popup-form__title {
     font-family: 'PFBeau SansPro Bold';
     font-size: 24px;
@@ -2305,4 +2330,6 @@ form label {
 }
 
 
-
+.has-error{
+    border: 2px solid #e70027 !important;
+}

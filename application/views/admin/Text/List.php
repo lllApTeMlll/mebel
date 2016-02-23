@@ -17,7 +17,7 @@
                             <tr>
                                 <td><?= $v['id'] ?></td>
                                 <td><?= $v['Title'] ?></td>
-                                <td><?php echo word_limiter($v['Description'],50) ?></td>
+                                <td><?php echo word_limiter(strip_tags($v['Description'], "<p>"),50) ?></td>
                                 <td>
                                     <a href="/fasadm/<?= $this->router->fetch_class() ?>/edit/<?= $v['id'] ?>/" class="btn btn-social-icon btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                     <a onclick="if (!confirm('Удалить')) {

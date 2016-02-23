@@ -6,6 +6,9 @@ class Project extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('Base_model');
+        $this->Base_model->set_table("Text");
+        $this->vstavka = $this->Base_model->get_ListV();
         $this->load->model('Project_model');
         $this->load->model('list_model');
         $this->load->model('Load_model');
@@ -21,6 +24,7 @@ class Project extends CI_Controller {
     }
 
     public function index() {
+        $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $page = $this->input->get('page', true);
         $config['total_rows'] = $this->CurrentModel->get_count();
@@ -40,6 +44,7 @@ class Project extends CI_Controller {
     }
 
     public function item() {
+        $dat['vstavka'] = $this->vstavka;
         $dat['d'] = "";
         $this->load->view('site/base/header', $dat);
         $this->load->view('site/project/item', $dat);

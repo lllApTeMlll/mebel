@@ -20,6 +20,7 @@
         <script src="/files/site/site/js/jquery.bxslider.js" type="text/javascript" charset="utf-8"></script>  
         <script src="/files/site/site/js/jquery.flexslider.js" type="text/javascript" charset="utf-8"></script>   
         <script src="/files/site/site/js/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/files/site/all/func.js"></script>
         <script src="/files/site/site/js/script.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,7 +48,7 @@
                             <a href="/"><img src="/files/site/site/images/logo.png" alt=""></a>
                         </div>
                         <div class="phone">
-                            <i class="icon icon-phone"></i><a href="tel:+73952500225">8 (3952) 500-225</a>
+                            <i class="icon icon-phone"></i><?=$vstavka[0]['Description']?>
                         </div>
                     </div>
                 </div>

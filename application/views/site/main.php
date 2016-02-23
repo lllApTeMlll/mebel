@@ -31,13 +31,7 @@
     <div class="wrapper">
         <div class="copy">Разработка сайта P&P</div>
         <div class="grayline-wrap">
-            <ul class="grayline-list">
-                <li><a href="">Рассчитать стоимость</a></li>
-                <li class="sep">|</li>
-                <li><a href="">Сотрудничество</a></li>
-                <li class="sep">|</li>
-                <li><a href="">Скачать каталоги</a></li>
-            </ul>
+            <?=$vstavka[1]['Description']?>
             <div class="grayline-facebook"><div class="facebook-icon"><a href=""></a></div></div>
         </div>
     </div>
@@ -99,13 +93,7 @@
             <div class="wrapper">
                 <div class="copy">Разработка сайта P&P</div>
                 <div class="grayline-wrap">
-                    <ul class="grayline-list">
-                        <li><a href="">Рассчитать стоимость</a></li>
-                        <li class="sep">|</li>
-                        <li><a href="">Сотрудничество</a></li>
-                        <li class="sep">|</li>
-                        <li><a href="">Скачать каталоги</a></li>
-                    </ul>
+                    <?=$vstavka[2]['Description']?>
                     <div class="grayline-facebook"><div class="facebook-icon"><a href=""></a></div></div>
                 </div>
             </div>

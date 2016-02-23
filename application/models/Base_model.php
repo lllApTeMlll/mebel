@@ -53,7 +53,8 @@ class Base_model extends CI_Model {
         foreach ($vstavka as $k => $v) {
             $pattern = '/(?<=\<p\>)(.*)(?=<\/p>)/';
             preg_match($pattern, $v['Description'], $matches);
-            $vstavka[$k]['Description'] = $matches[1];
+            if (isset($matches[1]))
+                $vstavka[$k]['Description'] = $matches[1];
         }
         return $vstavka;
     }

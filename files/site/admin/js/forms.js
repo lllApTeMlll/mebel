@@ -43,10 +43,7 @@ $(function () {
     $(".ckedit").each(function () {
         //loadFile(loadEditor($(this).attr("id")));
         $(this).froalaEditor({heightMax: 500, height: 300, language: 'ru', imageManagerLoadURL: '/imageManager/',
-            fontFamily: {
-                'Arial,Helvetica,sans-serif': 'Font 1',
-                'Impact,Charcoal,sans-serif': 'Font 2',
-                'Tahoma,Geneva,sans-serif': 'Font 3'}});
+            fileUploadURL: '/fileUpload/'});
     });
 
     if ($("#mainForm #Title").length && $("#mainForm #EnglishTitle").length) {

@@ -8,6 +8,9 @@ class Catalog extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('Base_model');
+        $this->Base_model->set_table("Text");
+        $this->vstavka = $this->Base_model->get_ListV();
         $this->load->model('Catalog_model');
         $this->load->model('list_model');
         $this->load->model('Load_model');
@@ -27,6 +30,7 @@ class Catalog extends CI_Controller {
     }
 
     public function index($cat = "catalog", $cat1 = false, $cat2 = false) {
+        $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $before = "/catalog/catalog/";
         $TiteleFirest = "Каталог";
@@ -64,6 +68,7 @@ class Catalog extends CI_Controller {
     }
 
     public function item($id) {
+        $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $catalogItem = $this->Catalog_model->get_List(array("count" => 1, 'EnglishTitle' => $id));
         if (!$catalogItem) {

@@ -6,6 +6,9 @@ class News extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('Base_model');
+        $this->Base_model->set_table("Text");
+        $this->vstavka = $this->Base_model->get_ListV();
         $this->load->model('News_model');
         $this->load->model('list_model');
         $this->load->model('Load_model');
@@ -26,6 +29,7 @@ class News extends CI_Controller {
     }
 
     public function index($type = 'news') {
+        $dat['vstavka'] = $this->vstavka;
         $before = "/news/";
         $TiteleFirest = "Новости";
         if (!$this->ajax) {
@@ -62,6 +66,7 @@ class News extends CI_Controller {
     }
 
     public function item($id) {
+        $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $dat['content'] = $this->CurrentModel->get_List(array("count" => 1, 'EnglishTitle' => $id));
         if (!$dat['content']) {

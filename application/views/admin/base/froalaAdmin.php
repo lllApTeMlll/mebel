@@ -56,6 +56,7 @@
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/paragraph_style.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/table.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/video.min.js"></script>
+        <script type="text/javascript" src="/files/site/all/floara/js/plugins/file.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/url.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/entities.min.js"></script>
         <script type="text/javascript" src="/files/site/all/floara/js/plugins/colors.min.js"></script>

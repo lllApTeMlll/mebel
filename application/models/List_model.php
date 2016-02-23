@@ -176,7 +176,7 @@ class list_model extends CI_Model {
             $podMas = $this->isMas($mas, $v['id']);
             if ($podMas || $List11) {
                 $class = "class='dropdown'";
-                $classA = "class='nav__item-link-dropdown'";
+                $classA = "nav__item-link-dropdown";
             }
             $str.="<div class='nav-item-wrap'><div class='nav__item {$class}'>";
             $str.="<a href='{$v['Link']}' class='nav__item-link {$classA}'>{$v['Title']}</a>";

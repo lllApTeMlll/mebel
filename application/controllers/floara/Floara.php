@@ -123,11 +123,11 @@ class Floara extends CI_Controller {
             $name = sha1(microtime()) . "." . $extension;
 
             // Save file in the uploads folder.
-            move_uploaded_file($_FILES["file"]["tmp_name"], getcwd() . "/uploads/" . $name);
+            move_uploaded_file($_FILES["file"]["tmp_name"], BASE . '/files/site/files/' . $name);
 
             // Generate response.
             $response = new StdClass;
-            $response->link = "/uploads/" . $name;
+            $response->link = '/files/site/files/' . $name;
             echo stripslashes(json_encode($response));
         }
     }
