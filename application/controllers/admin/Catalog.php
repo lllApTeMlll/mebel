@@ -48,12 +48,13 @@ class Catalog extends CI_Controller {
             $this->Load_model->delWithout();
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
-            $dat['current']['mas'] = array("Title" => "", "Articl" => "", "Price" => "", "Description" => "", "Sostav" => "", "EnglishTitle" => "");
+            $dat['current']['mas'] = array("Title" => "", "Articl" => "", "Price" => "", "Description" => "", "Sostav" => "", "EnglishTitle" => "","PriceText"=>"", "SostavStandart"=>"СОСТАВ СТАНДАРТНОЙ КОМПЛЕКТАЦИИ");
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
             $dat['current']['itemFasad'] = "";
             $dat['current']['itemColor'] = "";
+            $dat['current']['rigthPhoto'] = "";
             $dat['current']['action'] = "/fasadm/{$this->Component}/add/";
             //$cat = $this->list_model->get_ItemsEl(array("Parent_id" => 1, "count" => 100));
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", -1, "");
@@ -82,6 +83,7 @@ class Catalog extends CI_Controller {
             $dat['current']['image'] = $this->Load_model->getPhotos(array("Type" => "item", "Item_id" => $id, "count" => 100));
             $dat['current']['itemFasad'] = $this->Load_model->getPhotos(array("Type" => "itemFasad", "Item_id" => $id, "count" => 100), "itemFasad");
             $dat['current']['itemColor'] = $this->Load_model->getPhotos(array("Type" => "itemColor", "Item_id" => $id, "count" => 100), "itemColor");
+            $dat['current']['rigthPhoto'] = $this->Load_model->getPhotos(array("Type" => "rigthPhoto", "Item_id" => $id, "count" => 100), "rigthPhoto");
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "", $this->getFirstCat($dat['current']['mas']['Cat']), "");
             //echo "<pre>";
             //var_dump($dat);die();
@@ -126,9 +128,10 @@ class Catalog extends CI_Controller {
                 $this->Load_model->delete($v);
             }
         }
-        $this->addPhoto($mas["id_photo"], "item", $id);
-        $this->addPhoto($mas["itemFasad"], "itemFasad", $id);
-        $this->addPhoto($mas["itemColor"], "itemColor", $id);
+        $this->addPhoto($mas,"id_photo", "item", $id);
+        $this->addPhoto($mas,"itemFasad", "itemFasad", $id);
+        $this->addPhoto($mas,"itemColor", "itemColor", $id);
+        $this->addPhoto($mas,"rigthPhoto", "rigthPhoto", $id, true);
 //        $edit["Type"] = "item";
 //        if (isset($mas["id_photo"])) {
 //            foreach ($mas["id_photo"] as $k => $v) {
@@ -161,13 +164,14 @@ class Catalog extends CI_Controller {
         //var_dump($id);die();
     }
 
-    private function addPhoto($mas, $type, $id) {
+    private function addPhoto($mas,$index, $type, $id, $onliOne = false) {
         $edit["Type"] = $type;
         $edit["Item_id"] = $id;
-        if (isset($mas)) {
-            foreach ($mas as $k => $v) { 
+        if (isset($mas[$index])) {
+            foreach ($mas[$index] as $k => $v) { 
                 $edit["Order"] = $k;
                 $this->Load_model->update($edit, $v);
+                if ($onliOne) $edit["Type"] = "";
             }
         }
     }

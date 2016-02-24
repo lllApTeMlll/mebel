@@ -55,6 +55,7 @@
             var thiss = this;
             $('.delPhoto').unbind('mousedown');
             $('.delPhoto').mousedown(function () {
+                $(this).closest("li").find(".data input").attr("name","");
                 $(this).closest("li").hide(1000);
                 return false;
             });

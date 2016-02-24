@@ -13,7 +13,7 @@
                             <th>Категория</th>
                             <th>Заголовок</th>
                             <th>Цена</th>
-                            <th>Артикль</th>
+                            <th>Артикул</th>
                             <th>Действие</th>
                         </tr>
                         <?php foreach ($content as $v) { ?>

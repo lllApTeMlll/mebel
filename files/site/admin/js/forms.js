@@ -52,8 +52,11 @@ $(function () {
     if ($("#loadImage").length) {
         $("#loadImage").loadImage({maxWidth: 1100});
     }
+    if ($("#rigthPhoto").length) {
+        $("#rigthPhoto").loadImage({maxWidth: 1000, vid: "rigthPhoto"});
+    }
     if ($("#loadImageMain").length) {
-        $("#loadImageMain").loadImage({maxWidth: 850,minWidth: 850,onlismall:"true"});
+        $("#loadImageMain").loadImage({maxWidth: 700,minWidth: 700,onlismall:"true"});
     }
     if ($("#loadImageNews").length) {
         $("#loadImageNews").loadImage({maxWidth: 350,minWidth: 350,onlismall:"true"});
@@ -87,7 +90,7 @@ $(function () {
         maxLevels: 4,
         isTree: true,
         expandOnHover: 700,
-        startCollapsed: false,
+        startCollapsed: true,
         protectRoot: true,
         disableParentChange: true,
     });

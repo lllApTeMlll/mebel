@@ -70,11 +70,18 @@ class Catalog extends CI_Controller {
     public function item($id) {
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
-        $catalogItem = $this->Catalog_model->get_List(array("count" => 1, 'EnglishTitle' => $id));
+        $catalogItem = $this->Catalog_model->get_List(array("count" => 2, 'EnglishTitle' => $id));
         if (!$catalogItem) {
             header("Location: /{$this->Component}/catalog/");
         }
-        $dat['item'] = $this->madeTrueArrayForItem($catalogItem);
+        //echo "<pre>";
+        $catalogItem = $this->madeTrueArray($catalogItem,true,"item","photo");
+        $catalogItem = $this->madeTrueArray($catalogItem,true,"itemFasad","itemFasad");
+        $catalogItem = $this->madeTrueArray($catalogItem,true,"itemColor","itemColor");
+        $catalogItem = $this->madeTrueArray($catalogItem,true,"rigthPhoto","rigthPhoto");
+        $dat['item'] = $catalogItem[0];
+        //var_dump($dat['item']);
+        //echo "</pre>";
         $before = "/catalog/catalog/";
         if (array_reverse(explode(",", trim($dat['item']['Cat'], ",")))[0] == 29) {
             $before = "/catalog/material/";
@@ -95,39 +102,41 @@ class Catalog extends CI_Controller {
         $this->load->view('site/catalog/mini_info', $dat);
     }
 
-    private function madeTrueArray($mas, $array = false) {
+    private function madeTrueArray($mas, $array = false, $type = "item", $name = "photo") {
         foreach ($mas as $k => $v) {
-            $pthoto = $this->Load_model->get_List(array('count' => ($array ? 100 : 1), "Type" => "item", "Item_id" => $v['id']));
-            if ($pthoto) {
-                $mas[$k]['photo'] = ($array ? $pthoto : $pthoto['Puth'] . "small/" . $pthoto['Name']);
+            $photo = $this->Load_model->get_List(array('count' => ($array ? 100 : 1), "Type" => $type, "Item_id" => $v['id']));
+            //var_dump($photo);          
+            if ($photo) {
+                $mas[$k][$name] = ($array ? $photo : $photo['Puth'] . "small/" . $photo['Name']);
             } else {
-                $mas[$k]['photo'] = "";
+                $mas[$k][$name] = "";
             }
         }
+        //var_dump($mas);
         return $mas;
     }
 
-    private function madeTrueArrayForItem($mas) {
-        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "item", "Item_id" => $mas['id']));
-        if ($pthoto) {
-            $mas['photo'] = $pthoto;
-        } else {
-            $mas['photo'] = "";
-        }
-        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "itemFasad", "Item_id" => $mas['id']));
-        if ($pthoto) {
-            $mas['itemFasad'] = $pthoto;
-        } else {
-            $mas['itemFasad'] = "";
-        }
-        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "itemColor", "Item_id" => $mas['id']));
-        if ($pthoto) {
-            $mas['itemColor'] = $pthoto;
-        } else {
-            $mas['itemColor'] = "";
-        }
-        return $mas;
-    }
+//    private function madeTrueArrayForItem($mas) {
+//        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "item", "Item_id" => $mas['id']));
+//        if ($pthoto) {
+//            $mas['photo'] = $pthoto;
+//        } else {
+//            $mas['photo'] = "";
+//        }
+//        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "itemFasad", "Item_id" => $mas['id']));
+//        if ($pthoto) {
+//            $mas['itemFasad'] = $pthoto;
+//        } else {
+//            $mas['itemFasad'] = "";
+//        }
+//        $pthoto = $this->Load_model->get_List(array('count' => 100, "Type" => "itemColor", "Item_id" => $mas['id']));
+//        if ($pthoto) {
+//            $mas['itemColor'] = $pthoto;
+//        } else {
+//            $mas['itemColor'] = "";
+//        }
+//        return $mas;
+//    }
 
     private function getCrumbs($mas1, $pr = false, $before = "/catalog/", $TiteleFirest = "Каталог") {
         //echo "<pre>";
@@ -174,8 +183,9 @@ class Catalog extends CI_Controller {
                         <a href="' . $url . $v['Link'] . '/" class="sidemenu__item-link"><span>' . $v['Title'] . '</span></a>';
             $List11 = $this->list_model->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($List11) {
+                $count = $this->Catalog_model->get_count(array('cid' => array($v['Link'],false,false)));
                 $str .=
-                        '<div class="sidemenu__item-count">' . count($List11) . '</div>
+                        '<div class="sidemenu__item-count">' . $count . '</div>
                             <div class="sidemenu__item-dropbox" ' . $style . '>
                                 <ul>';
                 foreach ($List11 as $v1) {

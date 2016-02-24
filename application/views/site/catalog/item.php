@@ -35,7 +35,7 @@
                     <ul class="slides slides-faces">
                         <?php if (!empty($item["itemFasad"])) foreach ($item["itemFasad"] as $v) { ?>
                             <li class="cart-slider__item">
-                                <a href="<?=$v['Puth']?>big/<?=$v['Name']?>" class="fancyimage"><img src="<?=$v['Puth']?>small/<?=$v['Name']?>" alt="">
+                                <a href="<?=$v['Puth']?>big/<?=$v['Name']?>" data-fancybox-group='itemFasad' class="fancyimage"><img src="<?=$v['Puth']?>small/<?=$v['Name']?>" alt="">
                                 <div class="cart-slider__item-hover"></div></a>
                             </li>
                         <?php } ?>
@@ -46,7 +46,8 @@
                     <ul class="slides slides-radius">
                         <?php if (!empty($item["itemColor"])) foreach ($item["itemColor"] as $v) { ?>
                             <li class="cart-slider__item">
-                                <img src="<?=$v['Puth']?>small/<?=$v['Name']?>" alt="">
+                                <a href="<?=$v['Puth']?>big/<?=$v['Name']?>" data-fancybox-group='itemColor' class="fancyimage"><img src="<?=$v['Puth']?>small/<?=$v['Name']?>" alt="">
+                                <div class="cart-slider__item-hover"></div></a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -58,22 +59,19 @@
                 <div class="price-block">
                     <div class="col_6 col-image">
                         <a href="
-                            <?php if (!empty($item["photo"])){ echo $item["photo"][0]['Puth']."big/".$item["photo"][0]['Name'];}else echo"";?>"
+                            <?php if (!empty($item["rigthPhoto"])){ echo $item["rigthPhoto"][0]['Puth']."big/".$item["rigthPhoto"][0]['Name'];}else echo"";?>"
                         class="fancyimage"><img src="
-                            <?php if (!empty($item["photo"])){echo $item["photo"][0]['Puth']."small/".$item["photo"][0]['Name'];}else echo"";?>"" alt="">
+                            <?php if (!empty($item["rigthPhoto"])){echo $item["rigthPhoto"][0]['Puth']."small/".$item["rigthPhoto"][0]['Name'];}else echo"";?>"" alt="">
                             <div class="cart-slider__item-hover"></div></a>
                     </div>
                     <div class="col_6 col-price">
                         <div class="price-field"><?=$item['Price']?> <span>руб.</span></div>
-                        <p>Цена указана за стандартную
-                            комплектацию.  Доступен заказ
-                            в гипермаркетах
-                        </p>
+                        <?=$item['PriceText']?>
                         <div class="btn popup-show">заказать бесплатный<i><br></i> замер</div>
                     </div>
                 </div>
                 <?=$item['Description']?>
-                <h5>Состав стандартной  комплектации</h5>
+                <h5><?=$item['SostavStandart']?></h5>
                 <div class="cart-description-table">  
                     <?=$item['Sostav']?>
                 </div>

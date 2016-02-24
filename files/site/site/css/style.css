@@ -472,6 +472,7 @@ form label {
     border-bottom: 1px solid #b5b5b4;
     font-family: 'PFBeau SansPro Bold';
     line-height: 16px;
+    display: inline-flex;
 }
 
 .nav-item-wrap:hover .nav__item-link {
@@ -488,8 +489,8 @@ form label {
     width: 8px;
     height: 6px;
     background: url(../images/down.png) top no-repeat; 
-    margin-left: 16px;
-    margin-top: -28px;
+    margin-left: 6px;
+    margin-top: 4px;
 }
 
 .nav__item-dropdown {
@@ -497,7 +498,7 @@ form label {
     overflow: hidden;
     display: block;
     visibility: hidden;
-    top: 79px;
+    /*top: 79px;*/
     left: -42px;
     width: 253px;
     background: rgba(247,247,246,0.85);
@@ -520,11 +521,14 @@ form label {
     color: #000;
     border: none;
     text-decoration: none;
+    white-space: normal;
+    text-decoration: none;
 }
 
 .nav__item-dropdown ul li a:hover {
     color: #ff0731;
     text-decoration: underline;
+    text-decoration: none;
 }
 
 .logo-field {
@@ -607,7 +611,7 @@ form label {
 }
 
 .nav-wrap-2 .nav .nav__item-link:after {
-    margin-top: 14px;
+    /*margin-top: 14px;*/
 }
 
 .nav-wrap-2 .logo-field {
@@ -813,6 +817,11 @@ form label {
     line-height: 60px;
     color: #fff;
     margin: 0 4px;
+    text-transform: lowercase;
+}
+
+.grayline-wrap ul li:first-letter {
+    text-transform: uppercase;
 }
 
 .grayline-wrap ul li a {
@@ -978,6 +987,14 @@ form label {
     float: right;
 }
 
+
+.news .catalog-row:nth-of-type(2n) .item-image {
+    float: left;
+}
+
+.news .catalog-row:nth-of-type(2n) .item-caption {
+    float: right;
+}
 
 .catalog-row:nth-of-type(2n) .item-image .item-image-arrow {
     right: auto;
@@ -1570,6 +1587,7 @@ form label {
     text-transform: uppercase;
     border: none;
     text-decoration: none;
+    pointer-events: none;
 }
 
 .hover-icon a:hover {
@@ -2106,6 +2124,7 @@ height: 100%;
     margin: 0 auto;
     padding: 0;
     box-shadow: 0px 0px 15px 8px rgba(0,0,0,0.3); 
+    /*overflow: hidden;*/
 }
 
 .popup-form-slider {

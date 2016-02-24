@@ -108,11 +108,11 @@ class Base_model extends CI_Model {
                 if ($v && $v !== '1') {
                     $currentList = $this->list_model->get_List(array("idLink" => $v, "count" => 1, "Parent_id_NOT" => 0));
                     if ($currentList) {
-                        $str .= $currentList['Title'] . ",";
+                        $str .= $currentList['Title'] . ", &nbsp;";
                     }
                 }
             }
-            $cat[$k]['Cat'] = trim($str, ",");
+            $cat[$k]['Cat'] = trim($str, ", &nbsp;");
         }
         return $cat;
     }

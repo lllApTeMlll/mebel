@@ -124,7 +124,7 @@ class Content extends CI_Controller {
             $List11 = $this->list_model->get_List(array("Parent_id" => $v['id'], "count" => 100));
             if ($List11) {
                 $str .=
-                        '<div class="sidemenu__item-count">' . count($List11) . '</div>
+                        '
                             <div class="sidemenu__item-dropbox" ' . $style . '>
                                 <ul>';
                 foreach ($List11 as $v1) {

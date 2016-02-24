@@ -31,6 +31,14 @@
                         </select>
                     </div>
                     <div class="form-group col-lg-12">
+                        <label for="SostavStandart">СОСТАВ СТАНДАРТНОЙ КОМПЛЕКТАЦИИ</label>
+                        <input class="form-control" id="SostavStandart"  name="SostavStandart" value="<?= $current['mas']["SostavStandart"] ?>"  type="text">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label for="PriceText">Текст под ценой</label>
+                        <textarea class="form-control ckedit" id="PriceText" name="PriceText" ><?= $current['mas']["PriceText"] ?></textarea>
+                    </div>
+                    <div class="form-group col-lg-12">
                         <label for="Description">Описание</label>
                         <textarea class="form-control ckedit" id="Description" name="Description" ><?= $current['mas']["Description"] ?></textarea>
                     </div>
@@ -51,6 +59,17 @@
 
             </div><!-- /.tab-pane -->
             <div class="tab-pane" id="tab_2">
+                <div class="box-body">
+                    <div class="form-group col-lg-12">
+                        <label for="rigthPhoto">Фото справо</label>
+                        <input id="rigthPhoto" class="loadImage" type="file" multiple name="files[]">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <ul class="photoActiv">
+                            <?= $current['rigthPhoto'] ?>
+                        </ul>
+                    </div>
+                </div>
                 <div class="box-body">
                     <div class="form-group col-lg-12">
                         <label for="loadImage">Загрузка фото</label>

@@ -94,7 +94,7 @@ class Catalog_model extends CI_Model {
     }
 
     private function clearForCatalog($mas) {
-        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle", "Cat");
+        $clearArray = array("Title", "Articl", "Price", "Description", "Sostav", "EnglishTitle", "Cat", "PriceText", "SostavStandart");
         foreach ($mas as $k => $v) {
             if (!in_array($k, $clearArray)) {
                 unset($mas[$k]);
