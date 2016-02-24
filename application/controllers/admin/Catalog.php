@@ -17,7 +17,7 @@ class Catalog extends CI_Controller {
         $this->load->helper('text');
         $this->load->library('session');
         $this->CurrentModel = $this->Catalog_model;
-        $this->ajax = $this->input->post('type', true) === "ajax"  ? true : false;
+        $this->ajax = $this->input->post('type', true) === "ajax" ? true : false;
     }
 
     public function index() {
@@ -126,35 +126,50 @@ class Catalog extends CI_Controller {
                 $this->Load_model->delete($v);
             }
         }
-        $edit["Type"] = "item";
-        if (isset($mas["id_photo"])) {
-            foreach ($mas["id_photo"] as $k => $v) {
-                $edit["Item_id"] = $id;
-                $edit["Order"] = $k;
-                $this->Load_model->update($edit, $v);
-            }
-        }
-        $edit["Type"] = "itemFasad";
-        if (isset($mas["itemFasad"])) {
-            foreach ($mas["itemFasad"] as $k => $v) {
-                $edit["Item_id"] = $id;
-                $edit["Order"] = $k;
-                $this->Load_model->update($edit, $v);
-            }
-        }
-        $edit["Type"] = "itemColor";
-        if (isset($mas["itemColor"])) {
-            foreach ($mas["itemColor"] as $k => $v) {
-                $edit["Item_id"] = $id;
-                $edit["Order"] = $k;
-                $this->Load_model->update($edit, $v);
-            }
-        }
+        $this->addPhoto($mas["id_photo"], "item", $id);
+        $this->addPhoto($mas["itemFasad"], "itemFasad", $id);
+        $this->addPhoto($mas["itemColor"], "itemColor", $id);
+//        $edit["Type"] = "item";
+//        if (isset($mas["id_photo"])) {
+//            foreach ($mas["id_photo"] as $k => $v) {
+//                $edit["Item_id"] = $id;
+//                $edit["Order"] = $k;
+//                $this->Load_model->update($edit, $v);
+//            }
+//        }
+//        $edit["Type"] = "itemFasad";
+//        if (isset($mas["itemFasad"])) {
+//            foreach ($mas["itemFasad"] as $k => $v) {
+//                $edit["Item_id"] = $id;
+//                $edit["Order"] = $k;
+//                $this->Load_model->update($edit, $v);
+//            }
+//        }
+//        $edit["Type"] = "itemColor";
+//        if (isset($mas["itemColor"])) {
+//            foreach ($mas["itemColor"] as $k => $v) {
+//                $edit["Item_id"] = $id;
+//                $edit["Order"] = $k;
+//                $this->Load_model->update($edit, $v);
+//            }
+//        }
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
-        if ($this->ajax) echo "ok";
+        if ($this->ajax)
+            echo "ok";
         //var_dump($id);die();
+    }
+
+    private function addPhoto($mas, $type, $id) {
+        $edit["Type"] = $type;
+        $edit["Item_id"] = $id;
+        if (isset($mas)) {
+            foreach ($mas as $k => $v) { 
+                $edit["Order"] = $k;
+                $this->Load_model->update($edit, $v);
+            }
+        }
     }
 
 }
