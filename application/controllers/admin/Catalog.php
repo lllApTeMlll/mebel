@@ -21,22 +21,34 @@ class Catalog extends CI_Controller {
     }
 
     public function index() {
-        $dat['com'] = $this->user_model->getComp();
+        //var_dump($this->ajax);die();
+        if (!$this->ajax) {
+            $dat['com'] = $this->user_model->getComp();
+        }
         $page = $this->input->get('page', true);
-        $config['total_rows'] = $this->CurrentModel->get_count();
+        $cat = $this->input->get('cat', true);
+        $cat = $cat ? $cat : false; 
+        $config['total_rows'] = $this->CurrentModel->get_count(array("cid" =>array($cat, false, false)));
         $config['base_url'] = "";
         $config['cur_page'] = $page;
-        $config['page_size'] = 16;
+        $config['page_size'] = 30;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
-        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size']));
+        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size'], "cid" =>array($cat, false, false)));
         $dat['content'] = $this->Base_model->getRightName($dat['content']);
-        $this->list_model->setId(1);
-        $this->list_model->setmaxDee(4);
-        $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1);
-        $this->load->view('admin/base/header', $dat);
-        $this->load->view('admin/' . $this->Component . '/List', $dat);
-        $this->load->view('admin/base/footer');
+        if (!$this->ajax) {
+            $this->list_model->setId(1); 
+            $this->list_model->setmaxDee(4);
+            $dat['current']['cat'] = $this->Base_model->getOtion(1, "<option value='-'>-</option>", $cat, "");
+            $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1);
+            $this->load->view('admin/base/header', $dat);
+            $this->load->view('admin/' . $this->Component . '/List', $dat);
+        }
+        $this->load->view('admin/' . $this->Component . '/ListAjax', $dat);
+        if (!$this->ajax) {
+            $this->load->view('admin/' . $this->Component . '/ListEnd', $dat);
+            $this->load->view('admin/base/footer');
+        }
     }
 
     public function addItem() {
@@ -48,7 +60,7 @@ class Catalog extends CI_Controller {
             $this->Load_model->delWithout();
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
-            $dat['current']['mas'] = array("Title" => "", "Articl" => "", "Price" => "", "Description" => "", "Sostav" => "", "EnglishTitle" => "","PriceText"=>"", "SostavStandart"=>"СОСТАВ СТАНДАРТНОЙ КОМПЛЕКТАЦИИ");
+            $dat['current']['mas'] = array("Title" => "", "Articl" => "", "Price" => "", "Description" => "", "Sostav" => "", "EnglishTitle" => "", "PriceText" => "", "SostavStandart" => "СОСТАВ СТАНДАРТНОЙ КОМПЛЕКТАЦИИ");
             $dat['current']['type'] = "add";
             $dat['current']['id'] = "";
             $dat['current']['image'] = "";
@@ -128,34 +140,10 @@ class Catalog extends CI_Controller {
                 $this->Load_model->delete($v);
             }
         }
-        $this->addPhoto($mas,"id_photo", "item", $id);
-        $this->addPhoto($mas,"itemFasad", "itemFasad", $id);
-        $this->addPhoto($mas,"itemColor", "itemColor", $id);
-        $this->addPhoto($mas,"rigthPhoto", "rigthPhoto", $id, true);
-//        $edit["Type"] = "item";
-//        if (isset($mas["id_photo"])) {
-//            foreach ($mas["id_photo"] as $k => $v) {
-//                $edit["Item_id"] = $id;
-//                $edit["Order"] = $k;
-//                $this->Load_model->update($edit, $v);
-//            }
-//        }
-//        $edit["Type"] = "itemFasad";
-//        if (isset($mas["itemFasad"])) {
-//            foreach ($mas["itemFasad"] as $k => $v) {
-//                $edit["Item_id"] = $id;
-//                $edit["Order"] = $k;
-//                $this->Load_model->update($edit, $v);
-//            }
-//        }
-//        $edit["Type"] = "itemColor";
-//        if (isset($mas["itemColor"])) {
-//            foreach ($mas["itemColor"] as $k => $v) {
-//                $edit["Item_id"] = $id;
-//                $edit["Order"] = $k;
-//                $this->Load_model->update($edit, $v);
-//            }
-//        }
+        $this->addPhoto($mas, "id_photo", "item", $id);
+        $this->addPhoto($mas, "itemFasad", "itemFasad", $id);
+        $this->addPhoto($mas, "itemColor", "itemColor", $id);
+        $this->addPhoto($mas, "rigthPhoto", "rigthPhoto", $id, true);
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
@@ -164,14 +152,15 @@ class Catalog extends CI_Controller {
         //var_dump($id);die();
     }
 
-    private function addPhoto($mas,$index, $type, $id, $onliOne = false) {
+    private function addPhoto($mas, $index, $type, $id, $onliOne = false) {
         $edit["Type"] = $type;
         $edit["Item_id"] = $id;
         if (isset($mas[$index])) {
-            foreach ($mas[$index] as $k => $v) { 
+            foreach ($mas[$index] as $k => $v) {
                 $edit["Order"] = $k;
                 $this->Load_model->update($edit, $v);
-                if ($onliOne) $edit["Type"] = "";
+                if ($onliOne)
+                    $edit["Type"] = "";
             }
         }
     }

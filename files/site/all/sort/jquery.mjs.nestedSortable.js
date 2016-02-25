@@ -235,14 +235,22 @@
             this.positionAbs = this._convertPositionTo("absolute");
 
             // mjs - find the top offset before rearrangement,
+            var parentItem1;
             previousTopOffset = this.placeholder.offset().top;
-
+            if (this.placeholder.closest(".ui-sortable").length){
+                parentItem1 = this.placeholder.closest(".ui-sortable").offset();
+            }else{
+                parentItem1 = this.position;
+            }
             //Set the helper position
             if (!this.options.axis || this.options.axis !== "y") {
                 this.helper[0].style.left = this.position.left + "px";
             }
             if (!this.options.axis || this.options.axis !== "x") {
-                this.helper[0].style.top = (this.position.top) + "px";
+                var topCurr = (this.positionAbs.top - parentItem1.top);
+                //this.position.top = topCurr;
+                this.helper[0].style.top = (topCurr) + "px";
+                //this.helper[0].style.top = (this.position.top) + "px";
             }
 
             // mjs - check and reset hovering state at each cycle

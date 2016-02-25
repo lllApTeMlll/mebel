@@ -13,7 +13,7 @@ $(function () {
             var data = form.serializeArray();
             var ajax = {name: "type", value: "ajax"}
             data.push(ajax);
-            //console.log(data);
+            console.log(data);
             getLoader();
             ajaxLoad(data, form.attr('action')).complete(function (dat) {
                 var result = dat.responseText;
@@ -28,6 +28,26 @@ $(function () {
                 removeLoader();
                 //console.log(dat.responseText);
             });
+        }
+    });
+    $(document).on("change", ".ajaxCat", function (e) {
+        try {
+            var id = $(this).val();
+            //console.log(id);
+            history.pushState({}, "", "?cat=" + id + "");
+            var ajax = [{name: "type", value: "ajax"}];
+            getLoader();
+            ajaxLoad(ajax, window.location.href).complete(function (dat) {
+                var result = dat.responseText;
+                $(".ajaxConten").html(result);
+                removeLoader();
+                //console.log(dat.responseText);
+            });
+                    return false;
+        } catch (e1) {
+            console.log(e1);
+            //location.href = $(this).attr('href');
+            return true;
         }
     });
     $("form").submit(function () {

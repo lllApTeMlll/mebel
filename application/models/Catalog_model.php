@@ -30,7 +30,7 @@ class Catalog_model extends CI_Model {
         if ($config['cid'] != FALSE) {
             $idn = $this->getIdCid($config['cid']);
             if (($idn)) {
-                $this->db->or_like('`Cat`', "," . $idn["id"] . ",");
+                $this->db->like('`Cat`', "," . $idn["id"] . ",");
             }
         }
         if ($config['id'] != FALSE) {
@@ -114,7 +114,12 @@ class Catalog_model extends CI_Model {
         }else{
             return false;
         }
-        $query = $this->db->select('id')->where('`Link`', $name)->get('Cat');
+        $this->db->select('id');
+        $this->db->group_start();
+        $this->db->or_where('`id`', $name);
+        $this->db->or_where('`Link`', $name);
+        $this->db->group_end();
+        $query = $this->db->get('Cat');
         return $query->row_array();
     }
 
