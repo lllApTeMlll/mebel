@@ -5,31 +5,6 @@ $(function () {
             location.reload();
         });
     });
-    $(document).on("click", ".ajax", function (e) {
-        e.preventDefault();
-        var form = $(this).closest("form");
-        if (valid(form)) {
-            modefForMenu(form);
-            var data = form.serializeArray();
-            var ajax = {name: "type", value: "ajax"}
-            data.push(ajax);
-            console.log(data);
-            getLoader();
-            ajaxLoad(data, form.attr('action')).complete(function (dat) {
-                var result = dat.responseText;
-                if (result === "ok") {
-                    $.growl.notice({message: "Ваши данные сохранены"});
-                    //sendMesseg("Ваши данные сохранены", "");
-                } else {
-                    $.growl.error({message: "Ошибка при сохранении"});
-                    //sendMesseg("Ошибка при сохранении", "");
-                }
-                modefForMenuBack(form);
-                removeLoader();
-                //console.log(dat.responseText);
-            });
-        }
-    });
     $(document).on("change", ".ajaxCat", function (e) {
         try {
             var id = $(this).val();
@@ -43,20 +18,46 @@ $(function () {
                 removeLoader();
                 //console.log(dat.responseText);
             });
-                    return false;
+            return false;
         } catch (e1) {
             console.log(e1);
             //location.href = $(this).attr('href');
             return true;
         }
     });
-    $("form").submit(function () {
-        if (valid($(this))) {
-            modefForMenu($(this));
-            console.log($(this).serializeArray());
-            return true;
-        } else {
-            return false;
+    $("form [type='submit']").click(function (e) {
+        e.preventDefault();
+        var form = $(this).closest("form");
+        if (valid(form)) {
+            modefForMenu(form);
+            var data = form.serializeArray();
+            if ($(e.target).hasClass("ajax"))
+                data.push({name: "type", value: "ajax"});
+            console.log(data);
+            getLoader();
+            ajaxLoad(data, form.attr('action')).complete(function (dat) {
+                removeLoader();
+                var result = dat.responseText;
+                console.log(result);
+                try {
+                    var mas = JSON.parse(result);
+                    if (mas.result === "ok") {
+                        $.growl.notice({message: mas.message});
+                    } else {
+                        $.growl.error({message: mas.message});
+                        //sendMesseg("Ошибка при сохранении", "");
+                    }
+                    if (mas.location != undefined && mas.location != null) {
+                        window.location.href = mas.location;
+                    }
+                    modefForMenuBack(form);
+                } catch (e) {
+                    $.growl.error({message: "Ошибка при сохранении"});
+                    console.log(result);
+                    console.log(e);
+                }
+                //console.log(dat.responseText);
+            });
         }
     });
     //var editor;
@@ -76,13 +77,13 @@ $(function () {
         $("#rigthPhoto").loadImage({maxWidth: 1000, vid: "rigthPhoto"});
     }
     if ($("#loadImageMain").length) {
-        $("#loadImageMain").loadImage({maxWidth: 700,minWidth: 700,onlismall:"true"});
+        $("#loadImageMain").loadImage({maxWidth: 700, minWidth: 700, onlismall: "true"});
     }
     if ($("#loadImageNews").length) {
-        $("#loadImageNews").loadImage({maxWidth: 350,minWidth: 350,onlismall:"true"});
+        $("#loadImageNews").loadImage({maxWidth: 350, minWidth: 350, onlismall: "true"});
     }
     if ($("#loadImageSlider").length) {
-        $("#loadImageSlider").loadImage({maxWidth: 1920,minWidth: 1920,onlismall:"true"});
+        $("#loadImageSlider").loadImage({maxWidth: 1920, minWidth: 1920, onlismall: "true"});
     }
     if ($("#itemFasad").length) {
         $("#itemFasad").loadImage({maxWidth: 500, vid: "itemFasad"});
@@ -119,7 +120,7 @@ $(function () {
 function modefForMenu(form) {
     if (form.attr('id') === "menu") {
         form.find("[type='checkbox']").each(function () {
-            if (!$(this).prop("checked")){
+            if (!$(this).prop("checked")) {
                 $(this).val("");
                 $(this)[0].checked = true;
             }
@@ -130,7 +131,7 @@ function modefForMenu(form) {
 function modefForMenuBack(form) {
     if (form.attr('id') === "menu") {
         form.find("[type='checkbox']").each(function () {
-            if ($(this).val() === ""){
+            if ($(this).val() === "") {
                 $(this).val("checked");
                 $(this)[0].checked = false;
             }
