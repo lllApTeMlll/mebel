@@ -5,6 +5,7 @@ class User_model extends CI_Model {
     public function __construct() {
         $this->load->database();
         $this->load->library('session');
+        $this->load->library('show');
         $this->load->helper('url');
     }
 
@@ -25,27 +26,35 @@ class User_model extends CI_Model {
     }
 
     public function isAvtoris() {
-        if (!$this->session->has_userdata('user_id')) {
-            //echo $_SERVER['REQUEST_URI'];die();
-            if ($_SERVER['REQUEST_URI'] !== "/fasadm/" && $_SERVER['REQUEST_URI'] !== "/fasadm/avtoris/") {
+        if ($_SERVER['REQUEST_URI'] !== "/fasadm/" && $_SERVER['REQUEST_URI'] !== "/fasadm/avtoris/") {
+            if (!$this->session->has_userdata('user_id')) {
                 header("Location: /fasadm/");
+            } else {
+                $is_premission = in_array($this->router->fetch_class(), $this->session->premission);
+                if (!$is_premission) {
+                    if ($this->session->is_admin != 1) {
+                        header("Location: /fasadm/");
+                    }
+                }
             }
-        } else {
-            //echo $_SERVER['REQUEST_URI'];die();
         }
-        
-        //echo $this->router->fetch_class();
     }
 
     public function getComp() {
-        $query = $this->db->where('`Show`', 0)->get('Component', 130, 0);
+        if ($this->session->is_admin === 1) {
+            $this->db->where('`Show`', 0);
+        }
+        $query = $this->db->get('Component', 130, 0);
         $component = $query->result_array();
         $componetnArray['Crumbs'] = '<li><a href="/fasadm/"><i class="fa fa-dashboard"></i>Корень</a></li>';
         $componetnArray['Name'] = '';
-        foreach ($component as &$v) {
-            //echo "<pre>";
-            //var_dump($v['Name'] == $this->router->fetch_class());
-            //var_dump($v['Name'] ,$this->router->fetch_class());
+        foreach ($component as $k => &$v) {
+            if (!in_array($v['Name'], $this->session->premission)) {
+                if ($this->session->is_admin != 1) {
+                    unset($component[$k]);
+                    continue;
+                }
+            }
             if ($v['Name'] == $this->router->fetch_class()) {
                 $v['Act'] = "active";
                 $componetnArray['Crumbs'] .= '<li><a href="' . $v['Puth'] . '"><i class="fa ' . $v['Icon'] . '"></i>' . $v['Title'] . '</a></li>';

@@ -42,8 +42,14 @@ class Menu extends CI_Controller {
         //die();
         if (!$this->ajax) {
             header("Location: /fasadm/{$this->Component}/");
+        } else {
+            $mas1['result'] = "ok";
+            $mas1['message'] = "Данные сохранены";
+            if (!$this->ajax) {
+                $mas1['location'] = "/fasadm/{$this->Component}/";
+            }
+            echo json_encode($mas1);
         }
-        if ($this->ajax) echo "ok";
     }
 
 }

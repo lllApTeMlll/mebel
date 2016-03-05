@@ -24,6 +24,8 @@ class Base_model extends CI_Model {
             'Parent_id' => FALSE, //тип
             'count' => 80, //count enement in one page
             'current' => 0, //current element
+            'Show' => FALSE, 
+            'Email' => FALSE, 
             'id' => FALSE
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
@@ -36,6 +38,12 @@ class Base_model extends CI_Model {
         }
         if ($config['Parent_id'] !== FALSE) {
             $this->db->where('`Parent_id`', $config['Parent_id']);
+        }
+        if ($config['Show'] !== FALSE) {
+            $this->db->where('`Show`', $config['Show']);
+        }
+        if ($config['Email'] !== FALSE) {
+            $this->db->where('`Email`', $config['Email']);
         }
 
         $this->db->order_by('Order', 'ASC');

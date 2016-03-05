@@ -27,17 +27,17 @@ class Catalog extends CI_Controller {
         }
         $page = $this->input->get('page', true);
         $cat = $this->input->get('cat', true);
-        $cat = $cat ? $cat : false; 
-        $config['total_rows'] = $this->CurrentModel->get_count(array("cid" =>array($cat, false, false)));
+        $cat = $cat ? $cat : false;
+        $config['total_rows'] = $this->CurrentModel->get_count(array("cid" => array($cat, false, false)));
         $config['base_url'] = "";
         $config['cur_page'] = $page;
         $config['page_size'] = 30;
         $this->pagin->initialize($config);
         $dat['pagin'] = $this->pagin->getLinksAdmin();
-        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size'], "cid" =>array($cat, false, false)));
+        $dat['content'] = $this->CurrentModel->get_List(array("current" => $page, "count" => $config['page_size'], "cid" => array($cat, false, false)));
         $dat['content'] = $this->Base_model->getRightName($dat['content']);
         if (!$this->ajax) {
-            $this->list_model->setId(1); 
+            $this->list_model->setId(1);
             $this->list_model->setmaxDee(4);
             $dat['current']['cat'] = $this->Base_model->getOtion(1, "<option value='-'>-</option>", $cat, "");
             $dat['cat'] = $this->list_model->get_Items("catList", 'nestable3', 1);
@@ -55,7 +55,7 @@ class Catalog extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            //header("Location: /fasadm/{$this->Component}/");
         } else {
             $this->Load_model->delWithout();
             $dat['com'] = $this->user_model->getComp();
@@ -82,7 +82,7 @@ class Catalog extends CI_Controller {
         if ($isAdd) {
             $this->updateAndInsert();
             if (!$this->ajax) {
-                header("Location: /fasadm/{$this->Component}/");
+                //header("Location: /fasadm/{$this->Component}/");
             }
         } else {
             $this->Load_model->delWithout();
@@ -115,8 +115,15 @@ class Catalog extends CI_Controller {
         $this->list_model->saveCat($mas, array('Title', 'Link', 'id', 'Parent_id'));
         if (!$this->ajax) {
             header("Location: /fasadm/{$this->Component}/");
+        } else {
+            $mas1['result'] = "ok";
+            $mas1['message'] = "Данные сохранены";
+            if (!$this->ajax) {
+                $mas1['location'] = "/fasadm/{$this->Component}/";
+            }
+            echo json_encode($mas1);
         }
-        echo "ok";
+        //echo "ok";
     }
 
     private function getFirstCat($cat) {
@@ -147,8 +154,12 @@ class Catalog extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
-        if ($this->ajax)
-            echo "ok";
+        $mas1['result'] = "ok";
+        $mas1['message'] = "Данные сохранены";
+        if (!$this->ajax) {
+            $mas1['location'] = "/fasadm/{$this->Component}/";
+        }
+        echo json_encode($mas1);
         //var_dump($id);die();
     }
 

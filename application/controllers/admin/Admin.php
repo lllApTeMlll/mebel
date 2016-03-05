@@ -6,13 +6,14 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->model('user_model');
         $this->load->library('pagin');
+        $this->load->library('show');
         $this->load->helper('text');
         $this->load->library('session');
         $this->user_model->isAvtoris();
     }
 
     public function index() {
-		//die();
+        //die();
         if ($this->session->has_userdata('user_id')) {
             $dat['com'] = $this->user_model->getComp();
             //$dat['cur'] = $this->getCur();
@@ -33,8 +34,10 @@ class Admin extends CI_Controller {
             $newdata = array(
                 'username' => $dat['Email'],
                 'user_id' => $dat['id'],
-                'premission' => $dat['Privilege']
+                'is_admin' => $dat['isAdmin'],
+                'premission' => json_decode($dat['Privilege']) ? json_decode($dat['Privilege']) : $dat['Privilege']
             );
+            //$this->show->show1($newdata, true);
             $this->session->set_userdata($newdata);
             $mas['result'] = 'ok';
             $mas['mess'] = 'Вы авторизованы';
@@ -56,6 +59,5 @@ class Admin extends CI_Controller {
             $this->load->view('admin/avtoris');
         }
     }
-
 
 }

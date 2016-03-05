@@ -42,7 +42,7 @@ class News extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            //header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
@@ -65,7 +65,7 @@ class News extends CI_Controller {
         if ($isAdd) {
             $this->updateAndInsert();
             if (!$this->ajax) {
-                header("Location: /fasadm/{$this->Component}/");
+                //header("Location: /fasadm/{$this->Component}/");
             }
         } else {
             $dat['com'] = $this->user_model->getComp();
@@ -87,8 +87,14 @@ class News extends CI_Controller {
         $this->list_model->saveCat($mas, array('Title', 'Link', 'id', 'Parent_id'));
         if (!$this->ajax) {
             header("Location: /fasadm/{$this->Component}/");
+        } else {
+            $mas1['result'] = "ok";
+            $mas1['message'] = "Данные сохранены";
+            if (!$this->ajax) {
+                $mas1['location'] = "/fasadm/{$this->Component}/";
+            }
+            echo json_encode($mas1);
         }
-        if ($this->ajax) echo "ok";
     }
 
     public function delitItem($id) {
@@ -124,7 +130,12 @@ class News extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
         $mas["Psevdonime"] = "/News/item/" . $mas["EnglishTitle"] . "/";
         $this->Seo_model->insert($mas);
-        if ($this->ajax) echo "ok";
+        $mas1['result'] = "ok";
+        $mas1['message'] = "Данные сохранены";
+        if (!$this->ajax) {
+            $mas1['location'] = "/fasadm/{$this->Component}/";
+        }
+        echo json_encode($mas1);
     }
 
 }

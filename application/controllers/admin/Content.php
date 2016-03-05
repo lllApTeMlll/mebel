@@ -38,7 +38,7 @@ class Content extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            //header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['Seo'] = array("SeoDescription" => "", "SeoTitle" => "", "SeoKeyword" => "");
@@ -59,7 +59,7 @@ class Content extends CI_Controller {
         if ($isAdd) {
             $this->updateAndInsert();
             if (!$this->ajax) {
-                header("Location: /fasadm/{$this->Component}/");
+                //header("Location: /fasadm/{$this->Component}/");
             }
         } else {
             $dat['com'] = $this->user_model->getComp();
@@ -94,7 +94,12 @@ class Content extends CI_Controller {
         $mas["Url"] = "/{$this->Component}/item/" . $id ."/";
         $mas["Psevdonime"] = $mas["Puth"];
         $this->Seo_model->insert($mas);
-        if ($this->ajax) echo "ok";
+        $mas1['result'] = "ok";
+        $mas1['message'] = "Данные сохранены";
+        if (!$this->ajax) {
+            $mas1['location'] = "/fasadm/{$this->Component}/";
+        }
+        echo json_encode($mas1);
         //var_dump($id);die();
     }
 

@@ -35,7 +35,7 @@ class Text extends CI_Controller {
         $isAdd = $this->input->post('Title', true);
         if ($isAdd) {
             $this->updateAndInsert();
-            header("Location: /fasadm/{$this->Component}/");
+            //header("Location: /fasadm/{$this->Component}/");
         } else {
             $dat['com'] = $this->user_model->getComp();
             $dat['current']['mas'] = array("Title" => "", "Description" => "");
@@ -54,7 +54,7 @@ class Text extends CI_Controller {
         if ($isAdd) {
             $this->updateAndInsert();
             if (!$this->ajax) {
-                header("Location: /fasadm/{$this->Component}/");
+                //header("Location: /fasadm/{$this->Component}/");
             }
         } else {
             $dat['com'] = $this->user_model->getComp();
@@ -84,7 +84,12 @@ class Text extends CI_Controller {
         } else {
             $this->CurrentModel->update($mas, $id);
         }
-        if ($this->ajax) echo "ok";
+        $mas1['result'] = "ok";
+        $mas1['message'] = "Данные сохранены";
+        if (!$this->ajax) {
+            $mas1['location'] = "/fasadm/{$this->Component}/";
+        }
+        echo json_encode($mas1);
     }
 
 }
