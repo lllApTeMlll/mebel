@@ -23,6 +23,7 @@ class Content extends CI_Controller {
     }
 
     public function index() {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $dat['content'] = $this->Content_model->get_List(array("count" => 1, "Url" => $_SERVER['REQUEST_URI']));

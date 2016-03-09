@@ -30,6 +30,7 @@ class Catalog extends CI_Controller {
     }
 
     public function index($cat = "catalog", $cat1 = false, $cat2 = false) {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $before = "/catalog/catalog/";
@@ -68,6 +69,8 @@ class Catalog extends CI_Controller {
     }
 
     public function item($id) {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
+        //var_dump($dat['seo']);die();
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $catalogItem = $this->Catalog_model->get_List(array("count" => 2, 'EnglishTitle' => $id));

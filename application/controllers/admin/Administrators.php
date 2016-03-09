@@ -11,6 +11,7 @@ class Administrators extends CI_Controller {
         $this->load->library('show');
         $this->load->library('session');
         $this->load->model('Base_model');
+        $this->load->library('session');
         $this->CurrentModel = $this->Base_model;
         $this->CurrentModel->set_table("Admin");
         $this->CurrentModel->set_white(array("Email", "Password", "Privilege"));
@@ -80,8 +81,15 @@ class Administrators extends CI_Controller {
 
     public function delitItem($id) {
         $this->Base_model->set_table("Admin");
-        $this->CurrentModel->delete($id);
-        header("Location: /fasadm/{$this->Component}/");
+        $user = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
+        if ($user['isAdmin'] == 1 && $this->session->is_admin != 1) {
+            $mas1['result'] = "error";
+            $mas1['message'] = "Нет доступа";
+            echo json_encode($mas1);
+        } else {
+            $this->CurrentModel->delete($id);
+            header("Location: /fasadm/{$this->Component}/");
+        }
     }
 
     private function updateAndInsert() {
@@ -97,32 +105,40 @@ class Administrators extends CI_Controller {
             }
         }
         if ($existDubl) {
+
             $mas["Privilege"] = json_encode($mas["Privilege"]);
             $id = $this->input->post('id', true);
             $type = $this->input->post('type', true);
-            if ($type == 'add') {
-                $mas["Password"] = md5($mas["Password"] . $this->config->config['encryption_key']);
-                $id = $this->CurrentModel->insert($mas);
-            } else {
-                if ($mas["Password"] === ""){
-                    unset($mas["Password"]);
-                }else{
-                    $mas["Password"] = md5($mas["Password"] . $this->config->config['encryption_key']);
-                }
-                $this->CurrentModel->update($mas, $id);
+            if ($type !== 'add') {
+                $user = $this->CurrentModel->get_List(array("count" => 1, "id" => $id));
             }
+            //$this->show->show1($user,true);
+            if ($user['isAdmin'] == 1 && $this->session->is_admin != 1) {
+                $mas1['result'] = "error";
+                $mas1['message'] = "Нет доступа";
+            } else {
+                if ($type == 'add') {
+                    $mas["Password"] = md5($mas["Password"] . $this->config->config['encryption_key'] . "0");
+                    $id = $this->CurrentModel->insert($mas);
+                } else {
+                    if ($mas["Password"] === "") {
+                        unset($mas["Password"]);
+                    } else {
+                        $mas["Password"] = md5($mas["Password"] . $this->config->config['encryption_key'] . $user['isAdmin']);
+                    }
+                    $this->CurrentModel->update($mas, $id);
+                }
                 $mas1['result'] = "ok";
                 $mas1['message'] = "Данные сохранены";
                 if (!$this->ajax) {
                     $mas1['location'] = "/fasadm/{$this->Component}/";
                 }
-           // }
+            }
         } else {
             $mas1['result'] = "error";
             $mas1['message'] = "Email уже занят";
         }
         echo json_encode($mas1);
-       
     }
 
     private function getCompAdmin($premission) {

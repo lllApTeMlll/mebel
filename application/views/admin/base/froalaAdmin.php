@@ -23,6 +23,7 @@
         <script src='/files/site/all/datapiker/js/jquery.datetimepicker.js'></script>
         <link rel="stylesheet" href="/files/site/all/datapiker/css/jquery.datetimepicker.css">
         <script src='/files/site/all/modal/js/script.js'></script>
+        <script src='/files/site/all/tableDnD.js'></script>
         <link rel="stylesheet" href="/files/site/all/modal/css/style.css">
         <link rel="stylesheet" href="/files/site/all/animate.css">
 

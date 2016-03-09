@@ -19,9 +19,11 @@ class Seo_model extends CI_Model {
             unset($mas['current']);
         }
         $config = array_merge($config, (array) $mas);
-
         if ($config['Url'] !== FALSE) {
-            $this->db->where('`Url`', $config['Url']);
+            $this->db->group_start();
+            $this->db->or_where('`Psevdonime`', $config['Url']);
+            $this->db->or_where('`Url`', $config['Url']);
+            $this->db->group_end();
         }
 
         if ($config['id'] != FALSE) {
@@ -32,6 +34,11 @@ class Seo_model extends CI_Model {
             return $query->row_array();
         } else
             return $query->result_array();
+    }
+    
+    public function  getSeo($Url){
+        $seoData = $this->get_List(array("count" => 1, "Url" => $Url));
+        return $seoData && $seoData["SeoTitle"] !=="" ? $seoData : $this->get_List(array("count" => 1, "Url" => "default"));;
     }
 
     public function get_count($mas = "") {

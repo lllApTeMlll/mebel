@@ -24,14 +24,22 @@ class Base_model extends CI_Model {
             'Parent_id' => FALSE, //тип
             'count' => 80, //count enement in one page
             'current' => 0, //current element
-            'Show' => FALSE, 
-            'Email' => FALSE, 
-            'id' => FALSE
+            'Show' => FALSE,
+            'Email' => FALSE,
+            'id' => FALSE,
+            'Url' => FALSE, //тип
         );
         if (isset($mas['current']) && (!is_numeric($mas['current']) || $mas['current'] > 10000)) {
             unset($mas['current']);
         }
+        
         $config = array_merge($config, (array) $mas);
+        if ($config['current'] != 0){
+            $config['current']--;
+            $config['current'] *= $config['count'];
+        }
+        //var_dump($config);die();
+        //$config = array_merge($config, (array) $mas);
 
         if ($config['id'] !== FALSE) {
             $this->db->where('`id`', $config['id']);
@@ -45,8 +53,14 @@ class Base_model extends CI_Model {
         if ($config['Email'] !== FALSE) {
             $this->db->where('`Email`', $config['Email']);
         }
+        if ($config['Url'] !== FALSE) {
+            $this->db->group_start();
+            $this->db->or_where('`Psevdonime`', $config['Url']);
+            $this->db->or_where('`Url`', $config['Url']);
+            $this->db->group_end();
+        }
 
-        $this->db->order_by('Order', 'ASC');
+        $this->db->order_by('Order', 'ASC')->order_by('id', 'ASC');
 
         $query = $this->db->get($this->table, $config['count'], $config['current']);
         if ($config['count'] == 1) {
@@ -141,11 +155,33 @@ class Base_model extends CI_Model {
         }
         return $str;
     }
+
+    public function getRightNameArray($cat, $act) {
+        foreach ($cat as $k => $v) {
+            if ($v['id'] == $act) {
+                return $v['Title'];
+                break;
+            }
+        }
+        return "";
+    }
     
-    public function getRightNameForArray($cat,$array) {
+    public function getOtionArray($cat, $act) {
+        $str = "";
+        foreach ($cat as $k => $v) {
+            $sele = "";
+            if ($v['id'] == $act) {
+                $sele = "selected";
+            }
+            $str.="<option {$sele} value='{$v['id']}'>{$v['Title']}</option>";
+        }
+        return $str;
+    }
+
+    public function getRightNameForArray($cat, $array) {
         foreach ($cat as $k => $v) {
             $str = "";
-            foreach (($array) as $v1) { 
+            foreach (($array) as $v1) {
                 if ($v['Cat'] == $v1['id']) {
                     $str .= $v1['Title'] . ",";
                     break;

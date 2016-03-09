@@ -5,7 +5,7 @@
     var defaults = {
         type: /image.*/,
         maxSize: '1000000',
-        maxHeigth: 1300,
+        maxHeigth: 6300,
         maxWidth: 500,
         minWidth: 350,
         vid: "id_photo",
@@ -102,7 +102,7 @@
                             provTime = false;
                             removeLoader();
                             $('.loadImage').val('');
-                            // console.log(data);
+                             console.log(data);
                             try {
                                 var mas = JSON.parse(data);
                                 //console.log(mas);

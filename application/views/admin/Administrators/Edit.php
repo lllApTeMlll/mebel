@@ -28,7 +28,8 @@
                             </div><!-- /input-group -->
                         </div>
                     <?php } ?>
-
+                    <input name="Privilege[]" value="Floara" type="hidden">
+                    <input name="Privilege[]" value="LoadImage" type="hidden">
                 </div><!-- /.box-body -->
                 <input type="hidden" name="type" value="<?= $current['type'] ?>">
                 <input type="hidden" name="id" value="<?= $current['id'] ?>">

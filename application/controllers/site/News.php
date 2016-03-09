@@ -29,6 +29,7 @@ class News extends CI_Controller {
     }
 
     public function index($type = 'news') {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $before = "/news/";
         $TiteleFirest = "Новости";
@@ -66,6 +67,7 @@ class News extends CI_Controller {
     }
 
     public function item($id) {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $dat['content'] = $this->CurrentModel->get_List(array("count" => 1, 'EnglishTitle' => $id));

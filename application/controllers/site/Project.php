@@ -24,6 +24,7 @@ class Project extends CI_Controller {
     }
 
     public function index() {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $dat['menu'] = $this->menu;
         $page = $this->input->get('page', true);
@@ -44,6 +45,7 @@ class Project extends CI_Controller {
     }
 
     public function item() {
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
         $dat['vstavka'] = $this->vstavka;
         $dat['d'] = "";
         $this->load->view('site/base/header', $dat);

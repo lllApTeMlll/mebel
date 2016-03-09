@@ -1,12 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
     <head>
-        <title>Мебель Нобиллия</title>
+        <title><?=$seo['SeoTitle']?></title>
+        <meta name="description" content="<?=$seo['SeoDescription']?>" />
+        <meta name="keywords" content="<?=$seo['SeoKeyword']?>" />
+        <meta name="author" content="" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />          
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="author" content="">
         <link rel="shortcut icon" href="favicon.ico" />     
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/jquery.bxslider.css"/>
         <link rel="stylesheet" type="text/css" href="/files/site/site/css/animations.css"/>  
@@ -32,21 +34,21 @@
     </head>
 
     <body>  							
-    <div id="anchor2"></div>
-    <section class="header header-main">
-    <div class="nav-wrap">	
-        <div class="wrapper">
-            <div class="nav">
-                <?=$menu?>
-            </div>
-            <div class="logo-field">
-                <div class="logo">
+        <div id="anchor2"></div>
+        <section class="header header-main">
+            <div class="nav-wrap">	
+                <div class="wrapper">
+                    <div class="nav">
+                        <?= $menu ?>
+                    </div>
+                    <div class="logo-field">
+                        <div class="logo">
                             <a href="/"><img src="/files/site/site/images/logo.png" alt=""></a>
-                </div>
-                <div class="phone">
-                    <i class="icon icon-phone"></i><?=$vstavka[0]['Description']?>
+                        </div>
+                        <div class="phone">
+                            <i class="icon icon-phone"></i><?= $vstavka[0]['Description'] ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="clear"></div>	
+            <div class="clear"></div>	

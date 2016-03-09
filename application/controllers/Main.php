@@ -23,7 +23,8 @@ class Main extends CI_Controller {
     }
 
     public function index() {
-        //echo "ok";die();
+        $dat['seo'] = $this->Seo_model->getSeo($_SERVER['REQUEST_URI']);
+        //var_dump($_SERVER['REQUEST_URI']);die();
         $dat['menu'] = $this->menu;
         $dat['vstavka'] = $this->vstavka;
         $this->Base_model->set_table("MainBlock");

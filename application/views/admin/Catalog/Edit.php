@@ -11,6 +11,7 @@
                     <div class="form-group col-lg-6">
                         <label for="Title">Название</label>
                         <input class="form-control" id="Title" data_type="required" name="Title" value="<?= $current['mas']["Title"] ?>"  type="text">
+                    <input name="LastTitle" value="<?= $current['mas']["EnglishTitle"] ?>" type="hidden">
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="EnglishTitle">Seo название</label>

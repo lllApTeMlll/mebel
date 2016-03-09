@@ -64,7 +64,7 @@ $(function () {
     $(".ckedit").each(function () {
         //loadFile(loadEditor($(this).attr("id")));
         $(this).froalaEditor({heightMax: 500, height: 300, language: 'ru', imageManagerLoadURL: '/imageManager/',
-            fileUploadURL: '/fileUpload/'});
+            fileUploadURL: '/fileUpload/',imageUploadURL: '/uploadimage/'});
     });
 
     if ($("#mainForm #Title").length && $("#mainForm #EnglishTitle").length) {
@@ -115,6 +115,8 @@ $(function () {
         protectRoot: true,
         disableParentChange: true,
     });
+    
+    $("#table-1").tableDnD();
 });
 
 function modefForMenu(form) {

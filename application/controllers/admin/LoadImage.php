@@ -35,7 +35,7 @@ class LoadImage extends CI_Controller {
                     'new_image' => BASE . '/files/images2/big/' . $filename . ".jpg",
                     'maintain_ratio' => true,
                     'create_thumb' => false,
-                    'quality' => 90,
+                    'quality' => 95,
                     'width' => $this->input->post('max', true),
                 );
                 $mas['error'] = "";

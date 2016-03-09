@@ -133,31 +133,43 @@ class Catalog extends CI_Controller {
 
     public function updateAndInsert() {
         $mas = ($this->input->post(null, false));
-        //echo "<pre>";
-        //var_dump($mas);die();
-        $id = $this->input->post('id', true);
-        $type = $this->input->post('type', true);
-        if ($type == 'add') {
-            $id = $this->CurrentModel->insert($mas);
+        $existDubl = false;
+        if ($mas['EnglishTitle'] === $mas['LastTitle']) {
+            $existDubl = true;
         } else {
-            $this->CurrentModel->update($mas, $id);
-        }
-        if (isset($mas["del"])) {
-            foreach ($mas["del"] as $v) {
-                $this->Load_model->delete($v);
+            $exist = $this->CurrentModel->get_List(array("count" => 1, "EnglishTitle" => $mas['EnglishTitle']));
+            if (!$exist) {
+                $existDubl = true;
             }
         }
-        $this->addPhoto($mas, "id_photo", "item", $id);
-        $this->addPhoto($mas, "itemFasad", "itemFasad", $id);
-        $this->addPhoto($mas, "itemColor", "itemColor", $id);
-        $this->addPhoto($mas, "rigthPhoto", "rigthPhoto", $id, true);
-        $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
-        $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
-        $this->Seo_model->insert($mas);
-        $mas1['result'] = "ok";
-        $mas1['message'] = "Данные сохранены";
-        if (!$this->ajax) {
-            $mas1['location'] = "/fasadm/{$this->Component}/";
+        if ($existDubl) {
+            $id = $this->input->post('id', true);
+            $type = $this->input->post('type', true);
+            if ($type == 'add') {
+                $id = $this->CurrentModel->insert($mas);
+            } else {
+                $this->CurrentModel->update($mas, $id);
+            }
+            if (isset($mas["del"])) {
+                foreach ($mas["del"] as $v) {
+                    $this->Load_model->delete($v);
+                }
+            }
+            $this->addPhoto($mas, "id_photo", "item", $id);
+            $this->addPhoto($mas, "itemFasad", "itemFasad", $id);
+            $this->addPhoto($mas, "itemColor", "itemColor", $id);
+            $this->addPhoto($mas, "rigthPhoto", "rigthPhoto", $id, true);
+            $mas["Url"] = "/{$this->Component}/item/" . $id . "/";
+            $mas["Psevdonime"] = "/Catalog/item/" . $mas["EnglishTitle"] . "/";
+            $this->Seo_model->insert($mas);
+            $mas1['result'] = "ok";
+            $mas1['message'] = "Данные сохранены";
+            if (!$this->ajax) {
+                $mas1['location'] = "/fasadm/{$this->Component}/";
+            }
+        } else {
+            $mas1['result'] = "error";
+            $mas1['message'] = "Название уже используеться";
         }
         echo json_encode($mas1);
         //var_dump($id);die();

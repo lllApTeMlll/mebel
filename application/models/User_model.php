@@ -7,11 +7,18 @@ class User_model extends CI_Model {
         $this->load->library('session');
         $this->load->library('show');
         $this->load->helper('url');
+        $this->load->model('Base_model');
+        $this->CurrentModel = $this->Base_model;
+        
     }
 
     public function get_avtor($login = FALSE, $password = False) {
         if ($login != FALSE && $password != FALSE) {//9e7e1b85c49f8c5ab1b83fab4143ae17
-            $password = md5($password . $this->config->config['encryption_key']);
+            $this->CurrentModel->set_table("Admin");
+            $user = $this->CurrentModel->get_List(array("count" => 1, "Email" => $login));
+            if (!$user)
+                return false;
+            $password = md5($password . $this->config->config['encryption_key'] . $user['isAdmin']);
             $this->db->where('`Email`', $login);
             $this->db->where('`Password`', $password);
             $cou = $this->db->count_all_results('Admin');
@@ -44,6 +51,7 @@ class User_model extends CI_Model {
         if ($this->session->is_admin === 1) {
             $this->db->where('`Show`', 0);
         }
+        $this->db->order_by('Order', 'ASC');
         $query = $this->db->get('Component', 130, 0);
         $component = $query->result_array();
         $componetnArray['Crumbs'] = '<li><a href="/fasadm/"><i class="fa fa-dashboard"></i>Корень</a></li>';
@@ -66,6 +74,6 @@ class User_model extends CI_Model {
         //die();
         $componetnArray['Items'] = $component;
         return $componetnArray;
-    }
+    } 
 
 }
