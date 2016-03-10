@@ -7,7 +7,7 @@ class LoadImage extends CI_Controller {
         $this->load->model('user_model');
         $this->load->model('Load_model');
         //$this->load->library('session');
-        $this->user_model->isAvtoris();
+        $this->user_model->isAvtoris(); 
         $this->load->library('image_lib');
         // $this->delWithout();
     }
@@ -27,7 +27,7 @@ class LoadImage extends CI_Controller {
 
             if ((($mime == "image/gif") || ($mime == "image/jpeg") || ($mime == "image/pjpeg") || ($mime == "image/x-png") || ($mime == "image/png")) && in_array(strtolower($extension), $allowedExts)) {
                 $filename = md5(uniqid(rand(), true));
-                //copy($_FILES["files"]["tmp_name"], BASE . '/files/images2/big/' . $filename . "1.jpg");
+                copy($_FILES["files"]["tmp_name"], BASE . '/files/images2/small/' . $filename . "1.jpg");
                 $config = array(
                     'image_library' => 'imagemagick',
                     'library_path' => '/usr/bin/',

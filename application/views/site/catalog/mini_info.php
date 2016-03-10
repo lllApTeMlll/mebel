@@ -8,6 +8,7 @@
                             <?php if (!empty($cat["photo"])) foreach ($cat["photo"] as $v) { ?>
                             <li class="popup-slider__item" style="background: transparent url(<?= $v['Puth'] ?>big/<?= $v['Name'] ?>) no-repeat scroll left top;">
                                 <img src="<?=$v['Puth']?>big/<?=$v['Name']?>" alt="">
+                                <div class="cart-slider__item-hover fancyimageBig" data-fancybox-href='<?=$v['Puth']?>big/<?=$v['Name']?>' data-fancybox-group='cart'></div>
                             </li>
                             <?php } ?>
                         </ul>

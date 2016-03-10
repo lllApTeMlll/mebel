@@ -5,9 +5,9 @@
     var defaults = {
         type: /image.*/,
         maxSize: '1000000',
-        maxHeigth: 6300,
+        maxHeigth: 1300,
         maxWidth: 500,
-        minWidth: 350,
+        minWidth: 450,  
         vid: "id_photo",
         onlismall: "small"
     };
@@ -69,8 +69,8 @@
                 var url = URL.createObjectURL(e);
                 var img = new Image();
                 img.onload = function () {
-                    var width = this.width;
-                    var height = this.height;
+                    var width = this.width; 
+                    var height = this.height; 
                     if (width > height) {
                         if (width > thiss.options.maxWidth) {
                             height *= thiss.options.maxWidth / width;

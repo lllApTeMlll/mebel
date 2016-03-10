@@ -13,7 +13,7 @@
                             <?php if (!empty($item["photo"])) foreach ($item["photo"] as $v) { ?>
                             <li class="cart-slider__item" style="background: transparent url(<?= $v['Puth'] ?>big/<?= $v['Name'] ?>) no-repeat scroll left top;">
                                 <img src="<?=$v['Puth']?>big/<?=$v['Name']?>" alt="">
-                                <div class="cart-slider__item-hover fancyimage" data-fancybox-href='<?=$v['Puth']?>big/<?=$v['Name']?>' data-fancybox-group='cart'></div>
+                                <div class="cart-slider__item-hover fancyimageBig" data-fancybox-href='<?=$v['Puth']?>big/<?=$v['Name']?>' data-fancybox-group='cart'></div>
                             </li>
                             <?php } ?>
                         </ul>

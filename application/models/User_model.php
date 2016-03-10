@@ -6,7 +6,7 @@ class User_model extends CI_Model {
         $this->load->database();
         $this->load->library('session');
         $this->load->library('show');
-        $this->load->helper('url');
+        $this->load->helper('url'); 
         $this->load->model('Base_model');
         $this->CurrentModel = $this->Base_model;
         
@@ -37,6 +37,8 @@ class User_model extends CI_Model {
             if (!$this->session->has_userdata('user_id')) {
                 header("Location: /fasadm/");
             } else {
+                //var_dump($this->session->premission);
+                //var_dump($this->session->is_admin); 
                 $is_premission = in_array($this->router->fetch_class(), $this->session->premission);
                 if (!$is_premission) {
                     if ($this->session->is_admin != 1) {
@@ -74,6 +76,6 @@ class User_model extends CI_Model {
         //die();
         $componetnArray['Items'] = $component;
         return $componetnArray;
-    } 
+    }   
 
 }

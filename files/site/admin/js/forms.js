@@ -71,7 +71,7 @@ $(function () {
         tttrran($("#mainForm #Title"), $("#mainForm #EnglishTitle"));
     }
     if ($("#loadImage").length) {
-        $("#loadImage").loadImage({maxWidth: 1100});
+        $("#loadImage").loadImage({maxWidth: 2500});     
     }
     if ($("#rigthPhoto").length) {
         $("#rigthPhoto").loadImage({maxWidth: 1000, vid: "rigthPhoto"});
@@ -79,8 +79,8 @@ $(function () {
     if ($("#loadImageMain").length) {
         $("#loadImageMain").loadImage({maxWidth: 700, minWidth: 700, onlismall: "true"});
     }
-    if ($("#loadImageNews").length) {
-        $("#loadImageNews").loadImage({maxWidth: 350, minWidth: 350, onlismall: "true"});
+    if ($("#loadImageNews").length) { 
+        $("#loadImageNews").loadImage({maxWidth: 450, minWidth: 450, onlismall: "true"});
     }
     if ($("#loadImageSlider").length) {
         $("#loadImageSlider").loadImage({maxWidth: 1920, minWidth: 1920, onlismall: "true"});
